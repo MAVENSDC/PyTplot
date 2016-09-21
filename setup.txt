@@ -1,0 +1,71 @@
+##########################################################################
+
+DOWNLOAD ANACONDA:
+
+
+Get it from the following website 
+
+https://docs.continuum.io/anaconda/install
+
+Anaconda is a python install that comes with a huge variety of packages
+commonly used in scientific fields
+
+
+##########################################################################
+
+DOWNLOAD BOKEH:
+
+
+Type the following into the command prompt
+
+conda install bokeh
+
+This should install the latest bokeh package
+
+
+##########################################################################
+
+DOWNLOAD PYTPLOT:
+
+Obtain the pytplot zip file from github and unzip it onto your hard drive
+
+https://github.com/MAVENSDC/PyTplot
+
+
+##########################################################################
+
+START PYTPLOT:
+
+run pytplot by changing directory to the location of the pytplot files, 
+and type the following into the command prompt:
+
+python py_tplot_start.py
+
+This will start an IPython (interactive python) session, and you can type
+all of tplot procedures like you would with a session of IDL.  See 
+"routine_doc.html" for more info on the available procedures.  There is 
+sample data available for the user to experiment with, located in
+"test_data.tplot".  To bring this data into pytplot, type the command
+"py_tplot_restore('enter/your/path/here/test_data.tplot')"
+
+##########################################################################
+
+SAMPLE COMMANDS:
+
+#Obtain sample data:
+py_tplot_restore('test_data.tplot')
+
+#Plot some data:
+py_tplot('swia_vel', var_label='orbit')
+
+#Change panel size:
+py_options(['mag','swia_den','swia_vel'] , 'panel_size', .5)
+
+#Change axis:
+py_options('swia_den', 'ylog', 1)
+
+#Change timespan:
+py_timespan('2016-06-20 00:00:00', .1875, keyword='days')
+
+#Plot all of the data:
+py_tplot(['SEP_2_ELEC','SEP_1_ION', 'SEP_2_ION', 'swia_counts','swia_den','mag','swia_vel'])
