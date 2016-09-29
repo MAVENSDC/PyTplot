@@ -25,50 +25,55 @@ def options(option, value, old_yaxis_opt, old_zaxis_opt, old_line_opt, old_extra
     
     #if(option == 'axis_style'):
     
-    if option is 'color':
-        new_line_opt['line_color'] = value
-        
-    if option is 'colormap':
+    if option == 'color':
+        if isinstance(value, list):
+            new_extras['line_color'] = value
+        else:
+            new_extras['line_color'] = [value]
+    
+    if option == 'colormap':
         new_extras['colormap'] = value
     
+    if option == 'spec':
+        new_extras['spec'] = value
     #elif option is 'colors':
     
     # don't know what the values are meant to mean
     # elif(option == 'ygridstyle'):
     
-    elif option is 'ylog':
-        if value is 1:
+    elif option == 'ylog':
+        if value == 1:
             new_yaxis_opt['y_axis_type'] = 'log'
-        if value is 0:
+        if value == 0:
             new_yaxis_opt['y_axis_type'] = 'linear'
     
-    elif option is 'legend_names':
+    elif option == 'legend_names':
         new_yaxis_opt['legend_names'] = value
     
-    elif option is 'zlog':
-        if value is 1:
+    elif option == 'zlog':
+        if value == 1:
             new_zaxis_opt['z_axis_type'] = 'log'
-        if value is 0:
+        if value == 0:
             new_zaxis_opt['z_axis_type'] = 'linear'
     
     # elif(option == 'ymajor'):  
     
-    elif option is 'nodata':
+    elif option == 'nodata':
         new_line_opt['visible'] = value
     
-    elif option is 'line_style':
+    elif option == 'line_style':
         to_be = []
-        if value is 0 or value is 'solid_line':
+        if value == 0 or value == 'solid_line':
             to_be = []
-        elif value is 1 or value is 'dot':
+        elif value == 1 or value == 'dot':
             to_be = [2, 4]
-        elif value is 2 or value is 'dash':
+        elif value == 2 or value == 'dash':
             to_be = [6]
-        elif value is 3 or value is 'dash_dot':
+        elif value == 3 or value == 'dash_dot':
             to_be = [6, 4, 2, 4]
-        elif value is 4 or value is 'dash_dot_dot_dot':
+        elif value == 4 or value == 'dash_dot_dot_dot':
             to_be = [6, 4, 2, 4, 2, 4, 2, 4]
-        elif value is 5 or value is 'long_dash':
+        elif value == 5 or value == 'long_dash':
             to_be = [10]
             
         new_line_opt['line_dash'] = to_be
@@ -76,32 +81,32 @@ def options(option, value, old_yaxis_opt, old_zaxis_opt, old_line_opt, old_extra
         if(value == 6 or value == 'none'):
             new_line_opt['visible'] = False
             
-    elif option is 'name':
+    elif option == 'name':
         new_line_opt['name'] = value
     
-    elif option is "panel_size":
+    elif option == "panel_size":
         if value > 1 or value <= 0:
             print("Invalid value. Should be (0, 1]")
             return
         new_extras['panel_size'] = value
             
-    elif option is 'thick':
+    elif option == 'thick':
         new_line_opt['line_width'] = value
     
-    elif option is 'transparency':
+    elif option == 'transparency':
         alpha_val = value/100
         new_line_opt['line_alpha'] = alpha_val
     
-    elif option is ('yrange' or 'y_range'):
+    elif option == ('yrange' or 'y_range'):
         new_yaxis_opt['y_range'] = [value[0], value[1]]
         
-    elif option is ('zrange' or 'z_range'):
+    elif option == ('zrange' or 'z_range'):
         new_zaxis_opt['z_range'] = [value[0], value[1]]
     
-    elif option is 'ytitle':
+    elif option == 'ytitle':
         new_yaxis_opt['axis_label'] = value
     
-    elif option is 'ztitle':
+    elif option == 'ztitle':
         new_zaxis_opt['axis_label'] = value
         
     '''       
@@ -184,14 +189,14 @@ def tplot_options(option, value, old_tplot_opt_glob, old_title_opt, window_size)
     new_tplot_opt_glob = old_tplot_opt_glob
     new_title_opt = old_title_opt
     
-    if option is 'title':
+    if option == 'title':
         new_title_opt['text'] = value
     
-    elif option is 'title_size':
+    elif option == 'title_size':
         str_size = str(value) + 'pt'
         new_title_opt['text_font_size'] = str_size
         
-    elif option is 'wsize':
+    elif option == 'wsize':
         window_size = value
     
     return (new_tplot_opt_glob, new_title_opt, window_size)

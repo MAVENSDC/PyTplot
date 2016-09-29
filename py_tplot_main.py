@@ -10,24 +10,24 @@ import pandas as pd
 import numpy as np
 import pytz
 from bokeh.plotting import output_server
-from bokeh.models import CustomJS, ColumnDataSource, Label
+from bokeh.models import CustomJS, ColumnDataSource, Label, LogColorMapper, LogTicker, ColorBar, LinearColorMapper, BasicTicker, Legend
 from bokeh.plotting.figure import Figure
 from bokeh.models import (ColumnDataSource, CustomJS, DatetimeAxis,
                           HoverTool, LinearAxis, LogAxis, PanTool, Plot, Range1d, 
                           SaveTool, Span, Title, WheelZoomTool)
-from bokeh.models.formatters import DatetimeTickFormatter, FuncTickFormatter
+from bokeh.models.formatters import DatetimeTickFormatter, FuncTickFormatter,\
+    NumeralTickFormatter
 from bokeh.models.glyphs import Line
 from bokeh.models.tools import RedoTool, UndoTool, CrosshairTool, LassoSelectTool, BoxZoomTool, ResetTool
 from bokeh.driving import cosine
-from bokeh.layouts import gridplot, widgetbox
+from bokeh.layouts import gridplot, widgetbox, layout
 from openpyxl.worksheet import datavalidation
 from _collections import OrderedDict
 from bokeh.models.widgets.inputs import TextInput
-
 #Global variable is data_quants
 data_quants = OrderedDict()
 tplot_num = 1
-server=False
+
 #Global variable for tplot options
 tplot_opt_glob = dict(tools = "xpan,xwheel_zoom,crosshair,reset", 
                  min_border_top = 15, min_border_bottom = 0)
@@ -45,7 +45,6 @@ dttf = DatetimeTickFormatter(formats=dict(
 xaxis_opt_glob = dict(formatter = dttf)
 title_opt = dict(align = 'center')
 window_size = [800, 200]
-
 lim_info = {}
 extra_renderers = []
 extra_layouts = {}
@@ -65,8 +64,6 @@ def py_store_data(name, data=None, delete=False):
     if data is None:
         print('Please provide data.')
         return
-
-    times = data['x']
             
     df = pd.DataFrame(data['y'])
     if 'v' in data:
@@ -77,6 +74,7 @@ def py_store_data(name, data=None, delete=False):
     else:
         spec_bins = None
         
+    times = data['x']
     df['Index'] = times
     df = df.set_index('Index', drop=True)
     
@@ -84,10 +82,10 @@ def py_store_data(name, data=None, delete=False):
     yaxis_opt = dict(axis_label = name)
     zaxis_opt = {}
     line_opt = {}
-    dtype='I have no idea what dtype is, but it is in tplot'
+    dtype=''
     time_bar = []
     # Dictionary to keep track of extra details needed for plotting
-    #     that aren't actural attributes in Bokeh
+    #     that aren't actual attributes in Bokeh
     extras = dict(panel_size = 1)
     tag_names = ['name', 'data', 'spec_bins', 'yaxis_opt', 'zaxis_opt', 'line_opt',
                  'trange','dtype','create_time', 'time_bar', 'extras', 'number']
@@ -223,26 +221,21 @@ def py_tlimit(arg):
 def py_options(name, option, value):
     global data_quants
     
-    if isinstance(name, list):
-        for i in name:
-            if i not in data_quants.keys():
-                print(str(i) + " is currently not in pytplot.")
-                return
-            (new_yaxis_opt, new_zaxis_opt, new_line_opt, new_extras) = options(option, value, data_quants[i]['yaxis_opt'], data_quants[i]['zaxis_opt'], data_quants[i]['line_opt'], data_quants[i]['extras'])
+    if not isinstance(name, list):
+        name = [name]
     
-            data_quants[i]['yaxis_opt'] = new_yaxis_opt
-            data_quants[i]['zaxis_opt'] = new_zaxis_opt
-            data_quants[i]['line_opt'] = new_line_opt
-            data_quants[i]['extras'] = new_extras
-    else:
-        if name not in data_quants.keys():
-            print("That name is currently not in pytplot.")
-        (new_yaxis_opt, new_zaxis_opt, new_line_opt, new_extras) = options(option, value, data_quants[name]['yaxis_opt'], data_quants[name]['zaxis_opt'], data_quants[name]['line_opt'], data_quants[name]['extras'])
+    option = option.lower()
     
-        data_quants[name]['yaxis_opt'] = new_yaxis_opt
-        data_quants[name]['zaxis_opt'] = new_zaxis_opt
-        data_quants[name]['line_opt'] = new_line_opt
-        data_quants[name]['extras'] = new_extras
+    for i in name:
+        if i not in data_quants.keys():
+            print(str(i) + " is currently not in pytplot.")
+            return
+        (new_yaxis_opt, new_zaxis_opt, new_line_opt, new_extras) = options(option, value, data_quants[i]['yaxis_opt'], data_quants[i]['zaxis_opt'], data_quants[i]['line_opt'], data_quants[i]['extras'])
+
+        data_quants[i]['yaxis_opt'] = new_yaxis_opt
+        data_quants[i]['zaxis_opt'] = new_zaxis_opt
+        data_quants[i]['line_opt'] = new_line_opt
+        data_quants[i]['extras'] = new_extras
     
     return
 
@@ -251,6 +244,8 @@ def py_tplot_options(option, value):
     global title_opt
     global window_size
 
+    option = option.lower()
+    
     (tplot_opt_glob, title_opt, window_size) = tplot_options(option, value, tplot_opt_glob, title_opt, window_size)
     
     return
@@ -284,7 +279,7 @@ def py_tplot(name, var_label = None, interactive=False):
     text_height = TextInput(value="200", title="Height:")
     dim_height = widgetbox(text_height)
     
-    multi_line_colors = ['black', 'red', 'green', 'navy', 'orange', 'firebrick', 'pink', 'blue', 'olive']
+    
     # Name for .html file containing plots
     out_name = ""
     
@@ -313,10 +308,8 @@ def py_tplot(name, var_label = None, interactive=False):
         j += 1
     p_to_use = window_size[1]/total_psize
     
-    # Create all plots except bottom    
-    
+    # Create all plots  
     while(i < num_plots):
-        legend=None
         interactive_plot=None
         temp_data_quant = data_quants[name[i]]
         yaxis_opt = temp_data_quant['yaxis_opt']
@@ -327,7 +320,7 @@ def py_tplot(name, var_label = None, interactive=False):
         p_width = window_size[0]
         
         if temp_data_quant['spec_bins'] is not None:
-            new_plot, legend, interactive_plot = specplot(name[i], num_plots, last_plot = (i == num_plots-1), height=p_height, width=p_width, var_label=var_label, interactive=interactive)       
+            new_plot, interactive_plot = specplot(name[i], num_plots, last_plot = (i == num_plots-1), height=p_height, width=p_width, var_label=var_label, interactive=interactive)       
         else:
             # Make plot
             if 'x_range' not in tplot_opt_glob:
@@ -353,7 +346,7 @@ def py_tplot(name, var_label = None, interactive=False):
                 time_range_adjusted = True
                 
             if num_plots > 1 and i == num_plots-1:
-                new_plot.plot_height += 21
+                new_plot.plot_height += 22
             
             #Formatting stuff
             new_plot.grid.grid_line_color = None
@@ -361,6 +354,7 @@ def py_tplot(name, var_label = None, interactive=False):
             new_plot.axis.major_label_standoff = 0
             new_plot.xaxis.formatter = dttf
             new_plot.title = None
+            
             #Check for time bars
             if temp_data_quant['time_bar']:
                 time_bars = temp_data_quant['time_bar']
@@ -370,23 +364,21 @@ def py_tplot(name, var_label = None, interactive=False):
             new_plot.renderers.extend(extra_renderers)
             new_plot.toolbar.active_drag='auto'
             
+            xaxis1 = DatetimeAxis(major_label_text_font_size = '0pt', **xaxis_opt_glob)
+            new_plot.add_layout(xaxis1, 'above')
+                
+            #Turn off the axes for all but last plot    
             if num_plots > 1 and i != num_plots-1:
-                xaxis1 = DatetimeAxis(major_label_text_font_size = '0pt', **xaxis_opt_glob)
-                new_plot.add_layout(xaxis1, 'above')
                 new_plot.xaxis.major_label_text_font_size = '0pt'
-            elif i == num_plots-1:
-                xaxis1 = DatetimeAxis(major_label_text_font_size = '0pt', **xaxis_opt_glob)
-                new_plot.add_layout(xaxis1, 'above')
-                if var_label is not None:
-                    axis_data_quant = data_quants[var_label]
-                    axis_start = min(axis_data_quant['data'].min(skipna=True).tolist())
-                    axis_end = max(axis_data_quant['data'].max(skipna=True).tolist())
-                    new_plot.extra_x_ranges = {'extra': Range1d(start = axis_start, end = axis_end)}
-                    new_plot.add_layout(LinearAxis(x_range_name = 'extra'), 'below')
-
 
             # Add lines
+            if 'line_color' in temp_data_quant['extras']:
+                multi_line_colors = temp_data_quant['extras']['line_color']
+            else:
+                multi_line_colors = ['black', 'red', 'green', 'navy', 'orange', 'firebrick', 'pink', 'blue', 'olive']
+            
             yother = temp_data_quant['data']
+            line_glyphs = []
             line_num = 0
             for column_name in yother.columns:
                 corrected_time = []
@@ -396,11 +388,8 @@ def py_tplot(name, var_label = None, interactive=False):
                 y = yother[column_name]
                 line_opt = temp_data_quant['line_opt']
                 line_source = ColumnDataSource(data=dict(x=x, y=y, corrected_time=corrected_time))
-                if 'line_color' in line_opt:
-                    line = Line(x='x', y='y', **line_opt)
-                else:
-                    line = Line(x='x', y='y', line_color = multi_line_colors[line_num], **line_opt)
-                new_plot.add_glyph(line_source, line)
+                line = Line(x='x', y='y', line_color = multi_line_colors[line_num % len(multi_line_colors)], **line_opt)
+                line_glyphs.append(new_plot.add_glyph(line_source, line))
                 line_num += 1
             
             #Set y/z labels
@@ -410,10 +399,23 @@ def py_tplot(name, var_label = None, interactive=False):
             hover.tooltips = [("Time","@corrected_time"), ("Value","@y")]
             new_plot.add_tools(hover)
             new_plot.add_tools(BoxZoomTool(dimensions=['width']))
+            
+            #Add the Legend is applicable
             if line_num>1 and ('legend_names' in yaxis_opt):
                 if len(yaxis_opt['legend_names']) != line_num:
                     print("Number of lines do not match length of legend names")
-                legend = generate_legend(colors=multi_line_colors[0:line_num], text=yaxis_opt['legend_names'], plot_height=p_height)
+                legend = Legend()
+                legend.location = (0,0)
+                legend_items =[]
+                j=0
+                for legend_name in yaxis_opt['legend_names']:
+                    legend_items.append((legend_name, [line_glyphs[j]]))
+                    j = j+1
+                legend.legends = legend_items
+                legend.label_text_font_size = "6pt"
+                legend.border_line_color = None
+                legend.glyph_height = int(p_height / (len(legend_items) + 1))
+                new_plot.add_layout(legend, 'right')
             
         # Add name of variable to output file name
         if i == num_plots-1:    
@@ -421,30 +423,23 @@ def py_tplot(name, var_label = None, interactive=False):
         else:
             out_name += temp_data_quant['name'] + '+'
             
-        #It unfortunately appears that we need an empty plot in place of the color bar
-        #For plots without a color bar 
-        #Need to figure out how to get rid of this warning....
-        if legend is None:
-            legend=generate_legend(colors=[], text=[], plot_height=p_height)
-        if interactive_plot is None:
-            interactive_plot=generate_legend(colors=[], text=[], plot_height=p_height)
         # Add plot to GridPlot layout
-        all_plots.append([new_plot, legend, interactive_plot])
+        if interactive_plot is None:
+            all_plots.append([new_plot])
+        else:
+            all_plots.append([new_plot, interactive_plot])
         i += 1 
            
     # Add date of data to the bottom left corner and timestamp to lower right
     # if py_timestamp('on') was previously called
-    start_time = tplot_opt_glob['x_range'].start / 1000
-    total_string = timestamp_help(start_time)
+    total_string = ""
     if 'time_stamp' in extra_layouts:
-        todaystring = extra_layouts['time_stamp']
-        total_string += " "
-        total_string += todaystring
+        total_string = extra_layouts['time_stamp']
     
-    if not server:
-        ts = TimeStamp(text = total_string)
-        extra_layouts['data_time'] = ts
-        all_plots.append([extra_layouts['data_time']])
+    ts = TimeStamp(text = total_string)
+    extra_layouts['data_time'] = ts
+    all_plots.append([extra_layouts['data_time']])
+        
     # Set all plots' x_range and plot_width to that of the bottom plot
     #     so all plots will pan and be resized together.
     k = 0
@@ -452,24 +447,44 @@ def py_tplot(name, var_label = None, interactive=False):
         all_plots[k][0].x_range = all_plots[num_plots - 1][0].x_range
         k += 1
     
+    #
+    #Add extra x axes if applicable 
+    #
+    if var_label is not None:
+        if not isinstance(var_label, list):
+            var_label = [var_label]
+        
+        x_axes = []
+        x_axes_index = 0
+        for new_x_axis in var_label:
+            
+            axis_data_quant = data_quants[new_x_axis]
+            axis_start = min(axis_data_quant['data'].min(skipna=True).tolist())
+            axis_end = max(axis_data_quant['data'].max(skipna=True).tolist())
+            x_axes.append(Range1d(start = axis_start, end = axis_end))
+            
+            k = 0
+            while(k < num_plots ):
+                all_plots[k][0].extra_x_ranges['extra_'+str(new_x_axis)] = x_axes[x_axes_index]
+                k += 1
+            
+            all_plots[k-1][0].add_layout(LinearAxis(x_range_name = 'extra_'+str(new_x_axis)), 'below')
+            all_plots[k-1][0].plot_height += 22
+            x_axes_index += 1
+    
     # Add toolbar and title (if applicable) to top plot.
     #all_plots[0][0].toolbar_location = "above"  
     if 'text' in title_opt:
         title1 = Title(**title_opt)  
         all_plots[0][0].title = title1
-        all_plots[0][0].plot_height += 21
+        all_plots[0][0].plot_height += 22
     #final.children[0].add_tools(HoverTool())
     final = gridplot(all_plots)
     
     
-    if server:
-        output_server('hello')
-        show(final)
-    else:
-        out_name += '.html'
-        out_name = 'C:/temp/' + out_name
-        output_file(out_name)
-        show(final)
+    out_name += '.html'
+    output_file(out_name)
+    show(final)
     
     
     
@@ -557,7 +572,6 @@ def py_tplot_restore(file_name):
             if len(temp_tplot['dq'][i][1][0]) > 4:
                 temp_v_data = temp_tplot['dq'][i][1][0][4]
                 
-                
                 #Change from little endian to big endian, since pandas apparently hates little endian
                 #We might want to move this into the py_store_data procedure eventually
                 if (temp_x_data.dtype.byteorder == '>'):
@@ -581,9 +595,9 @@ def py_tplot_restore(file_name):
             #data_quants[data_name]['lh'] = temp_tplot['dq'][i][2]
             
             #Need to loop through the options and determine what goes where
-            #if temp_tplot['dq'][i][3].dtype.names is not None:
-            #    for option_name in temp_tplot['dq'][i][3].dtype.names:
-            #        py_options(data_name, option_name, temp_tplot['dq'][i][3][option_name])
+            if temp_tplot['dq'][i][3].dtype.names is not None:
+                for option_name in temp_tplot['dq'][i][3].dtype.names:
+                    py_options(data_name, option_name, temp_tplot['dq'][i][3][option_name][0])
             
             data_quants[data_name]['trange'] =  temp_tplot['dq'][i][4].tolist()
             data_quants[data_name]['dtype'] =  temp_tplot['dq'][i][5]
@@ -592,12 +606,15 @@ def py_tplot_restore(file_name):
         ###################################################################    
         #TODO: temp_tplot['tv']
         
+        #if temp_tplot['tv'][0][0].dtype.names is not None:
+        #    for option_name in temp_tplot['tv'][0][0].dtype.names:
+        #        py_tplot_options(option_name, temp_tplot['tv'][0][0][option_name][0])
         #'tv' stands for "tplot variables"
         #temp_tplot['tv'][0][0] is all of the "options" variables
             #For example, TRANGE_FULL, TRANGE, REFDATE, DATA_NAMES
         #temp_tplot['tv'][0][1] is all of the "settings" variables
             #temp_tplot['tv'][0][1]['D'][0] is "device" options
-            #temp_tplot['tv'][0][1]['D'][0] is "plot" options
+            #temp_tplot['tv'][0][1]['P'][0] is "plot" options
             #temp_tplot['tv'][0][1]['X'][0] is x axis options
             #temp_tplot['tv'][0][1]['Y'][0] is y axis options
         ####################################################################
@@ -661,14 +678,11 @@ def specplot(name, num_plots, last_plot=False, height=200, width=800, var_label=
     global time_range_adjusted
 
     temp_data_quant = data_quants[name]
-    
-    #HARD CODED FOR NOW
+
     if 'colormap' in temp_data_quant['extras']:
         rainbow_colormap = return_bokeh_colormap(temp_data_quant['extras']['colormap'])
     else:
         rainbow_colormap = return_bokeh_colormap('spectral')
-    
-    
     
     yaxis_opt = temp_data_quant['yaxis_opt']
     zaxis_opt = temp_data_quant['zaxis_opt']
@@ -712,6 +726,9 @@ def specplot(name, num_plots, last_plot=False, height=200, width=800, var_label=
     
     
     new_plot=Figure(x_axis_type='datetime', plot_height = height, plot_width = width, **all_tplot_opt)
+    new_plot.lod_factor = 100
+    new_plot.lod_interval = 30
+    new_plot.lod_threshold = 100
     new_plot.yaxis.axis_label_text_font_size = "10pt"
     if not time_range_adjusted:
         new_plot.x_range.start = new_plot.x_range.start * 1000
@@ -720,7 +737,7 @@ def specplot(name, num_plots, last_plot=False, height=200, width=800, var_label=
     
     #APPARENTLY NEEDED
     if num_plots > 1 and last_plot==True:
-        new_plot.plot_height += 21
+        new_plot.plot_height += 22
     #if num_plots > 1:
     #    p.toolbar_location = None
     
@@ -773,6 +790,7 @@ def specplot(name, num_plots, last_plot=False, height=200, width=800, var_label=
         else:
             y_interactive_log = 'linear'
         interactive_plot = Figure(plot_height = height, plot_width = width, y_range = (zmin, zmax), y_axis_type=y_interactive_log)
+        interactive_plot.min_border_left = 100
         spec_bins = temp_data_quant['spec_bins']
         flux = [0]*len(spec_bins)
         interactive_line_source = ColumnDataSource(data=dict(x=spec_bins, y=flux))
@@ -821,71 +839,47 @@ def specplot(name, num_plots, last_plot=False, height=200, width=800, var_label=
     new_plot.toolbar.active_drag='auto'
     
     #Add axes
+    xaxis1 = DatetimeAxis(major_label_text_font_size = '0pt', **xaxis_opt_glob)
+    new_plot.add_layout(xaxis1, 'above')
     if num_plots > 1 and not last_plot:
-        xaxis1 = DatetimeAxis(major_label_text_font_size = '0pt', **xaxis_opt_glob)
-        new_plot.add_layout(xaxis1, 'above')
         new_plot.xaxis.major_label_text_font_size = '0pt'
-    elif last_plot:
-        xaxis1 = DatetimeAxis(major_label_text_font_size = '0pt', **xaxis_opt_glob)
-        new_plot.add_layout(xaxis1, 'above')
-        if var_label is not None:
-            axis_data_quant = data_quants[var_label]
-            axis_start = min(axis_data_quant['data'].min(skipna=True).tolist())
-            axis_end = max(axis_data_quant['data'].max(skipna=True).tolist())
-            new_plot.extra_x_ranges = {'extra': Range1d(start = axis_start, end = axis_end)}
-            new_plot.add_layout(LinearAxis(x_range_name = 'extra'), 'below')
     
     #Add the color bar
-    colorbar = generate_colorbar(rainbow_colormap, low = zmin, high = zmax, plot_height=height, scale=zscale)
+    if 'z_axis_type' in zaxis_opt:
+        if zaxis_opt['z_axis_type'] == 'log':
+            color_mapper=LogColorMapper(palette=rainbow_colormap, low=zmin, high=zmax)
+            color_bar=ColorBar(color_mapper=color_mapper, ticker=LogTicker(), border_line_color=None, location=(0,0))
+        else:
+            color_mapper=LinearColorMapper(palette=rainbow_colormap, low=zmin, high=zmax)
+            color_bar=ColorBar(color_mapper=color_mapper, ticker=BasicTicker(), border_line_color=None, location=(0,0))
+    else:
+        color_mapper=LogColorMapper(palette=rainbow_colormap, low=zmin, high=zmax)
+        color_bar=ColorBar(color_mapper=color_mapper, ticker=LogTicker(), border_line_color=None, location=(0,0))
+    color_bar.width=10
+    color_bar.formatter = NumeralTickFormatter(format="0,0")
+    color_bar.major_label_text_align = 'left'
+    color_bar.label_standoff = 5
+    color_bar.major_label_text_baseline = 'middle'
+    #color_bar.title='hello'
+    #color_bar.title_text_align = 'left'
+    
     
     #Set y/z labels
     new_plot.yaxis.axis_label = yaxis_opt['axis_label']
     if 'axis_label' in zaxis_opt:
-        colorbar.yaxis.axis_label = zaxis_opt['axis_label']
-    else:
-        colorbar.yaxis.axis_label = ''
+        color_bar.title = zaxis_opt['axis_label']
+        color_bar.title_text_font_size = '8pt'
+        color_bar.title_text_font_style = 'bold'
+        color_bar.title_standoff = 20
     
-    if num_plots > 1 and last_plot==True:
-        colorbar.plot_height += 21
+    new_plot.add_layout(color_bar, 'right')
     
     #Create a custom hover tool
     hover = HoverTool(callback=callback)
     hover.tooltips = [("Time","@corrected_time"), ("Energy", "@y"), ("Value","@value")]
     new_plot.add_tools(hover)
     new_plot.add_tools(BoxZoomTool(dimensions=['width']))
-    return new_plot, colorbar, interactive_plot
-
-def generate_colorbar(palette, low=0, high=255, plot_height = 200, plot_width = 65, orientation = 'v', scale='log'):
-
-    if scale=='log':
-        y = np.logspace(np.log10(low),np.log10(high),len(palette))
-    else:
-        y = np.logspace(low,high,len(palette))
-    dy = []
-    for i in range(len(y)-1):
-        dy.append(y[i+1]-y[i])
-    if orientation.lower()=='v':
-        fig = Figure(y_axis_location='right', y_axis_type="log", tools = [], x_range = [0, 1], y_range = [low, high], plot_width = plot_width, plot_height=plot_height)
-        #HARD CODED FOR NOW, REMOVE LATER
-        
-        
-        fig.toolbar_location=None
-        fig.xaxis.visible = None
-        fig.yaxis.major_label_text_font_size = '6pt'
-        fig.yaxis.major_tick_line_color=None
-        fig.yaxis.minor_tick_line_color=None
-        fig.yaxis.axis_label = 'test'
-        fig.rect(x=0.5, y=y[0:len(y)-1], color=palette[0:len(y)-1], width=1, height = dy)      
-        
-    elif orientation.lower()=='h':
-        fig = Figure(tools="", y_range = [0, 1], x_range = [low, high],plot_width = plot_width, plot_height=plot_height)
-        fig.toolbar_location=None
-        fig.xaxis.visible = None
-        fig.yaxis.visible = None
-        fig.rect(x=y[0:(len(palette)-2)], y=0.5, color=palette[0:(len(palette)-2)], width=dy, height = 1)
-    
-
-    return fig
+    return new_plot, interactive_plot
 
 def return_bokeh_colormap(name):
     import matplotlib as mpl
@@ -917,28 +911,6 @@ def get_heatmap_color(color_map, min, max, value, zscale = 'log'):
     else:
         cm_index = int((((value-min) / (max-min)) * len(color_map)))
         return color_map[cm_index]
-
-def generate_legend(colors, text, plot_height = 200, plot_width = 125):
-
-
-    fig=Figure(y_axis_location='right', plot_width = plot_width, plot_height=plot_height, tools = [], x_range = [0, 1], y_range = [0,1])
-    fig.rect(x=0, y=0, color='white', width=1, height = 1, visible=False)  
-    fig.outline_line_color = None
-    fig.xaxis.visible = None
-    fig.yaxis.visible = None
-    i=0
-    for label in text:
-        y_position = (i+1)/(len(colors)+1)
-        asdf = Label(x = 0, y=y_position, text=label, text_font_size="8pt", text_color=colors[i])    
-        fig.add_layout(asdf)
-        i=i+1
-    fig.yaxis.major_tick_line_color=None
-    fig.yaxis.minor_tick_line_color=None
-    fig.grid.grid_line_color = None
-    fig.axis.major_tick_line_color = None
-    
-    
-    return fig
 
 def py_timebar_delete(t, varname = None, dim = 'height'):
     print(dim)
@@ -1086,8 +1058,7 @@ def py_timestamp(val):
     global extra_layouts
     
     if val is 'on':
-        today = datetime.datetime.now()
-        todaystring = today.strftime("%m/%d/%Y")
+        todaystring = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         extra_layouts['time_stamp'] = todaystring
     else:
         if 'time_stamp' in extra_layouts:

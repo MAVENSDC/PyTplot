@@ -1,6 +1,5 @@
 from IPython import embed
 import py_tplot_main
-from mvn_kp_read import mvn_kp_read
 from py_tplot_main import py_store_data
 from py_tplot_main import py_get_names
 from py_tplot_main import py_tplot
