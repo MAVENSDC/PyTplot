@@ -250,35 +250,9 @@ def py_tplot_options(option, value):
     
     return
 
-def py_tplot(name, var_label = None, interactive=False):
+def py_tplot(name, var_label = None, auto_color=False, interactive=False):
     global data_quants
     global time_range_adjusted
-    
-    ''' 
-    Widgets on Widgets 
-    TextInput
-    
-    from bokeh.io import output_file, show
-    from bokeh.layouts import widgetbox
-    from bokeh.models.widgets import TextInput
-    
-    output_file("text_input.html")
-    
-    text_input = TextInput(value="default", title="Label:")
-    
-    show(widgetbox(text_input))
-    '''
-    '''wsizecallback = CustomJS(args=dict(callbackw=window_size[0]), code="""
-        var frodo = cb_obj.get('value');
-        var frodo_int = parseInt(frodo, 10);
-        callbackw = frodo_int;
-        callbackw.trigger('change');
-    """)'''
-    text_width = TextInput(value="800", title="Width:")
-    dim_width = widgetbox(text_width)
-    text_height = TextInput(value="200", title="Height:")
-    dim_height = widgetbox(text_height)
-    
     
     # Name for .html file containing plots
     out_name = ""
@@ -380,6 +354,9 @@ def py_tplot(name, var_label = None, interactive=False):
             yother = temp_data_quant['data']
             line_glyphs = []
             line_num = 0
+            line_style = None
+            if 'linestyle' in temp_data_quant['extras']:
+                line_style = temp_data_quant['extras']['linestyle']
             for column_name in yother.columns:
                 corrected_time = []
                 for x in temp_data_quant['data'].index:
@@ -388,7 +365,15 @@ def py_tplot(name, var_label = None, interactive=False):
                 y = yother[column_name]
                 line_opt = temp_data_quant['line_opt']
                 line_source = ColumnDataSource(data=dict(x=x, y=y, corrected_time=corrected_time))
-                line = Line(x='x', y='y', line_color = multi_line_colors[line_num % len(multi_line_colors)], **line_opt)
+                if auto_color:
+                    line = Line(x='x', y='y', line_color = multi_line_colors[line_num % len(multi_line_colors)], **line_opt)
+                else:
+                    line = Line(x='x', y='y', **line_opt)
+                if 'line_style' not in line_opt:
+                    if line_style is not None:
+                        line.line_dash = line_style[line_num % len(line_style)]
+                else:
+                    line.line_dash = line_opt['line_style']
                 line_glyphs.append(new_plot.add_glyph(line_source, line))
                 line_num += 1
             
@@ -518,6 +503,52 @@ def py_get_names():
         if isinstance(key, int):
             print(key, ":", data_quants[key]['name'])
         
+    return
+
+def py_overplot(new_name, names, auto_format = False):
+    for i in names:
+        if i not in data_quants.keys():
+            print(str(i) + " is currently not in pytplot.")
+            return
+    new_time = None
+    new_data = []
+    if auto_format:
+        linestyle_guide = ['solid', 'dashed', 'dotted', 'dashdot']
+        linestyle_list = []
+        linestyle_added = 0
+    
+    # obtain time
+    (new_time, _) = py_get_data(names[0])
+    time_len = len(new_time)
+    # create internal lists in new_data based off new_time
+    for time in new_time:
+        new_data.append([])
+    for temp_name in names:
+        (_, temp_data) = py_get_data(temp_name)
+        data_len = None
+        i = 0
+        data_len = len(temp_data[0])
+        while(i < time_len):
+            j = 0
+            while(j < data_len):
+                new_data[i].append(temp_data[i][j])
+                j += 1
+            i += 1
+
+        # add linestyle to linestyle_list based on how many
+        # lines there were and which # plot this is
+        if auto_format:
+            temp_linestyle = linestyle_guide[linestyle_added]
+            i = 0
+            while(i < data_len):
+                linestyle_list.append(temp_linestyle)
+                i += 1
+            linestyle_added += 1
+
+    py_store_data(new_name, data={'x':new_time, 'y':new_data})
+    if auto_format:
+        data_quants[new_name]['extras']['linestyle'] = linestyle_list
+
     return
 
 def py_tplot_save(name, filename=None):
