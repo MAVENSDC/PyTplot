@@ -120,17 +120,7 @@ def py_del(name):
         del data_quants[int_name]
     
     return
-'''
-def py_overplot(names):
-    
-    Combine the data from all of the names.
-    Re-color lines so that none are the same color and can be distinguished.
-    Introduce 'names' to the line making so they can be distinguished.
-    In this case the legend would be automatic and use these names?
-    Look at IDL to see what exactly I'm doing.
-    
-    return
-'''
+
 def str_to_int(time_str):
     epoch_t = "1970-1-1 00:00:00"
     pattern = "%Y-%m-%d %H:%M:%S"
@@ -188,17 +178,6 @@ def py_zlim(name, min, max, log_opt=False):
     
     return
 
-'''
-ToDo: Add conversion from string to useable data in case of passing
-          in time. e.g.: tlimit('12:30', '14:30') == tlimit(12.5, 14.5)
-      Make it so when no arguments are passed in, the BoxZoomTool
-          is selected. But is this actually necessary? If you're going
-          to use the mouse anyway, why not just click the tool on the
-          toolbar.
-      When the BoxZoomTool is used to zoom in, the last should be
-          updated so that it can go back even when the mouse is used.
-          Right now just goes to full.
-'''
 # arg: can be a list of the min and max times to be taken
 #      can be a string of 'full' or 'last'
 #      can be a variable, and a variable plus a certain amount of time
@@ -476,10 +455,6 @@ def py_tplot(name, var_label = None, auto_color=False, interactive=False):
     return
 
 def py_get_data(name):
-    '''
-    ToDo: Figure out what the 'values' attribute in the
-          IDL version means.
-    '''
     global data_quants
     if name not in data_quants.keys():
         print("That name is currently not in pytplot")
@@ -487,11 +462,6 @@ def py_get_data(name):
     
     temp_data_quant = data_quants[name]
     data_val = temp_data_quant['data'].values
-    '''yother = temp_data_quant['data']
-    for column_name in yother.columns:
-        y = yother[column_name].values.tolist()
-        print(y)
-        data_val.append(y)'''
     time_val = temp_data_quant['data'].index
     
     return(time_val, data_val)
