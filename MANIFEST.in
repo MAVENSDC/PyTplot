@@ -1,0 +1,4 @@
+include README.rst
+include test_data.tplot
+include docs/*.html
+include docs/*.txt
