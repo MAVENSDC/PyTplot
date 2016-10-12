@@ -1,0 +1,367 @@
+<html>
+
+  <head>
+    <title>py_tplot doc</title>
+  </head>
+
+  <body>
+    <p><strong>Last modified: </strong>Wed August 10 13:24 2016.</p>
+
+    <hr>
+
+    <a name="RoutineList">
+      <h1>Directory Listing of Routines</h1></a>
+    <ul>
+      <h1>pythontplot</h1>
+      <li><a href="#py_get_data">py_get_data</a>
+      <br>Retrieves the data and/or limit structure associated with a name handle.
+      <li><a href="#py_get_names">py_get_names</a>
+      <br>Lists current stored data names that can be plotted with the TPLOT routines.
+      <li><a href="#py_get_timespan">py_get_timespan</a>
+      <li><a href="#py_get_ylimits">py_get_ylimits</a>
+      <br>Calculates appropriate ylimits for a single "TPLOT" variable or a list of "TPLOT" variables.
+      <li><a href="#py_options">py_options</a>
+      <br>Add (or change) options of individual plots.
+      <li><a href="#py_store_data">py_store_data</a>
+      <br>Store time series structures in static memory for later retrieval.
+      <li><a href="#py_timebar">py_timebar</a>
+      <br>Plot vertical (or horizontal) lines on TPLOTs at specified times (or values).
+      <li><a href="#py_timespan">py_timespan</a>
+      <br>Define a time span for the "tplot" routine.
+      <li><a href="#py_timestamp">py_timestamp</a>
+      <br>Adds current date and time to plot when "tplot" routine is called.
+      <li><a href="#py_tlimit">py_tlimit</a>
+      <li><a href="#py_tplot">py_tplot</a>
+      <br>Creates a time series plot of user defined quantities.
+      <li><a href="#py_tplot_options">py_tplot_options</a>
+      <br>Sets global options for the "tplot" routine.
+      <li><a href="#py_tplot_rename">py_tplot_rename</a>
+      <br>Renames a tplot variable without copy.
+      <li><a href="#py_tplot_restore">py_tplot_restore</a>
+      <br>Restores tplot data, limits, and name handles. (working on options and settings)
+      <li><a href="#py_tplot_save">py_tplot_save</a>
+      <br>Store tplot data in a file.
+      <li><a href="#py_xlim">py_xlim</a>
+      <br>To set plotting limits for plotting routines.
+      <li><a href="#py_ylim">py_ylim</a>
+      <br>Sets y-axis limits for plotting routines.
+      <li><a href="#py_zlim">py_zlim</a>
+      <br>To set plotting limits for plotting routines.
+      <br>
+    </ul><p>
+    <hr>
+
+    <h1>Routine Descriptions</h1>
+    <a name="py_get_data">
+      <h2>py_get_data</h2></a>
+    <a href="#py_get_names">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_get_data(name)
+PURPOSE:
+  Retrieves the data and/or limit structure associated with a name handles.
+  This procedure is used by the "TPLOT" routines.
+INPUT:
+  name  Scalar string or index of TPLOT variable.
+    </pre><p>
+    <hr>
+
+    <a name="py_get_names">
+      <h2>py_get_names</h2></a>
+    <a href="#py_get_data">[Previous Routine]</a>
+    <a href="#py_get_timespan">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_get_names()
+PURPOSE:
+  Lists current stored data names that can be plotted with the TPLOT routines.
+INPUT: None
+    </pre><p>
+    <hr>
+
+    <a name = "py_get_timespan">
+      <h2>py_get_timespan</h2></a>
+    <a href="#py_get_names">[Previous Routine]</a>
+    <a href="#py_get_ylimits">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_get_timespan(name)
+PURPOSE:
+  To get timespan of tplot data.
+INPUT:
+  name  Scalar string or index of TPLOT variable.
+    </pre><p>
+    <hr>
+
+    <a name = "py_get_ylimits">
+      <h2>py_get_ylimits</h2></a>
+    <a href="#py_get_timespan">[Previous Routine]</a>
+    <a href="#py_options">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_get_ylimits(name, trg = None)
+PURPOSE:
+  Calculates appropriate ylimits for either one "TPLOT" variable or a list of "TPLOT" variables to be plotted in the same panel.
+INPUT:
+  name  TPLOT variable string or number or a list of TPLOT variable strings or numbers.
+  trg   (Optional) Time range over which to calculate the limits; Double[2].
+    </pre><p>
+    <hr>
+
+    <a name = "py_options">
+      <h2>py_options</h2></a>
+    <a href="#py_get_ylimits">[Previous Routine]</a>
+    <a href="#py_store_data">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_options(name, option, value)
+PURPOSE:
+  Add (or change) options for individual plots.
+INPUT:
+  name    Scalar string or index of TPLOT variable.
+  option  String with name of plot option to be changed.
+  value   Value to be put into the option being changed.
+OPTIONS:
+  color         Color of plot lines to same value color.
+                value: String of color value.
+  line_style    Changes pattern of plot lines.
+                value: Enum('solid_line', 'dot', 'dash', 'dash_dot', dash_dot_dot_dot', 'long_dash').
+  name          Name of plot.
+                value: String.
+  nodata        Does not show the data plotted.
+                value: True or False.
+  panel_size    Size of panel compared to others.
+                value: Float (fraction of size of other panes).
+  thick         Thickness of plot lines.
+                value: Integer.
+  transparency  Transparency of plot lines.
+                value: Integer in range (0, 100).
+  ylog          Y-axis presented as linear or log.
+                value: 0 or 1, 0: linear, 1: log.
+  yrange        Range of y-axis.
+                value: two element list [min, max].
+  ytitle        Title displayed on y-axis.
+                value: String.
+  zlog          Z-axis presented as linear or log.
+                value: 0 or 1, 0: linear, 1: log.
+  ztitle        Title displayed on z-axis.
+                value: String.
+    </pre><p>
+    <hr>
+
+    <a name = "py_store_data">
+      <h2>py_store_data</h2></a>
+    <a href="#py_options">[Previous Routine]</a>
+    <a href="#py_timebar">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_store_data(name, data=None, delete=False)
+PURPOSE:
+  Store time series structures in static memory for later retrieval by the tplot routine.
+INPUT:
+  name    String name to be associated with the data structure passed in.
+  data    A data structure that contains the x and y data. (Optional) Include 'v' data in order for a spectrogram to be plotted.
+  delete  (Optional) True: deletes py_tplot variable(s) of name, no data required. In this case, name can be a single variable, or a list of variables. False: py_store_data creates tplot variable
+EXAMPLE:
+  py_store_data('one_line', data={'x':[1,2,3,4], 'y':[1,2,3,4]})
+  py_store_data('three_lines', data={'x':[1,2,3,4], 'y':[[1,5,9],[2,6,10],[3,7,11],[4,8,12]})
+  py_store_data(['one_line', three_lines'], delete=True)
+    </pre><p>
+    <hr>
+
+    <a name = "py_timebar">
+      <h2>py_timebar</h2></a>
+    <a href="#py_store_data">[Previous Routine]</a>
+    <a href="#py_timespan">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_timebar(t, varname = None, databar = False, delete = False, color = 'black', thick = 1)
+PURPOSE:
+  Plot vertical (or horizontal) lines on TPLOTs at specified times (or values).
+INPUT:
+  t        Time or list of times at which to draw vertical lines.
+  varname  (Optional) Name of specific plots to apply timebar to, otherwise all plots.
+  databar  (Optional) True: horizontal bar, False: vertical bar.
+  delete   (Optional) True: deletes all bars matching the t, databar, and varname inputs. False: creates bars as normal.
+  color    (Optional) Color of timebar, default black.
+  thick    (Optional) Thickness of timebar.
+    </pre><p>
+    <hr>
+
+    <a name = "py_timespan">
+      <h2>py_timespan</h2></a>
+    <a href="#py_timebar">[Previous Routine]</a>
+    <a href="#py_timestamp">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_timespan(t1, dt, keyword = None)
+PURPOSE:
+  Define a time span for the "tplot" routine.
+INPUT:
+  t1       Starting time (seconds since 1970).
+  dt       Duration of time span (Days is default).
+  keyword  (Optional) Set dt value to different time quantities.
+           'seconds', 'minutes', 'hours', 'days' (default)
+    </pre><p>
+    <hr>
+
+    <a name = "py_timestamp">
+      <h2>py_timestamp</h2></a>
+    <a href="#py_timespan">[Previous Routine]</a>
+    <a href="#py_tlimit">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_timestamp(val)
+PURPOSE:
+  Include date and time the plot was created on the plot when the "tplot" routine is called.
+INPUT:
+  val  'on' or 'off'
+    </pre><p>
+    <hr>
+    
+    <a name = "py_tlimit">
+      <h2>py_tlimit</h2></a>
+    <a href="#py_timestamp">[Previous Routine]</a>
+    <a href="#py_tplot">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_tlimit(arg)
+PURPOSE:
+  Defines time range for "tplot".
+INPUT:
+  arg  Two element list of minimum and maximum time of time range (seconds since 1970).
+       'full'  Use plot's original (full) limits.
+       'last'  Use plot's previous limits.
+    </pre><p>
+    <hr>
+
+    <a name = "py_tplot">
+      <h2>py_tplot</h2></a>
+    <a href="#py_tlimit">[Previous Routine]</a>
+    <a href="#py_tplot_options">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_tplot(name, var_label = None)
+PURPOSE:
+  Creates a time series plot of user defined quantities. If 'v' variable was provided when calling py_store_data, a spectrogram will be plotted.
+INPUT:
+  name       A single string or list of strings associated with TPLOT variables previously stored with the "py_store_data" routine.
+             Can alternatively be an integer or list of integers associated with a TPLOT variable.
+  var_label  (Optional)String of TPLOT variable to include as label along the bottom.
+    </pre><p>
+    <hr>
+
+    <a name = "py_tplot_options">
+      <h2>py_tplot_options</h2></a>
+    <a href="#py_tplot">[Previous Routine]</a>
+    <a href="#py_tplot_rename">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_tplot_options(option, value)
+PURPOSE:
+  Sets global options for the "tplot" routine.
+INPUT:
+  option  Name of option to be set (string).
+  value   Value to be given to the option.
+OPTIONS:
+  title       Title of entire plot.
+              value: String
+  title_size  Size of title font.
+              value: Integer
+  wsize       Size of plot window.
+              value: Two-element list of number of pixels for width and height of window (Integers). [width, height]
+    </pre><p>
+    <hr>
+
+    <a name = "py_tplot_rename">
+      <h2>py_tplot_rename</h2></a>
+    <a href="#py_tplot_options">[Previous Routine]</a>
+    <a href="#py_tplot_restore">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_tplot_rename(old_name, new_name)
+PURPOSE:
+  Renames a tplot variable without copy. Tplot number stays the same.
+INPUT:
+  old_name  Current name or index of the variable to be changed(string or integer).
+  new_name  Name the variable will have after the procedure call(string).
+    </pre><p>
+    <hr>
+
+    <a name = "py_tplot_restore">
+      <h2>py_tplot_restore</h2></a>
+    <a href="#py_tplot_rename">[Previous Routine]</a>
+    <a href="#py_tplot_save">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_tplot_restore(file_name)
+PURPOSE:
+  Restores tplot data, limits, and name handles from '.pytplot' files. Restores tplot data from '.tplot' files.
+INPUT:
+  file_name  File name to restore.
+    </pre><p>
+    <hr>
+
+    <a name = "py_tplot_save">
+      <h2>py_tplot_save</h2></a>
+    <a href="#py_tplot_restore">[Previous Routine]</a>
+    <a href="#py_xlim">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_tplot_save(name, filename=None)
+PURPOSE:
+  Store tplot data in a file.
+INPUT:
+  name      Tplot handle to save.
+  filename  (Optional) File name in which to save data. If none is provided, a filename will be constructed using the tplot handle. 
+    </pre><p>
+    <hr>
+  
+    <a name = "py_xlim">
+      <h2>py_xlim</h2></a>
+    <a href="#py_tplot_save">[Previous Routine]</a>
+    <a href="#py_ylim">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_xlim(min, max)
+PURPOSE:
+  Sets x-axis limits for plotting routines.
+INPUT:
+  min  Minimum value of range.
+  max  Maximum value of range.
+    </pre><p>
+    <hr>
+
+    <a name = "py_ylim">
+      <h2>py_ylim</h2></a>
+    <a href="#py_xlim">[Previous Routine]</a>
+    <a href="#py_zlim">[Next Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_ylim(name, min, max, log_opt = False)
+PURPOSE:
+  Sets y-axis limits for plotting routines.
+INPUT:
+  name     Name or tplot number of TPLOT variable to be changed.
+  min      Minimum value of yrange.
+  max      Maximum value of yrange.
+  log_opt  (Optional) False: linear, True: log.
+    </pre><p>
+    <hr>
+
+    <a name = "py_zlim">
+      <h2>py_zlim</h2></a>
+    <a href="#py_ylim">[Previous Routine]</a>
+    <a href="#RoutineList">[List of Routines]</a>
+    <pre>
+PROCEDURE: py_zlim(name, min, max, log_opt = False)
+PURPOSE:
+  Sets z-axis limits for plotting routines.
+INPUT:
+  name     Name or tplot number of TPLOT variable to be changed.
+  min      Minimum value of zrange.
+  max      Maximum value of zrange.
+  log_opt  (Optional) False: linear, True: log.
+    </pre><p>
+    <hr>
+
