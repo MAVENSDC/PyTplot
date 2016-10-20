@@ -1,23 +1,49 @@
-Pytplot
---------
+##########
+pytplot
+##########
 
+Pytplot is a python plotting library which aims to mimic the functionality of 
+the IDL "tplot" libraries.  It can be used in python scripts, or interactively 
+through IPython and the Jupyter notebook.  
 
-SAMPLE COMMANDS:
+Install Python
+=============
 
-Obtain sample data:
-pytplot.tplot_restore('test_data.tplot')
+You will need Python version 3.5 to run pytplot.  
 
-Plot some data:
-pytplot.py_tplot('swia_vel', var_label='orbit')
+It is recommended that you install `Anaconda <https://www.continuum.io/downloads/>`_, as it comes with a suite of packages that are useful for data science. 
 
-Change panel size:
-pytplot.py_options(['mag','swia_den','swia_vel'] , 'panel_size', .5)
+You could also install python directly from `python.org <https://www.python.org/download/>`_.
 
-Change axis:
-pytplot.py_options('swia_den', 'ylog', 1)
+Install pytplot
+=============
 
-Change timespan:
-pytplot.py_timespan('2016-06-20 00:00:00', .1875, keyword='days')
+Open up a terminal, and type::
 
-Plot all of the data:
-pytplot.py_tplot(['SEP_2_ELEC','SEP_1_ION', 'SEP_2_ION', 'swia_counts','swia_den','mag','swia_vel'])
+	pip install pytplot
+	
+This will install pytplot and all of it's dependencies.  
+
+Running Pytplot
+=============
+
+To start using pytplot in a similar manner to IDL tplot, start up an interactive environment through the terminal command::
+
+	ipython 
+	
+or, if you prefer the jupyter interactive notebook::
+
+	jupyter notebook
+	
+then, just import the package by typing the command::
+
+	import pytplot
+
+A demo/tutorial can be found here: 'pytplot/docs/pytplot_tutorial.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/pytplot_tutorial.html>'_.
+	
+And a full list of functions can be found in 'pytplot/docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>'_.
+	
+Contact
+=============
+
+If you have any suggestions or notice any problems, don't hesitate to contact Bryan Harter: harter@lasp.colorado.edu 

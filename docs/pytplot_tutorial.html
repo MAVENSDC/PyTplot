@@ -1,0 +1,102 @@
+<html>
+
+    <head>
+        <title>Rachel Lewis's pytplot tutorial</title>
+    </head>
+
+    <b>Tplot Tutorial</b>
+
+    <br><br>
+
+    <a href="#startup">Start IPython and load data into memory</a><br>
+    <a href="#step0">Storing Data</a><br>
+    <a href="#step1">Pytplot Variables</a><br>
+    <a href="#step2">Options</a><br>
+    <a href="#step3">Displaying Data Using Tplot</a><br>
+    <a href="#step4">Interacting with Data Plot</a><br>
+    <a href="#step5">Time Variables</a><br>
+
+    <br><br>
+
+    <ul>
+
+        <b><a name="startup">Start IPython and load some data into memory</a></b>
+        <ul>
+            <li>Run the 'py_tplot_start.py' file, which will start an interactive version of Python in the console.</li><br>
+            <li>***Stuff here about py_restore***
+        </ul>
+
+        <br><br>
+
+        <b><a name="step0">Storing Data</a></b>
+        <ul>
+            <li><i>Pytplot</i> works by interacting with global variables (called <i>tplot</i> variables) that contain information necessary for creating one panel (or even one portion of a panel) of a plot, that can be accessed from the main level or within any Python routine. Before anything can be plotted, <i>tplot</i> variables must be loaded into memory.</li><br>
+            <li><b>py_store_data('amplitude', data={'x':mags.time, 'y':mags.amp})</b> will store the amplitude of the mags variable as the y corresponding to the x (times) of mags.times under the tplot variable name 'amplitude'.</li><br>
+            <li><u>Single line Plot</u>: to store data to plot a single line, the 'y' data will be a single list of data that will correspond to the points that will make up the line.</li><br>
+            <li><u>Multi-line Plot</u>: to store data to plot a multi-line plot, the 'y' data will be a list of lists. Each column of the "matrix" created is the data for one line. So if you had a list with four lists in it and three elements in each list [[1,2,3],[4,5,6],[7,8,9],[10,11,12]] three lines with four data points each will be plotted.</li><br>
+            <li><u>Spectrogram Plot</u>:</li><br>
+            <li><u>Combining Two Plots</u>: <b>py_overplot('new_name', ['old_name1', 'old_name2'])</b> to combine multiple existing <i>tplot</i> variables ('old_name1' and 'old_name2') into one new <i>tplot</i> variable ('new_name'). 'new_name' will have all data from the existing <i>tplot</i> variables entered in one new <i>tplot</i> variable.</li><br>
+        </ul>
+
+        <br><br>
+
+        <b><a name="step1">Pytplot Variables</a></b>
+        <ul>
+            <li><b>py_get_names()</b> will print the numbers and names of the tplot variables currently in memory.</li><br>
+            <li>When using any routines that require the name of the tplot variable, the user can use either the name of the variable or the corresponding number.</li><br>
+        </ul>
+
+        <br><br>
+
+        <b><a name="step2">Options</a></b>
+        <ul>
+            <li><b>py_options('tplot_var', 'option', 'option_value')</b> can be used to change plotting options corresponding to specific <i>tplot</i> variables. All options currently implemented are described in the pytplot documentation, but here are some examples to get you started.</li>
+            <li>Line Thickness: <b>py_options('amplitude', 'thick', 4)</b></li>
+            <li>Title of y-axis: <b>py_options('Bxyz', 'ytitle', 'Bxyz (nT)')</b></li>
+            <li>Vertical Bounds of Plot: <b>py_options('amplitude', 'yrange', [0,300])</b></li>
+            <li>Vertical Size of Panel: <b>py_options('allmag', 'panel_size', 0.5)</b></li>
+            <br><li><b>py_tplot_options('option', 'option_value')</b> can be used to change plotting options for the <b>py_tplot</b> routine. These control options that effect all panels in a plot, such as:</li>
+            <li>Title: <b>py_tplot_options('title', 'All Plots')</b></li>
+            <li>Window Size: <b>py_tplot_options('wsize', [800, 200])</b></li><br>
+        </ul>
+
+        <br><br>
+
+        <b><a name="step3">Display Data Using Tplot</a></b>
+        <ul>
+            <li>Single Panel Plot: <b>py_tplot('amplitude')</b> or alternatively use the <i>tplot</i> variable number <b>py_tplot(1)</b></li><br>
+            <li>Multiple Panel Plot: <b>py_tplot(['amplitude', 'allmag', 'Bxyz'])</b> or <b>py_tplot([1, 3, 2])</b></li><br>
+        </ul>
+
+        <br><br>
+
+        <b><a name="step4">Interacting with Data Plot</a></b>
+        <ul>
+            <li>There are several ways to interact with the data plots. There is command line interaction that follows the same pattern of functions IDL utilizes. Pytplot additionally has interactivity built into the viewing window in the form of "tools".</li><br>
+            <li>Move forward and backward in time: The <b>Pan</b> tool allows the user to click and drag the mouse on the plot to move along the x- or y-axis.</li><br>
+            <li>Zoom in and out (in time) on a plot<br>
+            <ul>
+                <li>Command Line: <b>py_tlimit(["1-1-1970 00:01:00", "1-1-1970 00:02:00"])</b> will zoom in to show the data from the first time supplied to the second time when <b>py_tplot</b> is called again. <b>py_tlimit('last')</b> will revert to the previous time range. <b>py_tlimit('full')</b> will display the plots using the full time range.</li>
+                <li>Tools: The <b>Box Zoom</b> tool allows the user to click and drag the mouse on the plot to specify their desired x-axis range. The <b>Undo</b> tool can then revert the time range to that previously shown. The <b>Reset</b> tool reverts the entire plot to the way it was when first plotted (full time range).</li><br>
+            </ul>    
+            </li><br>
+            <li>Show data points: The <b>Hover Tool</b> displays the data of a given point when the user hovers their mouse over the line.</li><br>
+            <li>To put crosshairs on the window: The <b>Crosshairs</b> tool displays a set of crosshairs that follow the location of the mouse on the plot.</li><br>
+            <li>To place a vertical line at a specific time on all panels: <b>py_timebar("1-1-1970 00:01:01")</b> will add a vertical black line to all plots at the time entered. Further settings related to this routine are described in the pytplot documentation.</li><br>
+        </ul>
+
+        <br><br>
+
+        <b><a name="step5">Time Variables</a></b>
+        <ul>
+            <li>For routines that use time inputs (<b>py_timebar, py_timespan, py_tlimit, py_xlim</b>), time can be input in two ways. The first is simply the number of seconds since epoch. The second is a string formatted in the following way: "MM-DD-YYYY hh:mm:ss" with M: month, D: day, Y: year, h: hour, m: minute, s: second.</li>
+            <li>For example, "8-25-2016 16:43:37" is equivalent to 1472143417.</li><br>
+        </ul>
+
+        <br><br>
+
+    </ul>
+</html>
+
+
+
