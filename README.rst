@@ -41,7 +41,7 @@ then, just import the package by typing the command::
 
 A demo/tutorial can be found here: `pytplot/docs/pytplot_tutorial.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/pytplot_tutorial.html>`_.
 	
-And a full list of functions can be found in `pytplot/docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>`_.
+A full list of functions will eventually be found in `pytplot/docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>`_.  It is still being updated.  
 	
 Contact
 =============
