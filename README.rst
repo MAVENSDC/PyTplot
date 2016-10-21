@@ -2,9 +2,9 @@
 pytplot
 ##########
 
-Pytplot is a python plotting library which aims to mimic the functionality of 
-the IDL "tplot" libraries.  It can be used in python scripts, or interactively 
-through IPython and the Jupyter notebook.  
+Pytplot is a python plotting library which aims to mimic the functionality of the IDL "tplot" libraries.  The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a browser tab.   These files have several user interaction tools built in, such as zooming and panning.   
+
+Pytplot can be used in python scripts, or interactively through IPython and the Jupyter notebook.  
 
 Install Python
 =============
