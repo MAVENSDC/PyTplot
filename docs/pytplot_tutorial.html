@@ -56,7 +56,7 @@
             <li>Title of y-axis: <b>pytplot.options('swia_vel', 'ytitle', 'speed (km/s)')</b></li>
             <li>Vertical Bounds of Plot: <b>pytplot.options('SEP_1_ION', 'yrange', [5,5000])</b></li>
             <li>Vertical Size of Panel: <b>pytplot.options(['mag','swia_den','swia_vel'], 'panel_size', 0.5)</b></li>
-            <br><li><b>pytplot.tplot_options('option', 'option_value')</b> can be used to change plotting options for the <b>py_tplot</b> routine. These control options that effect all panels in a plot, such as:</li>
+            <br><li><b>pytplot.tplot_options('option', 'option_value')</b> can be used to change plotting options for the <b>tplot</b> routine. These control options that effect all panels in a plot, such as:</li>
             <li>Title: <b>pytplot.tplot_options('title', 'All Plots')</b></li>
             <li>Window Size: <b>pytplot.tplot_options('wsize', [800, 800])</b></li><br>
         </ul>
@@ -77,7 +77,7 @@
             <li>Move forward and backward in time: The <b>Pan</b> tool allows the user to click and drag the mouse on the plot to move along the x- or y-axis.</li><br>
             <li>Zoom in and out (in time) on a plot<br>
             <ul>
-                <li>Command Line: <b>pytplot.tlimit(['2016-06-20 00:00:00', '2016-06-20 04:00:00'])</b> will zoom in to show the data from the first time supplied to the second time when <b>py_tplot</b> is called again. <b>py_tlimit('last')</b> will revert to the previous time range. <b>py_tlimit('full')</b> will display the plots using the full time range.</li>
+                <li>Command Line: <b>pytplot.tlimit(['2016-06-20 00:00:00', '2016-06-20 04:00:00'])</b> will zoom in to show the data from the first time supplied to the second time when <b>tplot</b> is called again. <b>pytplot.tlimit('last')</b> will revert to the previous time range. <b>pytplot.tlimit('full')</b> will display the plots using the full time range.</li>
                 <li>Tools: The <b>Box Zoom</b> tool allows the user to click and drag the mouse on the plot to specify their desired x-axis range. The <b>Undo</b> tool can then revert the time range to that previously shown. The <b>Reset</b> tool reverts the entire plot to the way it was when first plotted (full time range).</li><br>
             </ul>    
             </li><br>
@@ -90,7 +90,7 @@
 
         <b><a name="step5">Time Variables</a></b>
         <ul>
-            <li>For routines that use time inputs (<b>py_timebar, py_timespan, py_tlimit, py_xlim</b>), time can be input in two ways. The first is simply the number of seconds since epoch. The second is a string formatted in the following way: "YYYY-MM-DD hh:mm:ss" with M: month, D: day, Y: year, h: hour, m: minute, s: second.</li>
+            <li>For routines that use time inputs (<b>timebar, timespan, tlimit, xlim</b>), time can be input in two ways. The first is simply the number of seconds since epoch. The second is a string formatted in the following way: "YYYY-MM-DD hh:mm:ss" with M: month, D: day, Y: year, h: hour, m: minute, s: second.</li>
             <li>For example, "2016-8-25 16:43:37" is equivalent to 1472143417.</li><br>
         </ul>
 
