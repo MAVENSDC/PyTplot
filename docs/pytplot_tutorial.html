@@ -25,7 +25,7 @@
         <b><a name="startup">Load some data into memory</a></b>
         <ul>
             <li>The pytplot package comes with a sample IDL tplot save file which will be used for the following tutorial, located in pytplot/pytplot/sampledata.  You can also download it <a href="https://github.com/MAVENSDC/PyTplot/raw/master/pytplot/sampledata/test_data.tplot">here</a>.</li><br>
-            <li>This file was generated in IDL, and therefore can be loaded into tplot if you wish to compare the IDL and python versions.</li>
+            <li>This file was generated in IDL, and therefore can be loaded into tplot if you wish to compare the IDL and python versions.</li><br>
             <li>To load this data into pytplot, type in the command <b>pytplot.tplot_restore('path/to/file/test_data.tplot')</b></li>
         </ul>
 
@@ -44,7 +44,7 @@
 -->
         <b><a name="step1">Pytplot Variables</a></b>
         <ul>
-            <li><b>pytplot.tplot_names()</b> will print the numbers and names of the tplot variables currently in memory.</li><br>
+            <br><li><b>pytplot.tplot_names()</b> will print the numbers and names of the tplot variables currently in memory.</li><br>
             <li>When using any routines that require the name of the tplot variable, the user can use either the name of the variable or the corresponding number.</li><br>
         </ul>
 
@@ -52,7 +52,7 @@
 
         <b><a name="step2">Options</a></b>
         <ul>
-            <li><b>pytplot.options('tplot_var', 'option', 'option_value')</b> can be used to change plotting options corresponding to specific <i>tplot</i> variables. All options currently implemented are described in the pytplot documentation, but here are some examples to get you started.</li>
+            <br><li><b>pytplot.options('tplot_var', 'option', 'option_value')</b> can be used to change plotting options corresponding to specific <i>tplot</i> variables. All options currently implemented are described in the pytplot documentation, but here are some examples to get you started.</li>
             <li>Line Thickness: <b>pytplot.options('swia_vel', 'thick', 4)</b></li>
             <li>Title of y-axis: <b>pytplot.options('swia_vel', 'ytitle', 'speed (km/s)')</b></li>
             <li>Vertical Bounds of Plot: <b>pytplot.options('SEP_1_ION', 'yrange', [5,5000])</b></li>

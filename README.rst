@@ -39,9 +39,9 @@ then, just import the package by typing the command::
 
 	import pytplot
 
-A demo/tutorial can be found here: `pytplot/docs/pytplot_tutorial.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/pytplot_tutorial.html>`_.
+A demo/tutorial can be found here: `docs/pytplot_tutorial.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/pytplot_tutorial.html>`_.
 	
-A full description of each function can be found in `pytplot/docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>`_.
+A full description of each function can be found in `docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>`_.
 	
 Contact
 =============
