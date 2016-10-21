@@ -25,7 +25,8 @@
         <b><a name="startup">Load some data into memory</a></b>
         <ul>
             <li>The pytplot package comes with a sample IDL tplot save file which will be used for the following tutorial, located in pytplot/pytplot/sampledata.  You can also download it <a href="https://github.com/MAVENSDC/PyTplot/raw/master/pytplot/sampledata/test_data.tplot">here</a>.</li><br>
-            <li>To load this data into pytplot, type in the command <b>pytplot.tplot_restore('path/to/file/test_data.tplot')</b>
+            <li>This file was generated in IDL, and therefore can be loaded into tplot if you wish to compare the IDL and python versions.</li>
+            <li>To load this data into pytplot, type in the command <b>pytplot.tplot_restore('path/to/file/test_data.tplot')</b></li>
         </ul>
 
         <br><br>
@@ -66,7 +67,8 @@
         <b><a name="step3">Display Data Using Tplot</a></b>
         <ul>
             <li>Single Panel Plot: <b>pytplot.tplot('swia_vel')</b> or alternatively use the <i>tplot</i> variable number <b>pytplot.tplot(6)</b></li><br>
-            <li>Multiple Panel Plot: <b>pytplot.tplot(['swia_counts', 'swia_vel', 'mag'])</b> or <b>pytplot.tplot([4,6,7])</b></li><br>
+            <li>Multiple Panel Plot: <b>pytplot.tplot(['swia_counts', 'swia_vel', 'mag'])</b> or <b>pytplot.tplot([4,6,7])</b></li><br><br>
+            <li>Note: If you are using the jupyter notebook and you want the plots to appear there, specify <b>nb=True</b> when calling tplot.  For example, <b>pytplot.tplot([4,6,7], nb=True)</b>.</li><br>
         </ul>
 
         <br><br>
@@ -84,6 +86,7 @@
             <li>Show data points: The <b>Hover Tool</b> displays the data of a given point when the user hovers their mouse over the line.</li><br>
             <li>To put crosshairs on the window: The <b>Crosshairs</b> tool displays a set of crosshairs that follow the location of the mouse on the plot.</li><br>
             <li>To place a vertical line at a specific time on all panels: <b>pytplot.timebar('2016-06-20 01:15:32', thick=3, color='green')</b> will add a vertical black line to all plots at the time entered. Further settings related to this routine are described in the pytplot documentation.</li><br>
+            <li>pytplot also has the ability to interact directly with spectrograms.  If you supply the <b>interactive=True</b> keyword to pytplot (<b>pytplot.tplot([1,2,3,4], interactive=True)</b>), a plot will appear next to the spectrogram that reads out "slices" of the plot when you hover the mouse over it.</li><br>
         </ul>
 
         <br><br>
