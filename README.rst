@@ -2,7 +2,7 @@
 pytplot
 ##########
 
-Pytplot is a python plotting library which aims to mimic the functionality of the IDL "tplot" libraries.  The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a browser tab.   These files have several user interaction tools built in, such as zooming and panning.   
+Pytplot is a python package which aims to mimic the functionality of the IDL "tplot" libraries.  The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a browser tab.   These files have several user interaction tools built in, such as zooming and panning.   
 
 Pytplot can be used in python scripts, or interactively through IPython and the Jupyter notebook.  
 
@@ -41,7 +41,7 @@ then, just import the package by typing the command::
 
 A demo/tutorial can be found here: `pytplot/docs/pytplot_tutorial.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/pytplot_tutorial.html>`_.
 	
-A full list of functions will eventually be found in `pytplot/docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>`_.  It is still being updated.  
+A full description of each function can be found in `pytplot/docs/routine_doc.html <http://htmlpreview.github.com/?https://github.com/MAVENSDC/PyTplot/blob/master/docs/routine_doc.html>`_.
 	
 Contact
 =============
