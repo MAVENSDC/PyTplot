@@ -24,6 +24,11 @@ Open up a terminal, and type::
 	
 This will install pytplot and all of it's dependencies.  
 
+
+NOTICE: It appears you may also need to install nodejs.  If you installed anaconda above, this can be done with the following command::
+
+	conda install -c bokeh nodejs
+
 Running Pytplot
 =============
 
