@@ -12,7 +12,7 @@ def readme():
         return f.read()
 
 setup(name='pytplot',
-      version='0.1.8',
+      version='0.1.9',
       description='A python version of IDL tplot libraries',
       url='http://github.com/MAVENSDC/Pytplot',
       author='MAVEN SDC',
@@ -20,6 +20,9 @@ setup(name='pytplot',
       license='MIT',
       keywords='tplot maven lasp idl',
       packages=['pytplot'],
-      install_requires=['bokeh', 'pandas', 'numpy', 'matplotlib'],
+      install_requires=['bokeh>=0.12.3', 
+                        'pandas', 
+                        'numpy', 
+                        'matplotlib'],
       include_package_data=True,
       zip_safe=False)
