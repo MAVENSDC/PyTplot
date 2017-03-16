@@ -33,3 +33,10 @@ class TVar(object):
         self.create_time = create_time
         self.time_bar = time_bar
         self.extras = extras
+        
+    def get_data(self):
+        '''return the x and y data given to the tplot variable'''
+        getv = self.data.values
+        getvreal = [i for [i] in getv]
+        geti = self.data.index.tolist()
+        return(geti, getvreal)

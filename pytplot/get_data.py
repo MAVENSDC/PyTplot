@@ -7,7 +7,9 @@ def get_data(name):
         return
     
     temp_data_quant = tplot_common.data_quants[name]
-    data_val = temp_data_quant.data.values
-    time_val = temp_data_quant.data.index
+    data_temp = temp_data_quant.data.values
+    data_val = [i for [i] in data_temp]
+    
+    time_val = temp_data_quant.data.index.tolist()
     
     return(time_val, data_val)
