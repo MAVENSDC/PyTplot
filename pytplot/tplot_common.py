@@ -1,4 +1,5 @@
 from _collections import OrderedDict
+from pytplot import tplot_utilities
 
 #Global variable is data_quants
 data_quants = OrderedDict()
@@ -40,3 +41,9 @@ class TVar(object):
         getvreal = [i for [i] in getv]
         geti = self.data.index.tolist()
         return(geti, getvreal)
+    
+    def get_timespan(self):
+        '''print and return the start and end times of data plotted'''
+        print('Start Time: ' + tplot_utilities.int_to_str(self.trange[0]))
+        print('End Time: ' + tplot_utilities.int_to_str(self.trange[1]))
+        return(self.trange[0], self.trange[1])
