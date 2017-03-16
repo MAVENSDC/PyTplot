@@ -20,10 +20,9 @@ class TVar(object):
         data: 
     """
     
-    def __init__(self, name, number, data, spec_bins, yaxis_opt, zaxis_opt, line_opt,
+    def __init__(self, name, data, spec_bins, yaxis_opt, zaxis_opt, line_opt,
                  trange, dtype, create_time, time_bar, extras):
         self.name = name
-        self.number = number
         self.data = data
         self.spec_bins = spec_bins
         self.yaxis_opt = yaxis_opt

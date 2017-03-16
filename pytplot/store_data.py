@@ -5,10 +5,8 @@ import numpy as np
 from . import tplot_common
 from .del_data import del_data
 
-tplot_num = 1
 
 def store_data(name, data=None, delete=False):
-    global tplot_num
     create_time = datetime.datetime.now()
     
     if delete is True:
@@ -47,12 +45,10 @@ def store_data(name, data=None, delete=False):
     #     that aren't actual attributes in Bokeh
     extras = dict(panel_size = 1)
     
-    temp = tplot_common.TVar(name, tplot_num, df, spec_bins, yaxis_opt, zaxis_opt, line_opt,
+    temp = tplot_common.TVar(name, df, spec_bins, yaxis_opt, zaxis_opt, line_opt,
                 trange, dtype, create_time, time_bar, extras)
     
     tplot_common.data_quants[name] = temp
-    tplot_common.data_quants[tplot_num] = temp
     
-    tplot_num += 1
     
     return
