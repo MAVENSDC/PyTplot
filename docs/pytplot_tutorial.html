@@ -9,9 +9,7 @@
     <br><br>
 
     <a href="#startup">Load data into memory</a><br>
-<!--
 	<a href="#step0">Storing Data</a><br>
--->
     <a href="#step1">Pytplot Variables</a><br>
     <a href="#step2">Options</a><br>
     <a href="#step3">Displaying Data Using Tplot</a><br>
@@ -30,18 +28,19 @@
         </ul>
 
         <br><br>
-<!--
+
         <b><a name="step0">Storing Data</a></b>
         <ul>
             <li><i>pytplot</i> works by interacting with global variables (called <i>tplot</i> variables) that contain information necessary for creating one panel (or even one portion of a panel) of a plot, that can be accessed from the main level or within any Python routine. Before anything can be plotted, <i>tplot</i> variables must be loaded into memory.</li><br>
             <li><u>Single line Plot</u>: to store data to plot a single line, the 'y' data will be a single list of data that will correspond to the points that will make up the line.</li><br>
             <li><u>Multi-line Plot</u>: to store data to plot a multi-line plot, the 'y' data will be a list of lists. Each column of the "matrix" created is the data for one line. So if you had a list with four lists in it and three elements in each list [[1,2,3],[4,5,6],[7,8,9],[10,11,12]] three lines with four data points each will be plotted.</li><br>
-            <li><u>Spectrogram Plot</u>:</li><br>
+            <li><u>Spectrogram Plot</u>: to store data to plot for a spectrogram, 'v' data will be a list of bins for the data, and the 'y' data will be a matrix of values with dimensions of the length of "x" time the length of "v"</li><br>
+            <li><u>Map Plot</u>: to store data to plot for a latitude/longitude plot, 'x' will contain a list of latitudes and a list of longitudes, for example 'x':[[15,30,45],[30,60,90]], and the 'y' data will be a list of values that correspond to those latitude/longitude points</li><br><br>
             <li><u>Combining Two Plots</u>: <b>py_overplot('new_name', ['old_name1', 'old_name2'])</b> to combine multiple existing <i>tplot</i> variables ('old_name1' and 'old_name2') into one new <i>tplot</i> variable ('new_name'). 'new_name' will have all data from the existing <i>tplot</i> variables entered in one new <i>tplot</i> variable.</li><br>
         </ul>
 		
         <br><br>
--->
+
         <b><a name="step1">Pytplot Variables</a></b>
         <ul>
             <br><li><b>pytplot.tplot_names()</b> will print the numbers and names of the tplot variables currently in memory.</li><br>
