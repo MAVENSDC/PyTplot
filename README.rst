@@ -7,18 +7,19 @@
 pytplot
 ##########
 
-Pytplot is a python package which aims to mimic the functionality of the IDL "tplot" libraries.  The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a browser tab.   These files have several user interaction tools built in, such as zooming and panning.   
+Pytplot is a python package which aims to mimic the functionality of the IDL "tplot" libraries.  The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a Qt interface.   
+
+These plots have several user interaction tools built in, such as zooming and panning.  The can be exported as standalone HTML files (to retain their interactivity) or as static PNG files.    
 
 Pytplot can be used in python scripts, or interactively through IPython and the Jupyter notebook.  
 
 Install Python
 =============
 
-You will need Python version 3.5 to run pytplot.  
+You will need the Anaconda distribution of Python 3 in order to run pytplot.  
 
-It is recommended that you install `Anaconda <https://www.continuum.io/downloads/>`_, as it comes with a suite of packages that are useful for data science. 
+`Anaconda <https://www.continuum.io/downloads/>`_ comes with a suite of packages that are useful for data science. 
 
-You could also install python directly from `python.org <https://www.python.org/download/>`_.
 
 Install pytplot
 =============
@@ -29,8 +30,7 @@ Open up a terminal, and type::
 	
 This will install pytplot and all of it's dependencies.  
 
-
-NOTICE: It appears you may also need to install nodejs.  If you installed anaconda above, this can be done with the following command::
+You will also need to install nodejs.  This can be done through Anaconda with the following command::
 
 	conda install -c bokeh nodejs
 
