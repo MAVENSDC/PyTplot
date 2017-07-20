@@ -18,6 +18,15 @@ These plots have several user interaction tools built in, such as zooming and pa
 
 Pytplot can be used in python scripts, or interactively through IPython and the Jupyter notebook.
 
+How It Works
+~~~~~~~~~~~~
+
+Data is read into pytplot by using the "store_data" command.  Each dataset is assigned a unique name by the user.  
+
+The data is stored in a "tplot variable" class.  The tplot variables contain all the information required to create a plot of the dataset.  The details of the plot, such as axis titles, types, line colors, etc, can be changed through other functions in pytplot.  
+
+When you are ready to create a graph of your dataset(s), supply the dataset names you wish to plot to the "tplot" function, and a graph will be generated.   
+
 Install Python
 ~~~~~~~~~~~~~~
 

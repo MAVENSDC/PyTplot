@@ -50,6 +50,12 @@
 <p>Pytplot is a python package which aims to mimic the functionality of the IDL &#8220;tplot&#8221; libraries. The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a Qt interface.</p>
 <p>These plots have several user interaction tools built in, such as zooming and panning. The can be exported as standalone HTML files (to retain their interactivity) or as static PNG files.</p>
 <p>Pytplot can be used in python scripts, or interactively through IPython and the Jupyter notebook.</p>
+<div class="section" id="how-it-works">
+<h3>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h3>
+<p>Data is read into pytplot by using the &#8220;store_data&#8221; command.  Each dataset is assigned a unique name by the user.</p>
+<p>The data is stored in a &#8220;tplot variable&#8221; class.  The tplot variables contain all the information required to create a plot of the dataset.  The details of the plot, such as axis titles, types, line colors, etc, can be changed through other functions in pytplot.</p>
+<p>When you are ready to create a graph of your dataset(s), supply the dataset names you wish to plot to the &#8220;tplot&#8221; function, and a graph will be generated.</p>
+</div>
 <div class="section" id="install-python">
 <h3>Install Python<a class="headerlink" href="#install-python" title="Permalink to this headline">¶</a></h3>
 <p>You will need the Anaconda distribution of Python 3 in order to run pytplot.</p>
@@ -914,6 +920,7 @@ Not all plot options will transfer over at this time.</p>
   <ul>
 <li><a class="reference internal" href="#">Welcome to PyTplot&#8217;s documentation!</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#how-it-works">How It Works</a></li>
 <li><a class="reference internal" href="#install-python">Install Python</a></li>
 <li><a class="reference internal" href="#running-pytplot">Running PyTplot</a></li>
 </ul>
