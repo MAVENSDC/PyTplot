@@ -9,8 +9,6 @@ Welcome to PyTplot's documentation!
 .. toctree::
    :maxdepth: 2
 
-
-
 Introduction
 ------------
 
@@ -27,7 +25,6 @@ You will need the Anaconda distribution of Python 3 in order to run pytplot.
 
 `Anaconda <https://www.continuum.io/downloads/>`_ comes with a suite of packages that are useful for data science.
 
-
 Running PyTplot
 ~~~~~~~~~~~~~~~
 
@@ -42,7 +39,6 @@ or, if you prefer the jupyter interactive notebook::
 then, just import the package by typing the command::
 
 	import pytplot
-
 
 Storing Data in Memory
 ----------------------
@@ -148,9 +144,6 @@ tplot_restore
 ~~~~~~~~~~~~~~~
 .. automodule:: pytplot.tplot_restore
 	:members: tplot_restore
-	
-	
-	
 	
 .. only:: html
 
