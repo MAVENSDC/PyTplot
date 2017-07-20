@@ -4,9 +4,9 @@
 *.egg-info/
 *.tar.gz
 *.tgz
-build
 /.project
 /.pydevproject
 *.ipynb
 /*.html
 *.zip
+*.prefs
