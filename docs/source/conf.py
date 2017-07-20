@@ -18,7 +18,7 @@ sphinx-build -b html ./source ./build
 
 import os
 import sys
-sys.path.insert(0, os.path.relpath("../../"))
+sys.path.insert(0, os.path.realpath("../../"))
 
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.ifconfig',
@@ -36,7 +36,7 @@ author = 'Laboratory for Atmospheric and Space Physics'
 
 
 version = '1.0.0'
-
+revision = '1.0.0'
 language = None
 
 exclude_patterns = []

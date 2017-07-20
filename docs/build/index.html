@@ -75,69 +75,825 @@
 <h2>Storing Data in Memory<a class="headerlink" href="#storing-data-in-memory" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-pytplot.store_data">
 <span id="store-data"></span><h3>store_data<a class="headerlink" href="#module-pytplot.store_data" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.store_data.store_data">
+<code class="descname">store_data</code><span class="sig-paren">(</span><em>name</em>, <em>data=None</em>, <em>delete=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.store_data.store_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function creates a &#8220;Tplot Variable&#8221; based on the inputs, and
+stores this data in memory.  Tplot Variables store all of the information
+needed to generate a plot.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Name of the tplot variable that will be created</dd>
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first">A python dictionary object.</p>
+<p>&#8216;x&#8217; should be a 1-dimensional array that represents the data&#8217;s x axis.  Typically this data is time, represented in seconds since epoch (January 1st 1970)</p>
+<p>&#8216;y&#8217; should be the data values. This can be 2 dimensions if multiple lines or a spectrogram are desired.</p>
+<p>&#8216;v&#8217; is optional, and is only used for spectrogram plots.  This will be a list of bins to be used.  If this is provided, then &#8216;y&#8217; should have dimensions of x by z.</p>
+<p class="last">&#8216;x&#8217; and &#8216;y&#8217; can be any data format that can be read in by the pandas module.  Python lists, numpy arrays, or any pandas data type will all work.</p>
+</dd>
+<dt>delete <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>Deletes the tplot variable matching the &#8220;name&#8221; parameter</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to combine multiple tplot variables into one, simply supply the list of tplot variables to the &#8220;data&#8221; parameter.  This will cause the data to overlay when plotted.</p>
+</div>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Store a single line</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Store a two lines</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable2&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Store a specrogram</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable3&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span><span class="n">v_data</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Combine two different line plots</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1and2&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="s1">&#39;Variable2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.tplot_rename">
 <span id="tplot-rename"></span><h3>tplot_rename<a class="headerlink" href="#module-pytplot.tplot_rename" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.tplot_rename.tplot_rename">
+<code class="descname">tplot_rename</code><span class="sig-paren">(</span><em>old_name</em>, <em>new_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.tplot_rename.tplot_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will rename tplot variables that are already stored in memory.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>old_name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Old name of the Tplot Variable</dd>
+<dt>new_name <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>New name of the Tplot Variable</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Rename Variable 1 to Variable 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot_rename</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.del_data">
 <span id="del-data"></span><h3>del_data<a class="headerlink" href="#module-pytplot.del_data" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.del_data.del_data">
+<code class="descname">del_data</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.del_data.del_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will delete tplot variables that are already stored in memory.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Name of the tplot variable to be deleted</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Delete Variable 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">del_data</span><span class="p">(</span><span class="s2">&quot;Varaible1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="retrieveing-data">
 <h2>Retrieveing Data<a class="headerlink" href="#retrieveing-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-pytplot.get_data">
 <span id="get-data"></span><h3>get_data<a class="headerlink" href="#module-pytplot.get_data" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.get_data.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.get_data.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will get extract the data from the Tplot Variables stored in memory.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Name of the tplot variable</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>time_val : pandas dataframe index
+data_val : list</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Retrieve the data from Variable 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pytplot</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.get_timespan">
 <span id="get-timespan"></span><h3>get_timespan<a class="headerlink" href="#module-pytplot.get_timespan" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.get_timespan.get_timespan">
+<code class="descname">get_timespan</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.get_timespan.get_timespan" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will get extract the time span from the Tplot Variables stored in memory.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Name of the tplot variable</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>time_begin <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The beginning of the time series</dd>
+<dt>time_end <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The end of the time series</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Retrieve the time span from Variable 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time1</span><span class="p">,</span> <span class="n">time2</span> <span class="o">=</span> <span class="n">pytplot</span><span class="o">.</span><span class="n">get_timespan</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.get_ylimits">
 <span id="get-ylimits"></span><h3>get_ylimits<a class="headerlink" href="#module-pytplot.get_ylimits" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.get_ylimits.get_ylimits">
+<code class="descname">get_ylimits</code><span class="sig-paren">(</span><em>name</em>, <em>trg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.get_ylimits.get_ylimits" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will get extract the y limites from the Tplot Variables stored in memory.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Name of the tplot variable</dd>
+<dt>trg <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd>The time range that you would like to look in</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>ymin <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The minimum value of y</dd>
+<dt>ymax <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The maximum value of y</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Retrieve the y limits from Variable 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">pytplot</span><span class="o">.</span><span class="n">get_ylimits</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.tplot_names">
 <span id="tplot-names"></span><h3>tplot_names<a class="headerlink" href="#module-pytplot.tplot_names" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.tplot_names.tplot_names">
+<code class="descname">tplot_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.tplot_names.tplot_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will print out and return a list of all current Tplot Variables stored in the memory.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>None</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>list <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
+<dd>A list of all Tplot Variables stored in the memory</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tnames</span> <span class="o">=</span> <span class="n">pyplot</span><span class="o">.</span><span class="n">tplot_names</span><span class="p">()</span>
+<span class="go">0 : Variable 1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="setting-plot-options">
 <h2>Setting Plot Options<a class="headerlink" href="#setting-plot-options" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-pytplot.options">
 <span id="options"></span><h3>options<a class="headerlink" href="#module-pytplot.options" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.options.options">
+<code class="descname">options</code><span class="sig-paren">(</span><em>name</em>, <em>option</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.options.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows the user to set a large variety of options for individual plots.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str </span></dt>
+<dd>Name of the tplot variable</dd>
+<dt>option <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The name of the option.  See section below</dd>
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">str/int/float/list</span></dt>
+<dd>The value of the option.  See section below.</dd>
+</dl>
+</dd>
+<dt>Options:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="14%" />
+<col width="12%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Options</th>
+<th class="head">Value type</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Color</td>
+<td>str/list</td>
+<td>Red, Orange, Yellow, Green, Blue, etc</td>
+</tr>
+<tr class="row-odd"><td>Colormap</td>
+<td>str/list</td>
+<td><a class="reference external" href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a></td>
+</tr>
+<tr class="row-even"><td>Spec</td>
+<td>int</td>
+<td>1 sets the Tplot Variable to spectrogram mode, 0 reverts</td>
+</tr>
+<tr class="row-odd"><td>Alt</td>
+<td>int</td>
+<td>1 sets the Tplot Variable to altitude plot mode, 0 reverts</td>
+</tr>
+<tr class="row-even"><td>Map</td>
+<td>int</td>
+<td>1 sets the Tplot Variable to latitude/longitude mode, 0 reverts</td>
+</tr>
+<tr class="row-odd"><td>ylog</td>
+<td>int</td>
+<td>1 sets the y axis to log scale, 0 reverts</td>
+</tr>
+<tr class="row-even"><td>zlog</td>
+<td>int</td>
+<td>1 sets the z axis to log scale, 0 reverts (spectrograms only)</td>
+</tr>
+<tr class="row-odd"><td>legend_names</td>
+<td>list</td>
+<td>A list of strings that will be used to identify the lines</td>
+</tr>
+<tr class="row-even"><td>line_style</td>
+<td>str</td>
+<td>solid_line, dot, dash, dash_dot, dash_dot_dot_dot, long_dash</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>str</td>
+<td>The title of the plot</td>
+</tr>
+<tr class="row-even"><td>panel_size</td>
+<td>flt</td>
+<td>Number between (0,1], representing the percent size of the plot</td>
+</tr>
+<tr class="row-odd"><td>basemap</td>
+<td>str</td>
+<td>Full path and name of a background image for &#8220;Map&#8221; plots</td>
+</tr>
+<tr class="row-even"><td>alpha</td>
+<td>flt</td>
+<td>Number between [0,1], gives the transparancy of the plot lines</td>
+</tr>
+<tr class="row-odd"><td>yrange</td>
+<td>flt list</td>
+<td>Two numbers that give the y axis range of the plot</td>
+</tr>
+<tr class="row-even"><td>zrange</td>
+<td>flt list</td>
+<td>Two numbers that give the z axis range of the plot</td>
+</tr>
+<tr class="row-odd"><td>ytitle</td>
+<td>str</td>
+<td>Title shown on the y axis</td>
+</tr>
+<tr class="row-even"><td>ztitle</td>
+<td>str</td>
+<td>Title shown on the z axis.  Spec plots only.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change the y range of Variable1 </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="s1">&#39;yrange&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change Variable1 to use a log scale</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="s1">&#39;ylog&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change the line color of Variable1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="s1">&#39;ylog&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.tplot_options">
 <span id="tplot-options"></span><h3>tplot_options<a class="headerlink" href="#module-pytplot.tplot_options" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.tplot_options.tplot_options">
+<code class="descname">tplot_options</code><span class="sig-paren">(</span><em>option</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.tplot_options.tplot_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows the user to set several global options for the generated plots.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>option <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The name of the option.  See section below</dd>
+<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">str/int/float/list</span></dt>
+<dd>The value of the option.  See section below.</dd>
+</dl>
+</dd>
+<dt>Options:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="16%" />
+<col width="13%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Options</th>
+<th class="head">Value type</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>title</td>
+<td>str</td>
+<td>Title of the the entire output</td>
+</tr>
+<tr class="row-odd"><td>title_size</td>
+<td>int</td>
+<td>Font size of the output</td>
+</tr>
+<tr class="row-even"><td>wsize</td>
+<td>[int, int]</td>
+<td>[height, width], pixel size of the plot window</td>
+</tr>
+<tr class="row-odd"><td>title_align</td>
+<td>int</td>
+<td>Offset position in pixels of the title</td>
+</tr>
+<tr class="row-even"><td>var_label</td>
+<td>srt</td>
+<td>Name of the tplot variable to be used as another x axis</td>
+</tr>
+<tr class="row-odd"><td>alt_range</td>
+<td>[flt, flt]</td>
+<td>The min and max altitude to be plotted on all alt plots</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the plot title</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot_options</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;SWEA Data for Orbit 1563&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the window size </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot_options</span><span class="p">(</span><span class="s1">&#39;wsize&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.timebar">
 <span id="timebar"></span><h3>timebar<a class="headerlink" href="#module-pytplot.timebar" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.timebar.timebar">
+<code class="descname">timebar</code><span class="sig-paren">(</span><em>t</em>, <em>varname=None</em>, <em>databar=False</em>, <em>delete=False</em>, <em>color='black'</em>, <em>thick=1</em>, <em>dash=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.timebar.timebar" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will add a vertical bar to all time series plots.  This is useful if you
+want to bring attention to a specific time.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>t <span class="classifier-delimiter">:</span> <span class="classifier">flt/list</span></dt>
+<dd>The time in seconds since Jan 01 1970 to place the vertical bar.  If a list of numbers are supplied,
+multiple bars will be created.  If &#8220;databar&#8221; is set, then &#8220;t&#8221; becomes the point on the y axis to 
+place a horizontal bar.</dd>
+<dt>varname <span class="classifier-delimiter">:</span> <span class="classifier">str/list, optional</span></dt>
+<dd>The variable(s) to add the vertical bar to.  If not set, the default is to add it to all current plots.</dd>
+<dt>databar <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>This will turn the timebar into a horizontal data bar.  If this is set True, then variable &#8220;t&#8221; becomes 
+the point on the y axis to place a horizontal bar.</dd>
+<dt>delete <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If set to True, at lease one varname must be supplied.  The timebar at point &#8220;t&#8221; for variable &#8220;varname&#8221;
+will be removed.</dd>
+<dt>color <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The color of the bar</dd>
+<dt>thick <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>The thickness of the bar</dd>
+<dt>dash <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>If set to True, the bar is dashed rather than solid</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Place a green time bar at 2017-07-17 00:00:00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">timebar</span><span class="p">(</span><span class="mi">1500249600</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grean)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Place a dashed data bar at 5500 on the y axis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">timebar</span><span class="p">(</span><span class="mi">5500</span><span class="p">,</span> <span class="n">dashed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">databar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.timespan">
 <span id="timespan"></span><h3>timespan<a class="headerlink" href="#module-pytplot.timespan" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.timespan.timespan">
+<code class="descname">timespan</code><span class="sig-paren">(</span><em>t1</em>, <em>dt</em>, <em>keyword='days'</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.timespan.timespan" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will set the time range for all time series plots.  This is a wrapper for the function &#8220;xlim&#8221; to
+better handle time axes.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>t1 <span class="classifier-delimiter">:</span> <span class="classifier">flt/str</span></dt>
+<dd>The time to start all time series plots.  Can be given in seconds since epoch, or as a string
+in the format &#8220;YYYY-MM-DD HH:MM:SS&#8221;</dd>
+<dt>dt <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The time duration of the plots.  Default is number of days.</dd>
+<dt>keyword <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>Sets the units of the &#8220;dt&#8221; variable.  Days, hours, minutes, and seconds are all accepted.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the timespan to be 2017-07-17 00:00:00 plus 1 day</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="mi">1500249600</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The same as above, but using different inputs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">timespan</span><span class="p">(</span><span class="s2">&quot;2017-07-17 00:00:00&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="n">keyword</span><span class="o">=</span><span class="s1">&#39;hours&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.timestamp">
 <span id="timestamp"></span><h3>timestamp<a class="headerlink" href="#module-pytplot.timestamp" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.timestamp.timestamp">
+<code class="descname">timestamp</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.timestamp.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will turn on a time stamp that shows up at the bottom of every generated plot.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>val <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>A string that can either be &#8216;on&#8217; or &#8216;off&#8217;.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Turn on the timestamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.xlim">
 <span id="xlim"></span><h3>xlim<a class="headerlink" href="#module-pytplot.xlim" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.xlim.xlim">
+<code class="descname">xlim</code><span class="sig-paren">(</span><em>min</em>, <em>max</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.xlim.xlim" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will set the x axis range for all time series plots</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>min <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The time to start all time series plots.  Can be given in seconds since epoch, or as a string
+in the format &#8220;YYYY-MM-DD HH:MM:SS&#8221;</dd>
+<dt>max <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The time to end all time series plots.  Can be given in seconds since epoch, or as a string
+in the format &#8220;YYYY-MM-DD HH:MM:SS&#8221;</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the timespan to be 2017-07-17 00:00:00 plus 1 day</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1500249600</span><span class="p">,</span> <span class="mi">1500249600</span> <span class="o">+</span> <span class="mi">86400</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The same as above, but using different inputs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="s2">&quot;2017-07-17 00:00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2017-07-18 00:00:00&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.ylim">
 <span id="ylim"></span><h3>ylim<a class="headerlink" href="#module-pytplot.ylim" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.ylim.ylim">
+<code class="descname">ylim</code><span class="sig-paren">(</span><em>name</em>, <em>min</em>, <em>max</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.ylim.ylim" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will set the y axis range displayed for a specific tplot variable.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The name of the tplot variable that you wish to set y limits for.</dd>
+<dt>min <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The start of the y axis.</dd>
+<dt>max <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The end of the y axis.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change the y range of Variable1 </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.zlim">
 <span id="zlim"></span><h3>zlim<a class="headerlink" href="#module-pytplot.zlim" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.zlim.zlim">
+<code class="descname">zlim</code><span class="sig-paren">(</span><em>name</em>, <em>min</em>, <em>max</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.zlim.zlim" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will set the z axis range displayed for a specific tplot variable.
+This is only used for spec plots, where the z axis represents the magnitude of the values
+in each bin.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The name of the tplot variable that you wish to set z limits for.</dd>
+<dt>min <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The start of the z axis.</dd>
+<dt>max <span class="classifier-delimiter">:</span> <span class="classifier">flt</span></dt>
+<dd>The end of the z axis.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change the z range of Variable1 </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable3&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span><span class="n">v_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">zlim</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="plotting-data">
 <h2>Plotting Data<a class="headerlink" href="#plotting-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-pytplot.tplot">
 <span id="tplot"></span><h3>tplot<a class="headerlink" href="#module-pytplot.tplot" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.tplot.tplot">
+<code class="descname">tplot</code><span class="sig-paren">(</span><em>name</em>, <em>var_label=None</em>, <em>auto_color=True</em>, <em>interactive=False</em>, <em>combine_axes=True</em>, <em>nb=False</em>, <em>save_file=None</em>, <em>gui=False</em>, <em>qt=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.tplot.tplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the function used to display the tplot variables stored in memory.
+The default output is to show the plots stacked on top of one another inside a GUI window.  
+The GUI window has the option to export the plots in either PNG or HTML formats.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This plotting routine uses the python Bokeh library, which creates plots using HTML and Javascript.  
+Bokeh is technically still in beta, so future patches to Bokeh may require updates to this function.</p>
+</div>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>name <span class="classifier-delimiter">:</span> <span class="classifier">str / list</span></dt>
+<dd>List of tplot variables that will be plotted</dd>
+<dt>var_label <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The name of the tplot variable you would like as
+a second x axis.</dd>
+<dt>auto_color <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>Automatically color the plot lines.</dd>
+<dt>interactive <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If True, a secondary interactive plot will be generated next to spectrogram plots.  
+Mousing over the spectrogram will display a slice of data from that time on the 
+interactive chart.</dd>
+<dt>combine_axis <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If True, the axes are combined so that they all display the same x range.  This also enables
+scrolling/zooming/panning on one plot to affect all of the other plots simultaneously.</dd>
+<dt>nb <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If True, the plot will be displayed inside of a current Jupyter notebook session.</dd>
+<dt>save_file <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>A full file name and path.  
+If this option is set, the plot will be automatically saved to the file name provided in an HTML format.
+The plots can then be opened and viewed on any browser without any requirements.</dd>
+<dt>gui <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If True, then this function will output the 2 HTML components of the generated plots as string variables.
+This is useful if you are embedded the plots in your own GUI.  For more information, see 
+<a class="reference external" href="http://bokeh.pydata.org/en/latest/docs/user_guide/embed.html">http://bokeh.pydata.org/en/latest/docs/user_guide/embed.html</a></dd>
+<dt>qt <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>If True, then this function will display the plot inside of the Qt window.  From this window, you
+can choose to export the plots as either an HTML file, or as a PNG.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#Plot a single line</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#Display two plots</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable2&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot</span><span class="p">([</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#Display 2 plots, using Variable1 as another x axis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable3&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span><span class="n">v_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s2">&quot;Variable3&quot;</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot</span><span class="p">([</span><span class="s2">&quot;Variable2&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable3&quot;</span><span class="p">],</span> <span class="n">var_label</span><span class="o">=</span><span class="s1">&#39;Variable1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#Plot all 3 tplot variables, sending the output to an HTML file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">tplot</span><span class="p">([</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable2&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable3&quot;</span><span class="p">],</span> <span class="n">save_file</span><span class="o">=</span><span class="s1">&#39;C:/temp/pytplot_example.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#Plot all 3 tplot variables, sending the HTML output to a pair of strings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">div</span><span class="p">,</span> <span class="n">component</span> <span class="o">=</span> <span class="n">pytplot</span><span class="o">.</span><span class="n">tplot</span><span class="p">([</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable2&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable3&quot;</span><span class="p">],</span> <span class="n">gui</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="saving-and-restoring-sessions">
 <h2>Saving and Restoring Sessions<a class="headerlink" href="#saving-and-restoring-sessions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-pytplot.tplot_save">
 <span id="tplot-save"></span><h3>tplot_save<a class="headerlink" href="#module-pytplot.tplot_save" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.tplot_save.tplot_save">
+<code class="descname">tplot_save</code><span class="sig-paren">(</span><em>names</em>, <em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.tplot_save.tplot_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will save tplot variables into a single file by using the python &#8220;pickle&#8221; function.
+This file can then be &#8220;restored&#8221; using tplot_restore.  This is useful if you want to end the pytplot session,
+but save all of your data/options.  All variables and plot options can be read back into tplot with the 
+&#8220;tplot_restore&#8221; command.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>names <span class="classifier-delimiter">:</span> <span class="classifier">str/list</span></dt>
+<dd>A string or a list of strings of the tplot variables you would like saved.</dd>
+<dt>filename <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>The filename where you want to save the file.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Save a single tplot variable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">store_data</span><span class="p">(</span><span class="s2">&quot;Variable1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">x_data</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y_data</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;Variable1&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;C:/temp/variable1.pytplot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-pytplot.tplot_restore">
 <span id="tplot-restore"></span><h3>tplot_restore<a class="headerlink" href="#module-pytplot.tplot_restore" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="pytplot.tplot_restore.tplot_restore">
+<code class="descname">tplot_restore</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pytplot.tplot_restore.tplot_restore" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will restore tplot variables that have been saved with the &#8220;tplot_save&#8221; command.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function is compatible with the IDL tplot_save routine.  
+If you have a &#8221;.tplot&#8221; file generated from IDL, this procedure will restore the data contained in the file.
+Not all plot options will transfer over at this time.</p>
+</div>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>filename <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The file name and full path generated by the &#8220;tplot_save&#8221; command.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>None</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Restore the saved data from the tplot_save example</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pytplot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytplot</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="s1">&#39;C:/temp/variable1.pytplot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 </div>
