@@ -6,3 +6,4 @@ include pytplot/*.coffee
 include pytplot/sampledata/*.tplot
 include pytplot/sampledata/*.pytplot
 include pytplot/version.txt
+exclude tplot2.py
