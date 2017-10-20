@@ -12,7 +12,7 @@ def readme():
         return f.read()
 
 setup(name='pytplot',
-      version='1.0.9',
+      version='1.0.11',
       description='A python version of IDL tplot libraries',
       url='http://github.com/MAVENSDC/Pytplot',
       author='MAVEN SDC',
@@ -25,6 +25,6 @@ setup(name='pytplot',
                         'numpy', 
                         'matplotlib',
                         'scipy',
-                        'pyqt5==5.6.0'],
+                        'pyqt5'],
       include_package_data=True,
       zip_safe=False)
