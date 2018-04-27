@@ -5,7 +5,7 @@ include docs/*.txt
 include pytplot/*.coffee
 include pytplot/sampledata/*.tplot
 include pytplot/sampledata/*.pytplot
-recursive-include pytplot/HTMLPlotter/
-recursive-include pytplot/QtPlotter/ 
+recursive-include pytplot/HTMLPlotter *
+recursive-include pytplot/QtPlotter *
 include pytplot/version.txt
 exclude tplot2.py
