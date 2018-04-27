@@ -5,6 +5,7 @@ include docs/*.txt
 include pytplot/*.coffee
 include pytplot/sampledata/*.tplot
 include pytplot/sampledata/*.pytplot
-include pytplot/PyQtGraphModels/*.py
+include pytplot/HTMLPlotter/*.py
+include pytplot/QtPlotter/*.py
 include pytplot/version.txt
 exclude tplot2.py
