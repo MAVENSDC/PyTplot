@@ -21,3 +21,4 @@ pytplot/TESTING.py
 .spyproject/
 test.py
 /testing.py
+/3dtesting.py
