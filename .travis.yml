@@ -15,7 +15,16 @@ python:
 os:
 - linux
 
-install: pip install -e .[tests]
+before_install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+  - chmod +x miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+
+install:
+  - conda install numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
+  - conda install pyqt --yes
+  - pip install -e .[tests]
 
 script:
 - pytest -rsv
