@@ -34,7 +34,5 @@ script:
 
 after_success:
   #Send the results to coveralls
-  - if [[ $TRAVIS_PYTHON_VERSION == 3.7* ]]; then
-    pytest --cov --cov-config=setup.cfg;
-    coveralls;
-    fi
+  - pytest --cov --cov-config=setup.cfg;
+  - coveralls;
