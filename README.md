@@ -1,7 +1,5 @@
-# Copyright 2017 Regents of the University of Colorado. All Rights Reserved.
-# Released under the MIT license.
-# This software was developed at the University of Colorado's Laboratory for Atmospheric and Space Physics.
-# Verify current version before use at: https://github.com/MAVENSDC/PyTplot
+[![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/pytplot)
+[![image](https://coveralls.io/repos/github/scivision/cdflib/badge.svg?branch=master)](https://coveralls.io/github/scivision/cdflib?branch=master)
 
 ##########
 pytplot
@@ -70,3 +68,9 @@ Contact
 =============
 
 If you have any suggestions or notice any problems, don't hesitate to contact Bryan Harter: harter@lasp.colorado.edu 
+
+
+Copyright 2018 Regents of the University of Colorado. All Rights Reserved.
+Released under the MIT license.
+This software was developed at the University of Colorado's Laboratory for Atmospheric and Space Physics.
+Verify current version before use at: https://github.com/MAVENSDC/PyTplot

@@ -1,7 +1,3 @@
-# Copyright 2017 Regents of the University of Colorado. All Rights Reserved.
-# Released under the MIT license.
-# This software was developed at the University of Colorado's Laboratory for Atmospheric and Space Physics.
-# Verify current version before use at: https://github.com/MAVENSDC/PyTplot
 
 ##########
 pytplot
@@ -70,3 +66,9 @@ Contact
 =============
 
 If you have any suggestions or notice any problems, don't hesitate to contact Bryan Harter: harter@lasp.colorado.edu 
+
+
+# Copyright 2017 Regents of the University of Colorado. All Rights Reserved.
+# Released under the MIT license.
+# This software was developed at the University of Colorado's Laboratory for Atmospheric and Space Physics.
+# Verify current version before use at: https://github.com/MAVENSDC/PyTplot
