@@ -22,19 +22,19 @@ install:
   - pip install cdflib
 
 before_script:
-    # We need to create a (fake) display on Travis, let's use a funny resolution
-    - export DISPLAY=:99.0
-    - "sh -e /etc/init.d/xvfb start"
-    - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
+  # We need to create a (fake) display on Travis, let's use a funny resolution
+  - export DISPLAY=:99.0
+  - "sh -e /etc/init.d/xvfb start"
+  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
 
 script:
+  #Run pytest
   - ls
   - pytest -rsv
-#- flake8
-# - mypy . --ignore-missing-imports
 
 after_success:
-- if [[ $TRAVIS_PYTHON_VERSION == 3.7* ]]; then
-  pytest --cov --cov-config=setup.cfg;
-  coveralls;
-  fi
+  #Send the results to coveralls
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7* ]]; then
+    pytest --cov --cov-config=setup.cfg;
+    coveralls;
+    fi
