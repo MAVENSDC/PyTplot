@@ -19,7 +19,7 @@ before_install:
 install:
   - conda install numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
   - conda install pyqt --yes
-  - pip3.7 install cdflib
+  - pip install cdflib
 script:
 - pytest -rsv
 #- flake8
