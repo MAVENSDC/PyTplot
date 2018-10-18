@@ -1,10 +1,13 @@
 include README.rst
+include README.md
+include LICENSE
 include test_data.tplot
 include docs/*.html
 include docs/*.txt
 include pytplot/*.coffee
 include pytplot/sampledata/*.tplot
 include pytplot/sampledata/*.pytplot
+include pytplot/tplot_math
 recursive-include pytplot/HTMLPlotter *
 recursive-include pytplot/QtPlotter *
 include pytplot/version.txt
