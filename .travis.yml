@@ -22,6 +22,7 @@ before_install:
 install:
   - conda install numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
   - conda install pyqt --yes
+  - pip install cdflib
 
 script:
 - pytest -rsv
