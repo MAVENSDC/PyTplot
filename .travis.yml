@@ -30,7 +30,7 @@ script:
 # - mypy . --ignore-missing-imports
 
 after_success:
-- if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then
+- if [[ $TRAVIS_PYTHON_VERSION == 3.7* ]]; then
   pytest --cov --cov-config=setup.cfg;
   coveralls;
   fi
