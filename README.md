@@ -1,5 +1,5 @@
 [![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/pytplot)
-[![image](https://coveralls.io/repos/github/scivision/cdflib/badge.svg?branch=master)](https://coveralls.io/github/scivision/cdflib?branch=master)
+[![image](https://coveralls.io/repos/github/MAVENSDC/PyTplot/badge.svg?branch=master)](https://coveralls.io/github/MAVENSDC/PyTplot?branch=master)
 
 ##########
 pytplot
