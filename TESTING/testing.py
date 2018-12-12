@@ -1,5 +1,6 @@
 import pytplot
 import pydivide
+import pandas as pd 
 
 # # PYDIVIDE STUFF #
 # # Load data with pydivide
@@ -47,6 +48,15 @@ var1 = pytplot.cdf_to_tplot(r"C:\Users\Elysia\Desktop\maven_code\maven_data\mave
 # var2 = pytplot.cdf_to_tplot("/Users/juba8233/Projects/maven/maven_data/maven/data/sci/swe/l2/2017/12/mvn_swe_l2_svyspec_20171208_v04_r04.cdf", prefix = 'swe_2_')
 # var3 = pytplot.cdf_to_tplot("/Users/juba8233/Projects/maven/maven_data/maven/data/sci/euv/l2/2017/06/mvn_euv_l2_bands_20170619_v09_r03.cdf", prefix="mvn_euv_")
 # var4 = pytplot.cdf_to_tplot("/Users/juba8233/Projects/maven/maven_data/maven/data/sci/euv/l2/2017/06/mvn_euv_l2_bands_20170619_v11_r03.cdf", prefix="mvn_euv_2_")
+
+print(pytplot.data_quants['swe_1_diff_en_fluxes'].data)
+pytplot.data_quants['swe_1_diff_en_fluxes'].data.index = pd.to_datetime(pytplot.data_quants['swe_1_diff_en_fluxes'].data.index, unit='s')
+pytplot.pdresample('swe_1_diff_en_fluxes','H')
+print(pytplot.data_quants['swe_1_diff_en_fluxes'].data)
+print('...................')
+pytplot.data_quants['swe_1_diff_en_fluxes'].data.index = pytplot.data_quants['swe_1_diff_en_fluxes'].data.index.strftime('%y-%m-%d %H:%M:%S')
+pytplot.data_quants['swe_1_diff_en_fluxes'].data.index = pytplot.tplot_utilities.str_to_int(pytplot.data_quants['swe_1_diff_en_fluxes'].data.index)
+print(pytplot.data_quants['swe_1_diff_en_fluxes'].data)
 
 # Set individual plot options
 pytplot.options('swe_1_diff_en_fluxes', 'colormap', 'magma')
