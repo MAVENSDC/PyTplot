@@ -1,4 +1,4 @@
-[![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/pytplot)
+[![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/PyTplot)
 [![image](https://coveralls.io/repos/github/MAVENSDC/PyTplot/badge.svg?branch=master)](https://coveralls.io/github/MAVENSDC/PyTplot?branch=master)
 
 ##########
