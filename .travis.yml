@@ -1,6 +1,5 @@
 language: python
-sudo: required
-dist: xenial
+sudo: false
 group: travis_latest
 
 git:
