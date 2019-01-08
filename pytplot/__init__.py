@@ -121,8 +121,8 @@ class TVar(object):
         self.extras['char_size'] = 10
 
         self.xaxis_opt['axis_label'] = 'Time'
-        self.yaxis_opt['axis_label'] = 'Y-Axis'
-        self.zaxis_opt['axis_label'] = 'Z-Axis'
+        self.yaxis_opt['axis_label'] = self.name if self.spec_bins is None else 'Y-Axis'
+        self.zaxis_opt['axis_label'] = self.name if self.spec_bins is not None else 'Z-Axis'
 
         self.xaxis_opt['crosshair'] = 'X'
         self.yaxis_opt['crosshair'] = 'Y'
