@@ -42,7 +42,6 @@ class TVarFigureAlt(pg.GraphicsLayout):
 
         self.curves = []
         self.colors = self._setcolors()
-        self.colormap = self._setcolormap()
 
         self.labelStyle = {'font-size': str(pytplot.data_quants[self.tvar_name].extras['char_size'])+'pt'}
 
@@ -114,7 +113,8 @@ class TVarFigureAlt(pg.GraphicsLayout):
         else:
             return
 
-    def getaxistype(self):
+    @staticmethod
+    def getaxistype():
         axis_type = 'altitude'
         link_y_axis = False
         return axis_type, link_y_axis
@@ -129,26 +129,38 @@ class TVarFigureAlt(pg.GraphicsLayout):
         # if plot window contains position
         if self.plotwindow.sceneBoundingRect().contains(pos):
             mousepoint = self.plotwindow.vb.mapSceneToView(pos)
+
+            # Add crosshairs to plot at the mouse's position
+            self._add_mouse_crosshairs(mousepoint)
+
             # grab x and y mouse locations
             index_x = int(mousepoint.x())
             index_y = int(mousepoint.y())
-            # add crosshairs
-            if self._mouseMovedFunction is not None:
-                self._mouseMovedFunction(int(mousepoint.x()))
-                self.vLine.setPos(mousepoint.x())
-                self.hLine.setPos(mousepoint.y())
-                self.vLine.setVisible(True)
-                self.hLine.setVisible(True)
 
-            # Set legend options
-            self.hoverlegend.setVisible(True)
-            # Allow the user to set x-axis(time) and y-axis data names in crosshairs
-            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].xaxis_opt['crosshair'] + ':', index_x)
-            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].yaxis_opt['crosshair'] + ':', index_y)
+            # Add legend options to the mouse's crosshairs
+            self._mouse_legend_options(index_x, index_y)
+
         else:
             self.hoverlegend.setVisible(False)
             self.vLine.setVisible(False)
             self.hLine.setVisible(False)
+
+    def _add_mouse_crosshairs(self, mousepoint):
+        # add crosshairs to the mouse's current location
+        if self._mouseMovedFunction is not None:
+            self._mouseMovedFunction(int(mousepoint.x()))
+            self.vLine.setPos(mousepoint.x())
+            self.hLine.setPos(mousepoint.y())
+            self.vLine.setVisible(True)
+            self.hLine.setVisible(True)
+
+    # Add legend options to the mouse's crosshairs
+    def _mouse_legend_options(self, index_x, index_y):
+        # Set legend options for the mouse crosshairs
+        self.hoverlegend.setVisible(True)
+        # Allow the user to set x-axis(time) and y-axis data names in crosshairs
+        self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].xaxis_opt['crosshair'] + ':', index_x)
+        self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].yaxis_opt['crosshair'] + ':', index_y)
 
     def _addlegend(self):
         if 'legend_names' in pytplot.data_quants[self.tvar_name].yaxis_opt:
@@ -185,9 +197,6 @@ class TVarFigureAlt(pg.GraphicsLayout):
             return pytplot.data_quants[self.tvar_name].extras['line_color']
         else:
             return pytplot.tplot_utilities.rgb_color(['k', 'r', 'seagreen', 'b', 'darkturquoise', 'm', 'goldenrod'])
-
-    def _setcolormap(self):
-        return
 
     def _setyrange(self):
         if self._getyaxistype() == 'log':

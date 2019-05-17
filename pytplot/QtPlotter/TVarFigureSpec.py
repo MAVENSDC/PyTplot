@@ -150,9 +150,9 @@ class TVarFigureSpec(pg.GraphicsLayout):
         zaxis.setLabel(pytplot.data_quants[self.tvar_name].zaxis_opt['axis_label'], **self.labelStyle)
 
         if self.show_xaxis:
-            emptyAxis = BlankAxis('bottom')
-            emptyAxis.setHeight(35)
-            p2 = self.addPlot(row=0, col=1, axisItems={'right': zaxis, 'bottom': emptyAxis}, enableMenu=False,
+            emptyaxis = BlankAxis('bottom')
+            emptyaxis.setHeight(35)
+            p2 = self.addPlot(row=0, col=1, axisItems={'right': zaxis, 'bottom': emptyaxis}, enableMenu=False,
                               viewBox=self.legendvb)
         else:
             p2 = self.addPlot(row=0, col=1, axisItems={'right': zaxis}, enableMenu=False, viewBox=self.legendvb)
@@ -189,14 +189,18 @@ class TVarFigureSpec(pg.GraphicsLayout):
         flag = 0
         # if plot window contains position
         if self.plotwindow.sceneBoundingRect().contains(pos):
-            mousePoint = self.plotwindow.vb.mapSceneToView(pos)
+            mousepoint = self.plotwindow.vb.mapSceneToView(pos)
+
+            # Add crosshairs to plot at the mouse's position
+            self._add_mouse_crosshairs(mousepoint)
+
             # grab x and y mouse locations
-            index_x = int(mousePoint.x())
+            index_x = int(mousepoint.x())
             # set log magnitude if log plot
             if self._getyaxistype() == 'log':
-                index_y = 10 ** (round(float(mousePoint.y()), 4))
+                index_y = 10 ** (round(float(mousepoint.y()), 4))
             else:
-                index_y = round(float(mousePoint.y()), 4)
+                index_y = round(float(mousepoint.y()), 4)
 
             dataframe = pytplot.data_quants[self.tvar_name].data
             specframe = pytplot.data_quants[self.tvar_name].spec_bins
@@ -207,7 +211,7 @@ class TVarFigureSpec(pg.GraphicsLayout):
             x_argmin = np.nanargmin(x_sub)
             x_closest = x[x_argmin]
 
-            #TODO: This currently grabs only the first row of the specframe,
+            # TODO: This currently grabs only the first row of the specframe
             # if it is time varying this will probably give incorrect Y values in the crosshair
             speclength = len(specframe.iloc[0])
             y = np.asarray((specframe.iloc[0, 0:speclength - 1]))
@@ -217,32 +221,36 @@ class TVarFigureSpec(pg.GraphicsLayout):
             index = int((np.nonzero(y == y_closest))[0])
             dp = dataframe[index][x_closest]
 
-            # add crosshairs
-            if self._mouseMovedFunction is not None:
-                # Associate mouse position with current plot you're mousing over.
-                self._mouseMovedFunction(int(mousePoint.x()), name=self.tvar_name)
-                if self.crosshair:
-                    self.vLine.setPos(mousePoint.x())
-                    self.hLine.setPos(mousePoint.y())
-                    self.vLine.setVisible(True)
-                    self.hLine.setVisible(True)
-
-            date = (pytplot.tplot_utilities.int_to_str(x_closest))[0:10]
-            time = (pytplot.tplot_utilities.int_to_str(x_closest))[11:19]
-
-            # Set legend options
-            if self.crosshair:
-                self.hoverlegend.setVisible(True)
-                self.hoverlegend.setItem("Date:", date)
-                # Allow the user to set x-axis(time), y-axis, and z-axis data names in crosshairs
-                self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].xaxis_opt['crosshair'] + ':', time)
-                self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].yaxis_opt['crosshair'] + ':', str(y_closest))
-                self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].zaxis_opt['crosshair'] + ':', str(dp))
+            # Add legend options to the mouse's crosshairs
+            self._mouse_legend_options(x_closest, y_closest, dp)
 
         else:
             self.hoverlegend.setVisible(False)
             self.vLine.setVisible(False)
             self.hLine.setVisible(False)
+
+    def _add_mouse_crosshairs(self, mousepoint):
+        # add crosshairs to the mouse's current location
+        if self._mouseMovedFunction is not None:
+            # Associate mouse position with current plot you're mousing over.
+            self._mouseMovedFunction(int(mousepoint.x()), name=self.tvar_name)
+            if self.crosshair:
+                self.vLine.setPos(mousepoint.x())
+                self.hLine.setPos(mousepoint.y())
+                self.vLine.setVisible(True)
+                self.hLine.setVisible(True)
+
+    def _mouse_legend_options(self, x_closest, y_closest, dp):
+        # Set legend options for the mouse crosshairs
+        date = (pytplot.tplot_utilities.int_to_str(x_closest))[0:10]
+        time = (pytplot.tplot_utilities.int_to_str(x_closest))[11:19]
+        if self.crosshair:
+            self.hoverlegend.setVisible(True)
+            self.hoverlegend.setItem("Date:", date)
+            # Allow the user to set x-axis(time), y-axis, and z-axis data names in crosshairs
+            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].xaxis_opt['crosshair'] + ':', time)
+            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].yaxis_opt['crosshair'] + ':', str(y_closest))
+            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].zaxis_opt['crosshair'] + ':', str(dp))
 
     def _getyaxistype(self):
         if 'y_axis_type' in pytplot.data_quants[self.tvar_name].yaxis_opt:
@@ -275,7 +283,8 @@ class TVarFigureSpec(pg.GraphicsLayout):
         else:
             return tplot_utilities.return_lut("inferno")
 
-    def getaxistype(self):
+    @staticmethod
+    def getaxistype():
         axis_type = 'time'
         link_y_axis = False
         return axis_type, link_y_axis

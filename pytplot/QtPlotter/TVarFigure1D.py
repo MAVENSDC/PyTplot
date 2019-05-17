@@ -268,29 +268,40 @@ class TVarFigure1D(pg.GraphicsLayout):
         # if plot window contains position
         if self.plotwindow.sceneBoundingRect().contains(pos):
             mousepoint = self.plotwindow.vb.mapSceneToView(pos)
+
+            # Add crosshairs to plot at the mouse's position
+            self._add_mouse_crosshairs(mousepoint)
+
             # grab x and y mouse locations
             index_x = int(mousepoint.x())
             index_y = round(float(mousepoint.y()), 4)
-            date = (pytplot.tplot_utilities.int_to_str(index_x))[0:10]
-            time = (pytplot.tplot_utilities.int_to_str(index_x))[11:19]
-            # add crosshairs
-            if self._mouseMovedFunction is not None:
-                self._mouseMovedFunction(int(mousepoint.x()))
-                self.vLine.setPos(mousepoint.x())
-                self.hLine.setPos(mousepoint.y())
-                self.vLine.setVisible(True)
-                self.hLine.setVisible(True)
 
-            self.hoverlegend.setVisible(True)
-            self.hoverlegend.setItem("Date:", date)
-            # Allow the user to set x-axis(time) and y-axis data names in crosshairs
-            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].xaxis_opt['crosshair'] + ':', time)
-            self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].yaxis_opt['crosshair'] + ':', str(index_y))
+            # Add legend options to the mouse's crosshairs
+            self._mouse_legend_options(index_x, index_y)
 
         else:
             self.hoverlegend.setVisible(False)
             self.vLine.setVisible(False)
             self.hLine.setVisible(False)
+
+    def _add_mouse_crosshairs(self, mousepoint):
+        # add crosshairs to the mouse's current location
+        if self._mouseMovedFunction is not None:
+            self._mouseMovedFunction(int(mousepoint.x()))
+            self.vLine.setPos(mousepoint.x())
+            self.hLine.setPos(mousepoint.y())
+            self.vLine.setVisible(True)
+            self.hLine.setVisible(True)
+
+    def _mouse_legend_options(self, index_x, index_y):
+        # Set legend options for the mouse crosshairs
+        date = (pytplot.tplot_utilities.int_to_str(index_x))[0:10]
+        time = (pytplot.tplot_utilities.int_to_str(index_x))[11:19]
+        self.hoverlegend.setVisible(True)
+        self.hoverlegend.setItem("Date:", date)
+        # Allow the user to set x-axis(time) and y-axis data names in crosshairs
+        self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].xaxis_opt['crosshair'] + ':', time)
+        self.hoverlegend.setItem(pytplot.data_quants[self.tvar_name].yaxis_opt['crosshair'] + ':', str(index_y))
 
     def _getyaxistype(self):
         if 'y_axis_type' in pytplot.data_quants[self.tvar_name].yaxis_opt:

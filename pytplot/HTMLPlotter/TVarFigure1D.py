@@ -261,7 +261,6 @@ class TVarFigure1D(object):
                                 # Restart the count and add the current val to the list of nan values to remove
                                 count = 0
                                 consec_list.append(nan_keys[val])
-                    print(consec_list)
 
                     times = x.tolist()
                     for elem in consec_list:

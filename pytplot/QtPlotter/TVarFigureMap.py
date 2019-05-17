@@ -98,9 +98,6 @@ class TVarFigureMap(pg.GraphicsLayout):
     def _setyaxislabel(self):
         self.yaxis.setLabel("Latitude", **self.labelStyle)
 
-    def _setyaxislabel(self):
-        self.yaxis.setLabel("Latitude")
-
     def getfig(self):
         return self
 
@@ -199,6 +196,10 @@ class TVarFigureMap(pg.GraphicsLayout):
         # if plot window contains position
         if self.plotwindow.sceneBoundingRect().contains(pos):
             mousepoint = self.plotwindow.vb.mapSceneToView(pos)
+
+            # Add crosshairs to plot at the mouse's position
+            self._add_mouse_crosshairs(mousepoint)
+
             # grab x and y mouse locations
             index_x = round(float(mousepoint.x()), 2)
             index_y = round(float(mousepoint.y()), 2)
@@ -217,30 +218,39 @@ class TVarFigureMap(pg.GraphicsLayout):
             # find closest time point to cursor
             radius = np.sqrt((latitude - index_y) ** 2 + (longitude - index_x) ** 2).argmin()
             time_point = time[radius]
-            # get date and time
-            date = (pytplot.tplot_utilities.int_to_str(time_point))[0:10]
-            time = (pytplot.tplot_utilities.int_to_str(time_point))[11:19]
 
-            # add crosshairs
-            if self._mouseMovedFunction is not None:
-                self._mouseMovedFunction(int(mousepoint.x()))
-                self.vLine.setVisible(True)
-                self.hLine.setVisible(True)
-                self.vLine.setPos(mousepoint.x())
-                self.hLine.setPos(mousepoint.y())
+            # Add legend options to the mouse's crosshairs
+            self._mouse_legend_options(time_point, index_x, index_y)
 
-            # Set legend options
-            self.hoverlegend.setVisible(True)
-            self.hoverlegend.setItem("Date: ", date)
-            self.hoverlegend.setItem("Time: ", time)
-            self.hoverlegend.setItem("Longitude:", str(index_x))
-            self.hoverlegend.setItem("Latitude:", str(index_y))
         else:
             self.hoverlegend.setVisible(False)
             self.vLine.setVisible(False)
             self.hLine.setVisible(False)
 
-    def _getyaxistype(self):
+    def _add_mouse_crosshairs(self, mousepoint):
+        # add crosshairs to the mouse's current location
+        if self._mouseMovedFunction is not None:
+            self._mouseMovedFunction(int(mousepoint.x()))
+            self.vLine.setVisible(True)
+            self.hLine.setVisible(True)
+            self.vLine.setPos(mousepoint.x())
+            self.hLine.setPos(mousepoint.y())
+
+    def _mouse_legend_options(self, time_point, index_x, index_y):
+        # Set legend options for the mouse crosshairs
+        # get date and time
+        date = (pytplot.tplot_utilities.int_to_str(time_point))[0:10]
+        time = (pytplot.tplot_utilities.int_to_str(time_point))[11:19]
+
+        # Set legend options
+        self.hoverlegend.setVisible(True)
+        self.hoverlegend.setItem("Date: ", date)
+        self.hoverlegend.setItem("Time: ", time)
+        self.hoverlegend.setItem("Longitude:", str(index_x))
+        self.hoverlegend.setItem("Latitude:", str(index_y))
+
+    @staticmethod
+    def _getyaxistype():
         return 'linear'
 
     def _setzaxistype(self):
@@ -270,7 +280,8 @@ class TVarFigureMap(pg.GraphicsLayout):
         else:
             return [pytplot.tplot_utilities.return_lut("inferno")]
 
-    def getaxistype(self):
+    @staticmethod
+    def getaxistype():
         axis_type = 'lat'
         link_y_axis = True
         return axis_type, link_y_axis
