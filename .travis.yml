@@ -19,8 +19,9 @@ before_install:
   - export PATH="$HOME/miniconda/bin:$PATH"
 
 install:
-  - conda install numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
+  - conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
   - conda install pyqt --yes
+  - conda install -c anaconda netcdf4
   - pip install cdflib
   - pip install -e .[tests]
 
