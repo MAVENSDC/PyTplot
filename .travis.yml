@@ -21,7 +21,7 @@ before_install:
 install:
   - conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
   - conda install pyqt --yes
-  - conda install -c anaconda netcdf4
+  - conda install -c anaconda netcdf4 --yes
   - pip install cdflib
   - pip install -e .[tests]
 
