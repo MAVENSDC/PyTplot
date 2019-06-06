@@ -38,7 +38,7 @@ def test_tplot_math():
 
     pytplot.deflag('data', 0, new_tvar='deflagged')
 
-    pytplot.tplot('deflagged')
+    pytplot.tplot('deflagged', testing=True)
 
     pytplot.flatten('data')
 
@@ -50,7 +50,7 @@ def test_tplot_math():
 
     pytplot.pwr_spec('data_0')
 
-    pytplot.tplot('data_0_pwrspec')
+    pytplot.tplot('data_0_pwrspec', testing=True)
 
     pytplot.derive('data_0')
 
