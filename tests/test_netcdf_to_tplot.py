@@ -4,6 +4,7 @@ import os
 current_directory = os.path.dirname(os.path.realpath(__file__))
 
 def test_goes_read():
+
     pytplot.netcdf_to_tplot(current_directory + "/testfiles/g15_xrs_2s_20170619_20170619.nc", time='time_tag')
     pytplot.xlim('2017-06-19 02:00:00', '2017-06-19 04:00:00')
     pytplot.ylim("B_COUNT", 17000, 18000)

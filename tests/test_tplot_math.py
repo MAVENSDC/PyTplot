@@ -4,7 +4,8 @@ import os
 current_directory = os.path.dirname(os.path.realpath(__file__))
 
 def test_tplot_math():
-    pytplot.cdf_to_tplot(current_directory + "/testfiles/mvn_euv_l2_bands_20170619_v09_r03.cdf")
+
+    pytplot.cdf_to_tplot(os.path.dirname(os.path.realpath(__file__)) + "/testfiles/mvn_euv_l2_bands_20170619_v09_r03.cdf")
     pytplot.tplot_names()
 
     pytplot.tplot_math.split_vec('data')
