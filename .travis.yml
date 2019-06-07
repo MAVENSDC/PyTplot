@@ -34,7 +34,6 @@ before_script:
 
 script:
   #Run pytest
-  - ls
   - pytest -rsv
 
 after_success:
