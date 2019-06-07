@@ -58,9 +58,7 @@ def test_tplot_math():
 
     pytplot.tplot('data3', testing=True)
 
-    current_directory = os.path.dirname("C:/Work/Code Repos/PyTplot/tests/testfiles")
-
-    pytplot.cdf_to_tplot(current_directory + "/testfiles/mvn_swe_l2_svyspec_20170619_v04_r04.cdf")
+    pytplot.cdf_to_tplot(os.path.dirname(os.path.realpath(__file__))+ "/testfiles/mvn_swe_l2_svyspec_20170619_v04_r04.cdf")
 
     pytplot.resample('data_1', pytplot.data_quants['diff_en_fluxes'].coords['time'].values, new_tvar='data_3_resampled')
 
