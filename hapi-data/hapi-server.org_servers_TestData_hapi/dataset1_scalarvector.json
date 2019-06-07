@@ -1,0 +1,47 @@
+{
+    "startDate": "1970-01-01Z",
+    "stopDate": "2016-12-31Z",
+    "sampleStartDate": "1970-01-01Z",
+    "sampleStopDate": "1970-01-01T00:00:11Z",
+    "cadence": "PT1S",
+    "parameters": [
+        {
+            "name": "Time",
+            "type": "isotime",
+            "units": "UTC",
+            "fill": null,
+            "length": 24
+        },
+        {
+            "name": "scalar",
+            "type": "double",
+            "units": "m",
+            "fill": "-1e31",
+            "description": "Sine wave with 600 s period"
+        },
+        {
+            "name": "vector",
+            "type": "double",
+            "units": "m",
+            "fill": "-1e31",
+            "size": [
+                3
+            ],
+            "description ": "Each component is a sine wave with a 600 s period with differing phases."
+        }
+    ],
+    "status": {
+        "code": 1200,
+        "message": "OK"
+    },
+    "HAPI": "2.0",
+    "x_server": "http://hapi-server.org/servers/TestData/hapi",
+    "x_dataset": "dataset1",
+    "x_parameters": "scalar,vector",
+    "x_metaFile": "C:\\Code Repos\\PyTplot\\hapi-data\\hapi-server.org_servers_TestData_hapi\\dataset1_scalarvector.json",
+    "x_requestDate": "2018-11-14T10:01:50",
+    "x_cacheDir": "C:\\Code Repos\\PyTplot\\hapi-data\\hapi-server.org_servers_TestData_hapi",
+    "x_time.min": "1970-01-01T00:00:00",
+    "x_time.max": "1970-01-01T00:00:10",
+    "x_dataFile": "C:\\Code Repos\\PyTplot\\hapi-data\\hapi-server.org_servers_TestData_hapi\\dataset1_scalar-vector_19700101T000000_19700101T000010.bin"
+}
