@@ -74,7 +74,7 @@ def test_tplot_math():
     pytplot.ylim('tot_en_flux', 1, 100)
     pytplot.tplot(['diff_en_fluxes', 'tot_en_flux'], testing=True)
 
-    pytplot.split_vec('tot_en_flux', testing=True)
+    pytplot.split_vec('tot_en_flux')
 
     pytplot.add('tot_en_flux_0', 'data_1', new_tvar='weird_data')
 
