@@ -17,4 +17,4 @@ def test_alt_plot():
     pytplot.timebar('2017-06-19 03:30:00', "A_COUNT", color='g')
     pytplot.options("A_COUNT", 'map', 1)
     pytplot.tplot(2, testing=True)
-    pytplot.tplot(2, testing=True, bokeh=True, save_file='asdf.png')
+    pytplot.tplot(2, testing=True, bokeh=True)

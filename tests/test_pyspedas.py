@@ -14,4 +14,4 @@ def test_pyspedas():
     SpecIN = 'mms' + probe + '_dis_energyspectr_omni_fast'
 
     pytplot.tplot([SpecIN, DenIN], testing=True)
-    pytplot.tplot([SpecIN, DenIN], testing=True, bokeh=True, save_file='testing.png')
+    pytplot.tplot([SpecIN, DenIN], testing=True, bokeh=True)
