@@ -23,6 +23,7 @@ install:
   - conda install pyqt --yes
   - conda install -c anaconda netcdf4 --yes
   - pip install cdflib
+  - pip install pyspedas
   - pip install -e .[tests]
 
 before_script:
