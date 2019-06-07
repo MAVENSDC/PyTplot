@@ -1,4 +1,0 @@
-[
-  "tests/test_cdf_to_tplot.py::test_cdf_euv_read",
-  "tests/test_cdf_to_tplot.py::test_cdf_swe_read"
-]
