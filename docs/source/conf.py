@@ -21,8 +21,7 @@ import sys
 sys.path.insert(0, os.path.realpath("../../"))
 
 extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.ifconfig',
-    'rinoh.frontend.sphinx']
+    'sphinx.ext.ifconfig']
 
 templates_path = ['_templates']
 
@@ -31,7 +30,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = 'PyTplot'
-copyright = '2017, Laboratory for Atmospheric and Space Physics'
+copyright = '2019, Laboratory for Atmospheric and Space Physics'
 author = 'Laboratory for Atmospheric and Space Physics'
 
 
@@ -63,8 +62,3 @@ man_pages = [
 
 autodoc_docstring_signature = True
 add_module_names = False
-rinoh_documents = [("index",            # top-level file (index.rst)
-                    'PyTplot',           # output (target.pdf)
-                    'PyTplot Documentation',   # document title
-                    'Laboratory for Atmospheric and Space Physics')]   # document author
-rinoh_template='article'
