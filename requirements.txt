@@ -1,0 +1,8 @@
+numpy
+bokeh
+pyqtgraph
+pandas
+matplotlib
+scipy
+cdflib
+xarray
