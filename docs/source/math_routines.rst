@@ -1,0 +1,1 @@
+.. autofunction:: pytplot.tplot_math.add

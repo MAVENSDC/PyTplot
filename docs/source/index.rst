@@ -12,6 +12,7 @@
 	tplot_options
 	plotting
 	linking
-	interactive_plots
+	interactivity 
+	math_routines
     apireference
 	
