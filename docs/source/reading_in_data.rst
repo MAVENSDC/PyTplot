@@ -1,5 +1,6 @@
 Reading in Data
-===============
+=============================
+
 
 .. autofunction:: pytplot.store_data
 

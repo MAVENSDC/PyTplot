@@ -1,4 +1,4 @@
 Options
 =============
 
-.. autofunction:: pytplot.options.options
+.. autofunction:: pytplot.options

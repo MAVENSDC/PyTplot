@@ -1,4 +1,4 @@
 Tplot Options
-=============
+=====================
 
-.. autofunction:: pytplot.tplot_options.tplot_options
+.. autofunction:: pytplot.tplot_options

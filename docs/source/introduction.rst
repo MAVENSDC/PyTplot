@@ -1,5 +1,5 @@
 Introduction
-============
+===================
 
 
 
@@ -15,7 +15,7 @@ and spectrograms from satellite data.
 
 
 What does it do?
----------------
+-------------------
 
 Because the tplot library evolved over several decades with new features being added depending on what scientists needed, 
 there is a variety of things it does:

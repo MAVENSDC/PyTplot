@@ -7,12 +7,12 @@
     :maxdepth: 2
 
     introduction
-	reading_in_data
+    reading_in_data
     options
-	tplot_options
-	plotting
-	linking
-	interactivity 
-	math_routines
+    tplot_options
+    plotting
+    linking
+    interactivity 
+    math_routines
     apireference
-	
+    

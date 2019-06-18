@@ -1,4 +1,4 @@
 Math Routines
-=============
+======================
 
-.. autofunction:: pytplot.tplot_math.add.add
+.. autofunction:: pytplot.tplot_math.add
