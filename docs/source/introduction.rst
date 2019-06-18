@@ -8,10 +8,13 @@ What is pytplot?
 
 Pytplot is an effort by the Laboratory for Atmospheric and Space Physics to replicate the functionality IDL tplot library.  
 It is a tool for manipulating, analyzing, and plotting time series data.  Primarily, it is focused on handling lines 
-and spectrograms from satellite data.
+and spectrograms from satellite data.  It can plot using either Qt via pytqtgraph, or using HTML files via Bokeh.  
 
 
 .. image:: _images/sample.png
+
+.. raw:: html
+   :file: _images/sample.html
 
 
 What does it do?
