@@ -7,3 +7,4 @@ scipy
 cdflib
 xarray
 pyqt5
+PyQtWebEngine
