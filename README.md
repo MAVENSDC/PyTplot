@@ -1,29 +1,21 @@
 [![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/PyTplot)
 [![image](https://coveralls.io/repos/github/MAVENSDC/PyTplot/badge.svg?branch=master)](https://coveralls.io/github/MAVENSDC/PyTplot?branch=master)
 
-##########
-pytplot
-##########
+Full Documentation here: [pytplot.readthedocs.io](pytplot.readthedocs.io) 
 
-Pytplot is a python package which aims to mimic the functionality of the IDL "tplot" libraries.  The primary routine (tplot) generates HTML files for the specified plots, and automatically opens the files in a Qt interface.   
+
+Pytplot is a python package which aims to mimic the functionality of the IDL "tplot" libraries. 
 
 These plots have several user interaction tools built in, such as zooming and panning.  The can be exported as standalone HTML files (to retain their interactivity) or as static PNG files.    
 
 Pytplot can be used in python scripts, or interactively through IPython and the Jupyter notebook.  
 
-How It Works
-=============
 
-Data is read into pytplot by using the "store_data" command.  Each dataset is assigned a unique name by the user.  
-
-The data is stored in a "tplot variable" class.  The tplot variables contain all the information required to create a plot of the dataset.  The details of the plot, such as axis titles, types, line colors, etc, can be changed through other functions in pytplot.  
-
-When you are ready to create a graph of your dataset(s), supply the dataset names you wish to plot to the "tplot" function, and a graph will be generated.   
-
-
+Quick Start
+===========
 
 Install Python
-=============
+---------------
 
 You will need the Anaconda distribution of Python 3 in order to run pytplot.  
 
@@ -31,7 +23,7 @@ You will need the Anaconda distribution of Python 3 in order to run pytplot.
 
 
 Install pytplot
-=============
+----------------
 
 Open up a terminal, and type::
 
@@ -44,7 +36,7 @@ You will also need to install nodejs.  This can be done through Anaconda with th
 	conda install -c bokeh nodejs
 
 Running Pytplot
-=============
+---------------
 
 To start using pytplot in a similar manner to IDL tplot, start up an interactive environment through the terminal command::
 
@@ -70,7 +62,7 @@ Contact
 If you have any suggestions or notice any problems, don't hesitate to contact Bryan Harter: harter@lasp.colorado.edu 
 
 
-Copyright 2018 Regents of the University of Colorado. All Rights Reserved.
+Copyright 2019 Regents of the University of Colorado. All Rights Reserved.
 Released under the MIT license.
 This software was developed at the University of Colorado's Laboratory for Atmospheric and Space Physics.
 Verify current version before use at: https://github.com/MAVENSDC/PyTplot
