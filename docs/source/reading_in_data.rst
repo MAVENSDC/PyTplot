@@ -1,3 +1,6 @@
+Reading in Data
+===============
+
 .. autofunction:: pytplot.store_data
 
 .. autofunction:: pytplot.importers.cdf_to_tplot
