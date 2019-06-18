@@ -7,6 +7,7 @@ Math Routines
 .. autofunction:: pytplot.tplot_math.clip
 .. autofunction:: pytplot.tplot_math.crop
 .. autofunction:: pytplot.tplot_math.deflag
+.. autofunction:: pytplot.tplot_math.degap
 .. autofunction:: pytplot.tplot_math.derive
 .. autofunction:: pytplot.tplot_math.divide
 .. autofunction:: pytplot.tplot_math.flatten
