@@ -10,6 +10,7 @@
     reading_in_data
     options
     tplot_options
+    helper_functions
     plotting
     linking
     interactivity 
