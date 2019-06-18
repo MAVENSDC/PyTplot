@@ -6,3 +6,4 @@ matplotlib
 scipy
 cdflib
 xarray
+pyqt5
