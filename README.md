@@ -1,7 +1,7 @@
 [![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/PyTplot)
 [![image](https://coveralls.io/repos/github/MAVENSDC/PyTplot/badge.svg?branch=master)](https://coveralls.io/github/MAVENSDC/PyTplot?branch=master)
 
-Full Documentation here: [pytplot.readthedocs.io](pytplot.readthedocs.io) 
+Full Documentation here: [https://pytplot.readthedocs.io/en/latest/](https://pytplot.readthedocs.io/en/latest/) 
 
 
 Pytplot is a python package which aims to mimic the functionality of the IDL "tplot" libraries. 
