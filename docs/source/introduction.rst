@@ -10,7 +10,7 @@ Pytplot is an effort by the Laboratory for Atmospheric and Space Physics to repl
 It is a tool for manipulating, analyzing, and plotting time series data.  Primarily, it is focused on handling line and spectrographs.
 
 
-.. image:: images/sample.png
+.. image:: _images/sample.png
 
 
 What does it do?
