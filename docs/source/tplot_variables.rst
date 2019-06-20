@@ -15,7 +15,7 @@ Tplot variables are kept global because it is not unheard of for >50 variables t
 Internal Structure
 ------------------
 
-Many users will not need to know this, but if you'd like to use tplot variables in other libraries this is good information to know.  
+Users do not necessarily need to know the internal details of the tplot variables to use the library, but if you'd like to use tplot variables in other libraries this is good information to know.  
 
 "Tplot variable" is really just a fancy name for an Xarray DataArrray object.  Tplot variables are just a type of DataArray that have standardized attributes so that PyTplot knows how to work with them
 

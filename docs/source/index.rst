@@ -11,7 +11,7 @@ PyTplot's Documentation
     :maxdepth: 2
 
     introduction
-	tplot_variables
+    tplot_variables
     reading_in_data
     options
     tplot_options
