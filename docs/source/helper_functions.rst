@@ -1,5 +1,5 @@
 Helper Functions
-=============
+=================
 
 These are functions that help get or set attributes of the data.  All of these were basically mapped one-to-one from IDL routines.
 
