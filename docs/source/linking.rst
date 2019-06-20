@@ -26,24 +26,28 @@ Altitude Plot Example
 
 The following uses data taken from the MAVEN mission::
 	
-	# Store Data from a dictionary variable named "insitu" taken from elsewhere
+	# Store Data from a dictionary variable named "insitu" (read into python from elsewhere)
 	pytplot.store_data('sc_alt', data={'x':insitu['Time'] , 'y':insitu['SPACECRAFT']['ALTITUDE']})
 	pytplot.store_data('euv_low', data={'x':insitu['Time'] , 'y':insitu['EUV']['IRRADIANCE_LOW']})
 	pytplot.store_data('euv_lyman', data={'x':insitu['Time'] , 'y':insitu['EUV']['IRRADIANCE_LYMAN']})
 	pytplot.store_data('euv_mid', data={'x':insitu['Time'] , 'y':insitu['EUV']['IRRADIANCE_MID']})
+	
 	# Link the EUV variables to "sc_alt"
 	pytplot.link(["euv_mid"], "sc_alt", link_type='alt')
 	pytplot.link(["euv_low"], "sc_alt", link_type='alt')
 	pytplot.link(["euv_lyman"], "sc_alt", link_type='alt')
 	#Specify that you'd like to overplot
 	pytplot.store_data('euv', data=["euv_low","euv_mid","euv_lyman"])
+	
 	#Set Plot options
 	pytplot.options("euv", 'alt', 1)
 	pytplot.options("euv", 'ylog', 1)
 	pytplot.ylim("euv", .000001, .02)
 	pytplot.options("euv", "legend_names", ["Low", "Mid", "Lyman"])
+	
 	#Add a big blue marker at 3:23:00
 	pytplot.timebar('2015-12-25 03:23:00', varname='euv', color='blue', thick=10)
+	
 	#Plot!
 	pytplot.tplot("euv")
 
@@ -60,7 +64,28 @@ The following uses data taken from the MAVEN mission::
 Map Plot Example
 ----------------
 
+The following is the same example as above, but this time plotted vs latitude and longitude over the surface of Mars.
+It also plots only the euv_lyman variable::
 
+	# Store Data from a dictionary variable named "insitu" (read into python from elsewhere)
+	pytplot.store_data('sc_lon', data={'x':insitu['Time'] , 'y':insitu['SPACECRAFT']['SUB_SC_LONGITUDE']})
+	pytplot.store_data('sc_lat', data={'x':insitu['Time'] , 'y':insitu['SPACECRAFT']['SUB_SC_LATITUDE']})
+	pytplot.store_data('euv_lyman', data={'x':insitu['Time'] , 'y':insitu['EUV']['IRRADIANCE_LYMAN']})
+	
+	# Link latitude and longitude 
+	pytplot.link(["euv_lyman"], "sc_lat", link_type='lat')
+	pytplot.link(["euv_lyman"], "sc_lon", link_type='lon')
+	
+	# Set Plot options
+	pytplot.options("euv_lyman", 'map', 1)
+	pytplot.options("euv_lyman", 'zlog', 1)
+	pytplot.options("euv_lyman", 'basemap', 'C:/maps/MOLA_BW_2500x1250.jpg'))
+	
+	#Add a big blue marker at 3:23:00
+	pytplot.timebar('2015-12-25 03:23:00', varname='euv_lyman', color='blue', thick=20)
+	
+	# Plot!
+	pytplot.tplot("euv_lyman")
 
 
 
