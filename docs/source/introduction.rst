@@ -11,12 +11,6 @@ It is a tool for manipulating, analyzing, and plotting time series data.  Primar
 and spectrograms from satellite data.  It can plot using either Qt via pytqtgraph, or using HTML files via Bokeh.  
 
 
-.. image:: _images/sample.png
-
-.. raw:: html
-   :file: _images/sample.html
-
-
 What does it do?
 -------------------
 
@@ -31,4 +25,14 @@ there is a variety of things it does:
 * Provides time series data analysis/manipulation routines
 * Provides tools to enable mouse interactions with other python routines
 
+Pyqtgraph Sample
+-----------------
 
+.. image:: _images/sample.png
+
+
+Interactive Bokeh Sample
+------------------------
+
+.. raw:: html
+   :file: _images/sample.html
