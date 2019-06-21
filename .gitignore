@@ -27,3 +27,4 @@ test.py
 .eggs/
 *.orig
 docs/build/*
+pydata
