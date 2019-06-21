@@ -23,5 +23,12 @@ Then when you plot this new variable, it will be a combination of the two variab
 ..note:
 	Each variable should still retain the plot options you set for it, but I am still working out the kinks.  
 	
+	
+Extra X axes
+-------------
+
+This is described above in the tplot function documentation, but this is such a widely used feature of tplot that it 
+deserves its own subsection.  
+	
 
 	
