@@ -20,5 +20,3 @@ PyTplot's Documentation
     linking
     interactivity 
     math_routines
-    apireference
-    
