@@ -20,7 +20,7 @@ To combine two or more variables in the same plot, you need to create a new vari
 	
 Then when you plot this new variable, it will be a combination of the two variables given in "data".  
 
-..note:
+.. note::
 	Each variable should still retain the plot options you set for it, but I am still working out the kinks.  
 	
 	

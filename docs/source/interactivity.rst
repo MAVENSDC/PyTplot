@@ -10,7 +10,8 @@ Spectrogram Slicing
 -------------------
 
 Slicing a spectrogram can be called in a few different ways.  Probably the easiest way to do it for now would be to simply specify "interactive=True" when calling tplot (which is a very general keyword that should definitely be changed in the future) ::
-    pytplot.tplot("spectrogram_data", interactive=True)
+    
+	pytplot.tplot("spectrogram_data", interactive=True)
 
 Below is what the spectrogram slicer command looks like in a Bokeh graph.  
 
@@ -42,9 +43,9 @@ Adding your Own Supplementary Qt Plots
 .. note::
     This only works when plotting with pyqtgraph.  Bokeh only creates static HTML files, so it cannot communicate back to python once created.  
 
-If you using pytplot in an IPython environment (including Jupyter notebooks), you can call tplot multiple times and have multiple windows pop up without.  This is because IPython continually runs a qt "event loop" in the background, similar to IDL.
+If you using pytplot in an IPython environment (including Jupyter notebooks), you can have multiple Qt windows open without issue.  This is because IPython continually runs a qt "event loop" in the background, similar to IDL.
 
-However, if you are using python in a non-interactive environment (say just running a script), pyqtgraph needs to start an event loop to run in.  Python will "freeze" and continue looking for events in the tplot window until the tplot window closes. 
+However, if you are using python in a non-interactive environment (say just running a script), pyqtgraph needs to start an event loop to run, which is done as the last thing in a call to tplot().  Python will "freeze" and continue looking for events in the tplot window until the tplot window closes. 
 
 This means that if you want multiple plots to appear at the same time, you need to supply a function to the tplot() command to call before it starts its event loop.  Lets say you have a custom plot you'd like to appear at the same time as the pytplot plot, you would make sure your function gets called with the following addition to the tplot command::
     
