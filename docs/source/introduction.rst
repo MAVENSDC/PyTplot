@@ -41,4 +41,10 @@ Interactive Bokeh Sample
 Version History
 ---------------
 
-Testing 
+Testing
+
+1.4.0 Changes:
+-Added documentation
+-Redid tplot variables as xarrays
+-Added many unit tests
+-Numerous bug fixes
