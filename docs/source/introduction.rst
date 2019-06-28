@@ -43,6 +43,11 @@ Version History
 
 Version History
 
+1.4.1 Changes:
+
+* Fixed small bug in the spec plots for certain file types
+* Added PySPEDAS changes to the cdf_to_tplot routine
+
 1.4.0 Changes:
 
 * Added documentation
