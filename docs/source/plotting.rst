@@ -32,7 +32,11 @@ A commonly used feature of tplot is adding extra x axes (in addition to time), o
 To do so in pytplot, specify which tplot variable(s) you'd like to to be included on the axis by passing them to the "var_label" option in tplot::
 
 	pytplot.tplot("variable1", var_label = ["variable2", "variable3"])
-	
+
+.. note::
+	Unfortunately, in the Bokeh plots currently the extra x axes must be linearly increasing in order to display properly.  Hopefully we can determine a way to map variables onto the axes at some point in the future.  
+
+
 A common use case would be orbit numbers or spacecraft position.  Here is an example of multiple x axes below:
 
 .. image:: _images/extra_x_axes.png
