@@ -27,8 +27,16 @@ Then when you plot this new variable, it will be a combination of the two variab
 Extra X axes
 -------------
 
-This is described above in the tplot function documentation, but this is such a widely used feature of tplot that it 
-deserves its own subsection.  
+A commonly used feature of tplot is adding extra x axes (in addition to time), on the bottom of the plot.  
+
+To do so in pytplot, specify which tplot variable(s) you'd like to to be included on the axis by passing them to the "var_label" option in tplot::
+
+	pytplot.tplot("variable1", var_label = ["variable2", "variable3"])
+	
+A common use case would be orbit numbers or spacecraft position.  Here is an example of multiple x axes below:
+
+.. image:: _images/extra_x_axes.png
+
 	
 
 	
