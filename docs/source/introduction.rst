@@ -43,6 +43,10 @@ Version History
 
 Version History
 
+1.4.3 Changes:
+
+* Bug fix where ylog could not be unset
+
 1.4.1 Changes:
 
 * Fixed small bug in the spec plots for certain file types
@@ -98,7 +102,7 @@ Version History
 
 * Added ability to display an arbitrarily large number of qt plot windows, if done from ipython
 
-1.1.13 Changes: 
+1.1.13 Changes:
 
 * Added overplot capabilities to the Qt Plotting routines
 
@@ -146,12 +150,12 @@ Version History
 
 1.0.7 Changes:
 
-* Should be able to export to HTML properly now.  
+* Should be able to export to HTML properly now.
 
 1.0.6 Changes:
 
-* Qt is getting rid of support for QtWebView.  QWebEngineView will replace it, but has great difficulty viewing html greater than 2GB.  
-* As a temporary solution, a local html file is saved, and then read into QWebEngineView.  
+* Qt is getting rid of support for QtWebView.  QWebEngineView will replace it, but has great difficulty viewing html greater than 2GB.
+* As a temporary solution, a local html file is saved, and then read into QWebEngineView.
 
 1.0.5 Changes:
 
@@ -161,4 +165,3 @@ Version History
 
 * Added cdf_to_tplot routine
 * Made a version checker
-    
