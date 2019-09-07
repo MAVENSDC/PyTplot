@@ -3,7 +3,6 @@
 # This software was developed at the University of Colorado's Laboratory for Atmospheric and Space Physics.
 # Verify current version before use at: https://github.com/MAVENSDC/Pydivide
 
-import os
 import datetime
 import numpy as np
 
@@ -12,12 +11,12 @@ import pytplot
 
 def read_sts_file(sts_file=None, read_only=False, prefix='', suffix=''):
     """
-    Read in a given filename in situ file into a dictionary object
+    Read in a given insitu file into a dictionary object
     Optional keywords maybe used to downselect instruments returned
      and the time windows.
 
     Input:
-        filename: str/list of str
+        sts_file: str/list of str
             The file names and full paths of STS files to be read and parsed.
         read_only: boolean
             If True, just reads data into dict and returns the dict.
