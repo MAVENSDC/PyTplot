@@ -9,6 +9,8 @@
 #Uploading new versions to conda:
 ##################################
 
+#Note: You'll need to make sure cdflib is up to date on conda as well
+
 #Run: conda skeleton pypi pytplot
 #This should generate a meta.yaml file
 #Edit the YAML file so that the requirements/about/extra look like this:
