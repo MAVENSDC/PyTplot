@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.6"
+  - "3.7"
   
 sudo: false
 group: travis_latest
@@ -22,7 +22,7 @@ before_install:
   - export PATH="$HOME/miniconda/bin:$PATH"
 
 install:
-  - conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib pandas --yes
+  - conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
   - conda install pyqt --yes
   - conda install -c anaconda netcdf4 --yes
   - pip install cdflib
