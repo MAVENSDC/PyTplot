@@ -41,7 +41,21 @@ Interactive Bokeh Sample
 Version History
 ---------------
 
-Version History
+1.4.7 Changes:
+
+* Added two more ancillary plots, Mars 2D Map and Mars 3D Map
+
+1.4.6 Changes:
+
+* Occasionally logged spec plots would not be properly displayed, this is a hopefully a quick fix for that
+
+1.4.5 Changes:
+
+* Fixing typescript errors with bokeh
+
+1.4.4 Changes:
+
+* Fixing pyqtgraph's collections.abc imports
 
 1.4.3 Changes:
 
