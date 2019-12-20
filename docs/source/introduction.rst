@@ -41,6 +41,10 @@ Interactive Bokeh Sample
 Version History
 ---------------
 
+1.4.8 Changes:
+
+* The coordinates for 3+ dimensional objects should now be read in correctly.
+
 1.4.7 Changes:
 
 * Added two more ancillary plots, Mars 2D Map and Mars 3D Map
