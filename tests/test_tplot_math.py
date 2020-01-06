@@ -44,7 +44,7 @@ def test_math():
 
     pytplot.tplot('data_flattened', testing=True)
 
-    pytplot.join_vec(['data_0', 'data_1', 'data_2'], new_tvar='data2')
+    pytplot.join_vec(['mvn_euv_calib_bands_0', 'mvn_euv_calib_bands_1', 'mvn_euv_calib_bands_2'], new_tvar='data2')
 
     pytplot.tplot('data2', testing=True)
 
@@ -79,3 +79,4 @@ def test_math():
     pytplot.add('tot_en_flux_0', 'mvn_euv_calib_bands_1', new_tvar='weird_data')
 
     pytplot.tplot('weird_data', testing=True)
+    
