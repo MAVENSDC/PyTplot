@@ -1,5 +1,5 @@
-Non-Time Series Plots
-=====================
+Linking Two Variables and Non-Time Series Plots
+==================================================
 
 Sometimes plots other than time series may be desired.  Typically, this is either altitude or latitude/longitude plots.
 
@@ -10,7 +10,7 @@ In other words, if you have a tplot variable for altitude named "spacecraft_alt"
 	
 	pytplot.link("spacecraft_data", "spacecraft_alt", link_type = 'alt')
 
-If the data are not on the same time cadence, the linked variable will be interpolated to match that of the data variable.  
+If the data are not on the same time cadence, the linked variable will be interpolated to match that of the data variable at the time of plotting.  
 
 
 Why Linking?
@@ -87,8 +87,8 @@ It also plots only the euv_lyman variable::
 	# Plot!
 	pytplot.tplot("euv_lyman")
 
-
-
-
 .. raw:: html
    :file: _images/map.html
+   
+   
+If pyqtgraph is used to plot the map plot instead, a little marker will appear on the map at the time the user is hovering over with their mouse.  
