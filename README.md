@@ -1,5 +1,7 @@
 [![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/PyTplot)
 [![image](https://coveralls.io/repos/github/MAVENSDC/PyTplot/badge.svg?branch=master)](https://coveralls.io/github/MAVENSDC/PyTplot?branch=master)
+[![DOI](https://zenodo.org/badge/68843190.svg)](https://zenodo.org/badge/latestdoi/68843190)
+
 
 Full Documentation here: [https://pytplot.readthedocs.io/en/latest/](https://pytplot.readthedocs.io/en/latest/) 
 
