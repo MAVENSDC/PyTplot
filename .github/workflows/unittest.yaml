@@ -24,8 +24,8 @@ jobs:
         pip install pyspedas --no-dependencies
     - name: set up XVFB
       uses: GabrielBB/xvfb-action@v1.0
-    - name: Test with unittest
-      run: |
-        pytest -rsv
-        pytest --cov --cov-config=setup.cfg
-        coveralls
+      with:
+        run: |
+          pytest -rsv
+          pytest --cov --cov-config=setup.cfg
+          coveralls
