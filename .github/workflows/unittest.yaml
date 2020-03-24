@@ -25,7 +25,4 @@ jobs:
     - name: set up XVFB
       uses: GabrielBB/xvfb-action@v1.0
       with:
-        run: |
-          pytest -rsv
-          pytest --cov --cov-config=setup.cfg
-          coveralls
+        run: pytest -rsv
