@@ -6,3 +6,5 @@ matplotlib
 scipy
 cdflib
 xarray
+pyqt5 <= 5.12.1
+pyqtwebengine <= 5.12.1
