@@ -18,9 +18,8 @@ jobs:
         conda install pip xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
-        $HOME/miniconda/Scripts/pip install cdflib
-        $HOME/miniconda/Scripts/pip install pyspedas --no-dependencies
-        $HOME/miniconda/Scripts/pip install -e .[tests]
+        $HOME/miniconda/Scripts/pip3 install cdflib
+        $HOME/miniconda/Scripts/pip3 install pyspedas --no-dependencies
     - name: set up XVFB
       uses: GabrielBB/xvfb-action@v1.0
       with:
