@@ -23,4 +23,4 @@ jobs:
         conda install -c anaconda netcdf4 --yes
         conda install -c mavensdc cdflib --yes
         ls -d
-        xvfb-run $HOME/miniconda/bin/pytest -rsv $HOME/tests
+        xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
