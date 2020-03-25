@@ -18,10 +18,16 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install coveralls pytest
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+        chmod +x miniconda.sh
+        bash miniconda.sh -b -p $HOME/miniconda
+        export PATH="$HOME/miniconda/bin:$PATH"
+        conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
+        conda install pyqt --yes
+        conda install -c anaconda netcdf4 --yes
+        pip install cdflib
         pip install pyspedas --no-dependencies
+        pip install -e .[tests]
     - name: set up XVFB
       uses: GabrielBB/xvfb-action@v1.0
       with:
