@@ -6,10 +6,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8]
-        
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
@@ -18,13 +14,14 @@ jobs:
         chmod +x miniconda.sh
         bash miniconda.sh -b -p $HOME/miniconda
         export PATH="$HOME/miniconda/bin:$PATH"
+        export PATH="$HOME/miniconda/Scripts:$PATH"
         conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
-        pip install cdflib
-        pip install pyspedas --no-dependencies
-        pip install -e .[tests]
+        $HOME/miniconda/pip install cdflib
+        $HOME/miniconda/Scripts/pip install pyspedas --no-dependencies
+        $HOME/miniconda/Scripts/pip install -e .[tests]
     - name: set up XVFB
       uses: GabrielBB/xvfb-action@v1.0
       with:
-        run: pytest -rsv
+        run: $HOME/miniconda/Scripts/pytest -rsv
