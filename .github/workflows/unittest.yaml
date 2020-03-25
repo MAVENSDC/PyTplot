@@ -15,7 +15,7 @@ jobs:
         bash miniconda.sh -b -p $HOME/miniconda
         export PATH="$HOME/miniconda/bin:$PATH"
         export PATH="$HOME/miniconda/Scripts:$PATH"
-        conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
+        conda install pip xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
         $HOME/miniconda/Scripts/pip install cdflib
