@@ -14,8 +14,8 @@ jobs:
         chmod +x miniconda.sh
         bash miniconda.sh -b -p $HOME/miniconda
         export PATH="$HOME/miniconda/bin:$PATH"
-        apt-get update
-        apt-get -y install libgl-mesa-glx
+        sudo apt-get update
+        sudo apt-get -y install libgl-mesa-glx
         conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
