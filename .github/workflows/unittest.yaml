@@ -26,4 +26,4 @@ jobs:
         cd $HOME/miniconda/bin
         ls
         cd ../../
-        xvfb-run $HOME/miniconda/bin/pytest
+        xvfb-run $HOME/miniconda/bin/pytest -rsv
