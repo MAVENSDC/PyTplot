@@ -24,3 +24,9 @@ jobs:
         conda install -c mavensdc cdflib --yes
         ls -d
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
+        cd $GITHUB_WORKSPACE
+        python setup.py sdist
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        password: ${{ secrets.pypi_password }}
