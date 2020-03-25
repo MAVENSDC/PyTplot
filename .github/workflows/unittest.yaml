@@ -22,8 +22,5 @@ jobs:
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
         conda install -c mavensdc cdflib --yes
-        ls 
-        cd $HOME/miniconda/bin
-        ls
-        cd ../../
+        ls -d
         xvfb-run $HOME/miniconda/bin/pytest -rsv $HOME/tests
