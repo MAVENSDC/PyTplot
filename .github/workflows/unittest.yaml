@@ -18,7 +18,7 @@ jobs:
         conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
-        $HOME/miniconda/pip install cdflib
+        $HOME/miniconda/Scripts/pip install cdflib
         $HOME/miniconda/Scripts/pip install pyspedas --no-dependencies
         $HOME/miniconda/Scripts/pip install -e .[tests]
     - name: set up XVFB
