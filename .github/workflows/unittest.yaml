@@ -14,7 +14,8 @@ jobs:
         chmod +x miniconda.sh
         bash miniconda.sh -b -p $HOME/miniconda
         export PATH="$HOME/miniconda/bin:$PATH"
-        export PATH="$HOME/miniconda/Scripts:$PATH"
+        apt-get update
+        apt-get -y install libgl-mesa-glx
         conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
@@ -22,4 +23,4 @@ jobs:
     - name: set up XVFB
       uses: GabrielBB/xvfb-action@v1.0
       with:
-        run: $HOME/miniconda/Scripts/pytest -rsv
+        run: $HOME/miniconda/bin/pytest -rsv
