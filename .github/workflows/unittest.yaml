@@ -22,6 +22,7 @@ jobs:
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
         conda install -c mavensdc cdflib --yes
+        conda install keyring --yes
     - name: Run unit tests
       run: |
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests

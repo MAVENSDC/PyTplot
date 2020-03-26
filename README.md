@@ -1,5 +1,4 @@
-[![image](https://travis-ci.com/MAVENSDC/PyTplot.svg?branch=master)](https://travis-ci.com/MAVENSDC/PyTplot)
-[![image](https://coveralls.io/repos/github/MAVENSDC/PyTplot/badge.svg?branch=master)](https://coveralls.io/github/MAVENSDC/PyTplot?branch=master)
+[![image](![build](https://github.com/MAVENSDC/PyTplot/workflows/build/badge.svg))](https://travis-ci.com/MAVENSDC/PyTplot)
 [![DOI](https://zenodo.org/badge/68843190.svg)](https://zenodo.org/badge/latestdoi/68843190)
 
 
