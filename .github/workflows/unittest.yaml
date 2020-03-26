@@ -22,17 +22,23 @@ jobs:
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
         conda install -c mavensdc cdflib --yes
-        ls -d
+        xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
+        cd $GITHUB_WORKSPACE
+        python setup.py sdist
+    - name: Run unit tests
+      run: |
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
         cd $GITHUB_WORKSPACE
         python setup.py sdist
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@master
+      if: startsWith(github.event.ref, 'refs/tags')
       with:
         password: ${{ secrets.pypi_password }}
     - name: Publish to Anaconda
       env: 
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+      if: startsWith(github.event.ref, 'refs/tags')
       run: |
         conda install conda-build --yes
         conda build -c conda-forge --python 3.5 --output-folder . .
