@@ -38,6 +38,7 @@ jobs:
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
       run: |
         conda install conda-build --yes
+        conda install anaconda-client --yes
         conda build -c conda-forge --python 3.5 --output-folder . .
         conda build -c conda-forge --python 3.6 --output-folder . .
         conda build -c conda-forge --python 3.7 --output-folder . .
