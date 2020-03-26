@@ -22,9 +22,6 @@ jobs:
         conda install pyqt --yes
         conda install -c anaconda netcdf4 --yes
         conda install -c mavensdc cdflib --yes
-        xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
-        cd $GITHUB_WORKSPACE
-        python setup.py sdist
     - name: Run unit tests
       run: |
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
