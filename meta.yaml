@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+  script: "$HOME/miniconda/bin/python -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
   build:
@@ -33,7 +33,7 @@ about:
   home: "https://github.com/MAVENSDC/pytplot"
   license: "MIT"
   summary: "Pytplot is an effort to replicate the functionality IDL tplot library in python"
-  doc_url: "https://github.com/MAVENSDC/pytplot"
+  doc_url: "https://pytplot.readthedocs.io"
   dev_url: "https://github.com/MAVENSDC/pyptlot"
 
 extra:
