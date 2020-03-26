@@ -18,11 +18,11 @@ jobs:
         sudo apt-get -y install libgl1-mesa-glx
         sudo apt-get -y install libsm6 libxrender1 libfontconfig1 libxcomposite-dev libxcursor1 libxi6 libxtst6 libxss1 libxrandr2 libasound2 libegl1
         sudo apt-get -y install xvfb
-        conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
-        conda install pyqt --yes
-        conda install -c anaconda netcdf4 --yes
-        conda install -c mavensdc cdflib --yes
-        conda install keyring --yes
+        $HOME/miniconda/bin/conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
+        $HOME/miniconda/bin/conda install pyqt --yes
+        $HOME/miniconda/bin/conda install -c anaconda netcdf4 --yes
+        $HOME/miniconda/bin/conda install -c mavensdc cdflib --yes
+        $HOME/miniconda/bin/conda install keyring --yes
     - name: Run unit tests
       run: |
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
@@ -37,18 +37,18 @@ jobs:
       env: 
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
       run: |
-        conda install conda-build --yes
-        conda install anaconda-client --yes
-        conda build -c conda-forge --python 3.5 --output-folder . .
-        conda build -c conda-forge --python 3.6 --output-folder . .
-        conda build -c conda-forge --python 3.7 --output-folder . .
-        conda convert -p linux-32 linux-64/*.tar.bz2
-        conda convert -p win-32 linux-64/*.tar.bz2
-        conda convert -p osx-64 linux-64/*.tar.bz2
-        conda convert -p win-64 linux-64/*.tar.bz2
-        anaconda upload --label main linux-64/*.tar.bz2
-        anaconda upload --label main osx-64/*.tar.bz2
-        anaconda upload --label main win-64/*.tar.bz2
-        anaconda upload --label main win-32/*.tar.bz2
-        anaconda upload --label main linux-32/*.tar.bz2
+        $HOME/miniconda/bin/conda install conda-build --yes
+        $HOME/miniconda/bin/conda install anaconda-client --yes
+        $HOME/miniconda/bin/conda build -c conda-forge --python 3.5 --output-folder . .
+        $HOME/miniconda/bin/conda build -c conda-forge --python 3.6 --output-folder . .
+        $HOME/miniconda/bin/conda build -c conda-forge --python 3.7 --output-folder . .
+        $HOME/miniconda/bin/conda convert -p linux-32 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p win-64 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main linux-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main osx-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main win-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main win-32/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main linux-32/*.tar.bz2
         
