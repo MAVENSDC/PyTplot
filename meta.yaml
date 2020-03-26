@@ -1,0 +1,41 @@
+{% set name = "pytplot" %}
+{% set version = "1.5.7" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  path: .
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  build:
+    - setuptools
+    - twine
+    - python
+    - pip
+  run:
+    - python
+    - numpy
+    - bokeh
+    - pandas
+    - matplotlib
+    - scipy
+    - xarray
+    - pyqtgraph
+    - cdflib
+
+about:
+  home: "https://github.com/MAVENSDC/pytplot"
+  license: "MIT"
+  summary: "Pytplot is an effort to replicate the functionality IDL tplot library in python"
+  doc_url: "https://github.com/MAVENSDC/pytplot"
+  dev_url: "https://github.com/MAVENSDC/pyptlot"
+
+extra:
+  recipe-maintainers:
+    - MAVENSDC
