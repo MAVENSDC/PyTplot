@@ -39,6 +39,8 @@ jobs:
       if: startsWith(github.event.ref, 'refs/tags')
       run: |
         alias python=$HOME/miniconda/bin/python
+        alias pip=$HOME/miniconda/bin/pip
+        pip install twine
         $HOME/miniconda/bin/conda install conda-build --yes
         $HOME/miniconda/bin/conda install anaconda-client --yes
         $HOME/miniconda/bin/conda config --add channels mavensdc
