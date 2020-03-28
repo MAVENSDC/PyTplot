@@ -1,12 +1,14 @@
 {% set name = "pytplot" %}
-{% set version = "1.5.10" %}
+{% set version = "1.5.11" %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  path: .
+  git_url: https://github.com/MAVENSDC/pytplot.git
+  git_depth: 3
+  get_rev: v1.5.11
 
 build:
   number: 0

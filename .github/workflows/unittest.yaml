@@ -40,6 +40,7 @@ jobs:
       run: |
         $HOME/miniconda/bin/conda install conda-build --yes
         $HOME/miniconda/bin/conda install anaconda-client --yes
+        $HOME/miniconda/bin/conda config --add channels mavensdc
         $HOME/miniconda/bin/conda build --python 3.5 --output-folder . .
         $HOME/miniconda/bin/conda build --python 3.6 --output-folder . .
         $HOME/miniconda/bin/conda build --python 3.7 --output-folder . .
