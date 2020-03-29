@@ -10,6 +10,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: |
+        cd $HOME
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
         chmod +x miniconda.sh
         bash miniconda.sh -b -p $HOME/miniconda
@@ -28,9 +29,15 @@ jobs:
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
         cd $GITHUB_WORKSPACE
         $HOME/miniconda/bin/python setup.py sdist
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@master
+      if: startsWith(github.event.ref, 'refs/tags')
+      with:
+        password: ${{ secrets.pypi_password }}
     - name: Publish to Anaconda
       env: 
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+      if: startsWith(github.event.ref, 'refs/tags')
       run: |
         alias python=$HOME/miniconda/bin/python
         alias pip=$HOME/miniconda/bin/pip
@@ -38,9 +45,10 @@ jobs:
         $HOME/miniconda/bin/conda install conda-build --yes
         $HOME/miniconda/bin/conda install anaconda-client --yes
         $HOME/miniconda/bin/conda config --add channels mavensdc
-        $HOME/miniconda/bin/conda build --python 3.5 --output-folder . .
-        $HOME/miniconda/bin/conda build --python 3.6 --output-folder . .
-        $HOME/miniconda/bin/conda build --python 3.7 --output-folder . .
+        $HOME/miniconda/bin/conda build --python 3.5 --output-folder $HOME .
+        $HOME/miniconda/bin/conda build --python 3.6 --output-folder $HOME .
+        $HOME/miniconda/bin/conda build --python 3.7 --output-folder $HOME .
+        cd $HOME
         $HOME/miniconda/bin/conda convert -p linux-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
