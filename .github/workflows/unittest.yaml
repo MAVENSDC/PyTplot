@@ -11,6 +11,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd $HOME
+        ls -l
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
         chmod +x miniconda.sh
         bash miniconda.sh -b -p $HOME/miniconda
@@ -28,6 +29,7 @@ jobs:
       run: |
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
         cd $GITHUB_WORKSPACE
+        ls -l
         $HOME/miniconda/bin/python setup.py sdist
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@master
@@ -46,9 +48,10 @@ jobs:
         $HOME/miniconda/bin/conda install anaconda-client --yes
         $HOME/miniconda/bin/conda config --add channels mavensdc
         cd $HOME
-        $HOME/miniconda/bin/conda build --python 3.5 --output-folder . $GITHUB_WORKSPACE
-        $HOME/miniconda/bin/conda build --python 3.6 --output-folder . $GITHUB_WORKSPACE
-        $HOME/miniconda/bin/conda build --python 3.7 --output-folder . $GITHUB_WORKSPACE
+        ls -l
+        $HOME/miniconda/bin/conda-build --python 3.5 --output-folder . $GITHUB_WORKSPACE
+        $HOME/miniconda/bin/conda-build --python 3.6 --output-folder . $GITHUB_WORKSPACE
+        $HOME/miniconda/bin/conda-build --python 3.7 --output-folder . $GITHUB_WORKSPACE
         $HOME/miniconda/bin/conda convert -p linux-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
