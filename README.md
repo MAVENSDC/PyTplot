@@ -1,4 +1,4 @@
-[![image](![build](https://github.com/MAVENSDC/PyTplot/workflows/build/badge.svg))](https://github.com/MAVENSDC/PyTplot/actions)
+[![build](https://github.com/MAVENSDC/PyTplot/workflows/build/badge.svg)](https://github.com/MAVENSDC/PyTplot/actions)
 [![DOI](https://zenodo.org/badge/68843190.svg)](https://zenodo.org/badge/latestdoi/68843190)
 
 
