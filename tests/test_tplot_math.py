@@ -63,11 +63,11 @@ def test_math():
     pytplot.resample('mvn_euv_calib_bands_y', pytplot.data_quants['diff_en_fluxes'].coords['time'].values, new_tvar='data_3_resampled')
 
     pytplot.tplot('data_3_resampled', testing=True)
-
+    pytplot.options('diff_en_fluxes', 'spec', 1)
     pytplot.spec_mult('diff_en_fluxes')
 
     pytplot.add_across('diff_en_fluxes_specmult', new_tvar='tot_en_flux', column_range=[[0, 10], [10, 20], [20, 30]])
-    pytplot.options('diff_en_fluxes', 'spec', 1)
+
     pytplot.options('diff_en_fluxes', 'ylog', 1)
     pytplot.options('diff_en_fluxes', 'zlog', 1)
     pytplot.options('tot_en_flux', 'ylog', 1)
