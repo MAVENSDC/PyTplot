@@ -76,7 +76,7 @@ def test_math():
 
     pytplot.split_vec('tot_en_flux')
 
-    pytplot.add('tot_en_flux_0', 'mvn_euv_calib_bands_1', new_tvar='weird_data')
+    pytplot.add('tot_en_flux_x', 'mvn_euv_calib_bands_y', new_tvar='weird_data')
 
     pytplot.tplot('weird_data', testing=True)
     
