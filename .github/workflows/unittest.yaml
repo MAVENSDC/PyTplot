@@ -50,7 +50,6 @@ jobs:
         $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p win-64 linux-64/*.tar.bz2
-        $HOME/miniconda/bin/anaconda upload --label main linux-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main osx-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main win-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main win-32/*.tar.bz2
@@ -65,7 +64,6 @@ jobs:
         $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p win-64 linux-64/*.tar.bz2
-        $HOME/miniconda/bin/anaconda upload --label main linux-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main osx-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main win-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main win-32/*.tar.bz2
