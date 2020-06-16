@@ -11,11 +11,6 @@ jobs:
     - name: Install dependencies
       run: |
         cd $HOME
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-        chmod +x miniconda.sh
-        bash miniconda.sh -b -p $HOME/miniconda
-        export PATH="$HOME/miniconda/bin:$PATH"
-        sudo apt-get update
         sudo apt-get -y install libgl1-mesa-glx
         sudo apt-get -y install libsm6 libxrender1 libfontconfig1 libxcomposite-dev libxcursor1 libxi6 libxtst6 libxss1 libxrandr2 libasound2 libegl1
         sudo apt-get -y install xvfb
@@ -46,14 +41,16 @@ jobs:
         $HOME/miniconda/bin/conda install conda-build --yes
         $HOME/miniconda/bin/conda install anaconda-client --yes
         $HOME/miniconda/bin/conda config --add channels mavensdc
+        rm -r linux-64
+        rm -r linux-32
+        rm -r osx-64
+        rm -r win-64
+        rm -r win-32
         $HOME/miniconda/bin/conda-build --python 3.6 --output-folder . .
         $HOME/miniconda/bin/conda convert -p linux-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
         $HOME/miniconda/bin/conda convert -p win-64 linux-64/*.tar.bz2
-        ls -l linux-64
-        ls -l win-64
-        ls -l osx-64
         $HOME/miniconda/bin/anaconda upload --label main linux-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main osx-64/*.tar.bz2
         $HOME/miniconda/bin/anaconda upload --label main win-64/*.tar.bz2
