@@ -1,0 +1,68 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        cd $HOME
+        sudo apt-get -y install libgl1-mesa-glx
+        sudo apt-get -y install libsm6 libxrender1 libfontconfig1 libxcomposite-dev libxcursor1 libxi6 libxtst6 libxss1 libxrandr2 libasound2 libegl1
+        sudo apt-get -y install xvfb
+        $HOME/miniconda/bin/conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
+        $HOME/miniconda/bin/conda install pyqt --yes
+        $HOME/miniconda/bin/conda install pip --yes
+        $HOME/miniconda/bin/conda install -c anaconda netcdf4 --yes
+        $HOME/miniconda/bin/conda install -c mavensdc cdflib --yes
+        $HOME/miniconda/bin/conda install keyring --yes
+    - name: Run unit tests
+      run: |
+        xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
+        cd $GITHUB_WORKSPACE
+        $HOME/miniconda/bin/python setup.py sdist
+    - name: Publish to Anaconda
+      env:
+        ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+      if: startsWith(github.event.ref, 'refs/tags')
+      run: |
+        alias python=$HOME/miniconda/bin/python
+        alias pip=$HOME/miniconda/bin/pip
+        $HOME/miniconda/bin/pip install twine
+        $HOME/miniconda/bin/conda install conda-build --yes
+        $HOME/miniconda/bin/conda install anaconda-client --yes
+        $HOME/miniconda/bin/conda config --add channels mavensdc
+        $HOME/miniconda/bin/conda-build --python 3.6 --output-folder . .
+        $HOME/miniconda/bin/conda convert -p linux-32 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p win-64 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main linux-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main osx-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main win-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main win-32/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main linux-32/*.tar.bz2
+        rm -r linux-64
+        rm -r linux-32
+        rm -r osx-64
+        rm -r win-64
+        rm -r win-32
+        $HOME/miniconda/bin/conda-build --python 3.7 --output-folder . .
+        $HOME/miniconda/bin/conda convert -p linux-32 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p win-32 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p osx-64 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/conda convert -p win-64 linux-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main linux-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main osx-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main win-64/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main win-32/*.tar.bz2
+        $HOME/miniconda/bin/anaconda upload --label main linux-32/*.tar.bz2
+        rm -r linux-64
+        rm -r linux-32
+        rm -r osx-64
+        rm -r win-64
+        rm -r win-32

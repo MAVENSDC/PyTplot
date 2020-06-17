@@ -25,3 +25,8 @@ jobs:
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
         cd $GITHUB_WORKSPACE
         $HOME/miniconda/bin/python setup.py sdist
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@master
+      if: startsWith(github.event.ref, 'refs/tags')
+      with:
+        password: ${{ secrets.pypi_password }}
