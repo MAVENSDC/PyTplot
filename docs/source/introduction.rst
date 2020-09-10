@@ -41,6 +41,77 @@ Interactive Bokeh Sample
 Version History
 ---------------
 
+1.7.7
+
+1.7.7 Changes:
+* Added the replace_data function to replace data directly in a tplot variable object
+* cdf_to_tplot now reads in all global and variable attributes directly in the tplot variable 
+* get_data can retrieve this metadata by specifying "get_data("tvar_name", metadata=True)"
+
+1.7.6 Changes:
+* Added the ability to call pytplot.tplot_options("axis_font_size", x) to alter the axis font label size for all plots.
+* Modifed 1D plot to change default color to white when the black background in enabled.
+
+1.7.5 Changes:
+* Altered the functionality of the tplot_ascii tool to use the xarrays functions
+
+1.7.4 Changes:
+* Reverting a change from 1.7.1 back
+
+1.7.3 Changes:
+*fixing tplot math add routine to actually add
+
+1.7.2 Changes:
+* Fixing some issues with the import order of various graphic tools.  Should be easier to import where graphics are disabled.
+
+1.7.1 Changes:
+* Fixing bugs where the crosshairs give inaccurate values
+* Adding a "tplot_copy" method to copy tplot variables
+* Adding an option to specify which axis to plot on the spectrogram
+
+1.7.0 Changes:
+* Updating to pyqtgraph 0.11.0
+
+1.6.9 Changes:
+* Fixed a small bug where the spectrogram plot type is set without having spec bins data.
+
+1.6.8 Changes:
+* Fixing a small issue with the add_across rotuine, the attributes from the input and output should not be copied
+
+1.6.7 Changes:
+* Fixed bug introduced in previous version
+
+1.6.5 Changes
+* Changes issues with split_vec giving errors when "v" values are given to line plots.  Thanks to Nick Hatzigeorgiu for finding / solving the bug
+
+1.6.4 Changes
+* Fixed an issue where sts_to_tplot wasn't merging with previous calls
+
+1.6.1 Changes
+* Fixed some issues with the cursor movement not displaying correctly
+* Fixed issues with nan data values in the spec slicing code causing the slices to not display
+
+1.5.6 Changes
+
+* Fixed qtwebengine import to only apply previous fix if the initial import fails
+* Set version of pyqt to be <=5.12.1 for now, apparently higher versions can cause issues
+
+1.5.5 Changes:
+
+* Fixed import qtwebengine errors, and a few other small bugs
+
+1.5.3 Changes:
+
+* Bug fix for NaN values in time varying "v" values in spectrogram plots
+
+1.5.2 Changes:
+
+* Fixed an issue with cdf_to_tplot when DEPEND_1/2/3 were string values instead of numbers.  They are now ignored if string.
+
+1.5.1 Changes:
+
+* Added ability to read in specific variable names in cdf_to_tplot
+
 1.4.8 Changes:
 
 * The coordinates for 3+ dimensional objects should now be read in correctly.
