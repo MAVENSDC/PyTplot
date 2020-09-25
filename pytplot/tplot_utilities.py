@@ -592,13 +592,11 @@ def return_interpolated_link_dict(dataset, types):
 
 
 def get_y_range(dataset):
-    # This is for the numpy RuntimeWarning: All-NaN axis encountered
+    # This takes care of the numpy RuntimeWarning: All-NaN axis encountered
     # with np.nanmin below
 
     # This takes the data and sets the minimum and maximum range of the data values.
     # If the data type later gets set to 'spec', then we'll change the ymin and ymax
-    import warnings
-    warnings.filterwarnings("error")
 
     # Special rule if 'spec' is True
     if 'spec' in dataset.attrs['plot_options']['extras']:
@@ -607,6 +605,8 @@ def get_y_range(dataset):
                 ymin = np.nanmin(dataset.coords['spec_bins'].values)
                 ymax = np.nanmax(dataset.coords['spec_bins'].values)
                 return [ymin, ymax]
+            except RuntimeWarning:
+                pass
             except Exception as e:
                 #continue on to the code below
                 pass
@@ -624,5 +624,5 @@ def get_y_range(dataset):
         # Show 10% and 10% below the straight line
         y_min = y_min - (.1 * np.abs(y_min))
         y_max = y_max + (.1 * np.abs(y_max))
-    warnings.resetwarnings()
+
     return [y_min, y_max]
