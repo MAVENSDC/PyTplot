@@ -28,3 +28,5 @@ test.py
 *.orig
 docs/build/*
 pydata
+maven_data
+themis_data
