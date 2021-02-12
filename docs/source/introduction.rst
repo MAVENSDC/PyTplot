@@ -41,12 +41,42 @@ Interactive Bokeh Sample
 Version History
 ---------------
 
-1.7.7
+1.7.22
 
-1.7.7 Changes:
-* Added the replace_data function to replace data directly in a tplot variable object
-* cdf_to_tplot now reads in all global and variable attributes directly in the tplot variable 
-* get_data can retrieve this metadata by specifying "get_data("tvar_name", metadata=True)"
+1.7.22 Changes:
+* Fixed some issues with the data_quants giving inconsistant dictionary keys throughout the code
+* Fixed a bug where the var_label axis would not extend all the way to line up with the other plots
+* Added "var_label_ticks" as a variable option to alter the number of ticks if the variable is displayed as a secondary x axis
+* Changed default behavior of plots to not zoom in on the y axis with the mouse wheel
+* Added the "y_axis_zoom" global option to toggle on/off the above change
+
+1.7.21 Changes:
+* Brought the yaxis labels closer to the axis ticks
+* Fixed a bug with saving black background plots
+* Added new tplot_options: yaxis_width and axis_tick_num
+
+1.7.20 Changes:
+* Increased the number of ticks that are always shown on the yaxis by default
+* get_data now returns a named tuple
+* new lines are allowed within axis labels by using a backslash character
+
+1.7.19 Changes:
+* Added some support for non-record varying variables
+* Set default CDF string encoding to ASCII
+* Fixed a handful of bugs within the IDL restore
+
+1.7.16 Changes:
+* Added keyword for get_ignore_data in cdf_to_tplot
+
+1.7.15 Changes:
+* Added support in tplot_restore for higher dimensional variables
+
+1.7.14 Changes:
+* Added visible right and upper axes so that the plots are always boxed in like in IDL tplot
+
+1.7.10 Changes:
+* Added a metadata dictionary from CDF files to the tplot variables
+* Added the replace_data function
 
 1.7.6 Changes:
 * Added the ability to call pytplot.tplot_options("axis_font_size", x) to alter the axis font label size for all plots.
