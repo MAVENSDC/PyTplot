@@ -1,4 +1,4 @@
-numpy <= 1.19.3
+numpy >= 1.20.0
 bokeh >= 1.1
 pyqtgraph >= 0.11.1
 pandas
