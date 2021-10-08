@@ -21,12 +21,10 @@ requirements:
   run:
     - python
     - numpy
-    - bokeh
     - pandas
     - matplotlib
     - scipy
     - xarray
-    - pyqtgraph
     - cdflib
 
 about:
