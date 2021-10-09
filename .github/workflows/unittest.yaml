@@ -25,6 +25,7 @@ jobs:
         $HOME/miniconda/bin/conda install -c anaconda netcdf4 --yes
         $HOME/miniconda/bin/conda install -c mavensdc cdflib --yes
         $HOME/miniconda/bin/conda install keyring --yes
+        pip install pyspedas
     - name: Run unit tests
       run: |
         xvfb-run $HOME/miniconda/bin/pytest -rsv $GITHUB_WORKSPACE/tests
