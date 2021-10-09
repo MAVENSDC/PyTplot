@@ -1,8 +1,7 @@
 
 import unittest
 from pytplot.MPLPlotter.tplot import tplot
-from pytplot import options, tplot_options
-import pyspedas
+from pytplot import options, tplot_options, cdf_to_tplot
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -13,12 +12,12 @@ class MPLPlotter_tests(unittest.TestCase):
         """
         Creates a series of test images
         """
-        pyspedas.mms.fpi(trange=['2015-10-16/13:06', '2015-10-16/13:07'], time_clip=True, data_rate='brst', datatype='dis-moms')
+        cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
 
         panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
 
         tplot_options('title', 'Basic')
-        tplot(panels, display=False, save_png=current_directory+'basic')
+        tplot(panels, display=False, save_png=current_directory + 'basic')
 
         tplot_options('title', 'ylog')
         options('mms1_dis_energyspectr_omni_brst', 'ylog', False)
