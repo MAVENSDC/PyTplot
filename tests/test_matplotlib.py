@@ -5,7 +5,6 @@ from pytplot import options, tplot_options, cdf_to_tplot
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
-current_directory = ''
 
 class MPLPlotter_tests(unittest.TestCase):
     def test_options(self):
