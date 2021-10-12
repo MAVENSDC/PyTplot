@@ -1,12 +1,19 @@
 
 import unittest
 from pytplot.MPLPlotter.tplot import tplot
-from pytplot import options, tplot_options, cdf_to_tplot
+from pytplot import options, tplot_options, cdf_to_tplot, tlimit
 import os
 
-current_directory = os.path.dirname(os.path.realpath(__file__))
+current_directory = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
 class MPLPlotter_tests(unittest.TestCase):
+    def test_tlimit(self):
+        cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
+        panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
+        tlimit(['2015-10-16 13:06:10', '2015-10-16 13:06:20'])
+        tplot_options('title', 'tlimit')
+        tplot(panels, display=False, save_png=current_directory + 'tlimit')
+
     def test_options(self):
         """
         Creates a series of test images
@@ -68,6 +75,29 @@ class MPLPlotter_tests(unittest.TestCase):
         tplot(panels, display=False, save_png=current_directory+'zsubtitle')
         options('mms1_dis_energyspectr_omni_brst', 'zsubtitle', '')
 
+        tplot_options('title', 'legend_names')
+        options('mms1_dis_bulkv_gse_brst', 'legend_names', ['Vx data', 'Vy data', 'Vz data'])
+        options('mms1_dis_numberdensity_brst', 'legend_names', 'density')
+        tplot(panels, display=False, save_png=current_directory+'legend_names')
+        options('mms1_dis_bulkv_gse_brst', 'legend_names', None)
+        options('mms1_dis_numberdensity_brst', 'legend_names', None)
+
+        tplot_options('title', 'line_style')
+        options('mms1_dis_numberdensity_brst', 'line_style', 'dashed')
+        tplot(panels, display=False, save_png=current_directory+'line_style')
+        options('mms1_dis_numberdensity_brst', 'line_style', 'solid')
+
+        tplot_options('title', 'thickness')
+        options('mms1_dis_numberdensity_brst', 'thick', 4)
+        tplot(panels, display=False, save_png=current_directory+'thick')
+        options('mms1_dis_numberdensity_brst', 'thick', 1)
+
+        tplot_options('title', 'alpha')
+        options('mms1_dis_numberdensity_brst', 'alpha', 0.5)
+        options('mms1_dis_energyspectr_omni_brst', 'alpha', 0.5)
+        tplot(panels, display=False, save_png=current_directory+'alpha')
+        options('mms1_dis_numberdensity_brst', 'alpha', 1)
+        options('mms1_dis_energyspectr_omni_brst', 'alpha', 1)
 
 
 if __name__ == '__main__':
