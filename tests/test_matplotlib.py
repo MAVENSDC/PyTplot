@@ -1,12 +1,28 @@
 
 import unittest
 from pytplot.MPLPlotter.tplot import tplot
-from pytplot import options, tplot_options, cdf_to_tplot, tlimit
+from pytplot import store_data, options, tplot_options, cdf_to_tplot, tlimit, timebar
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
 class MPLPlotter_tests(unittest.TestCase):
+    """
+    Creates a series of test images
+    """
+    def test_simple(self):
+        store_data('simple', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 1, 5, 1]})
+        tplot_options('title', 'simple')
+        tplot('simple', display=False, save_png=current_directory + 'simple')
+
+    def test_timebar(self):
+        cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
+        panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
+        tplot_options('title', 'timebar')
+        timebar('2015-10-16 13:06:20', color='r')
+        timebar('2015-10-16 13:06:40', color='b')
+        tplot(panels, display=False, save_png=current_directory + 'timebar')
+
     def test_tlimit(self):
         cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
         panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
@@ -15,9 +31,6 @@ class MPLPlotter_tests(unittest.TestCase):
         tplot(panels, display=False, save_png=current_directory + 'tlimit')
 
     def test_options(self):
-        """
-        Creates a series of test images
-        """
         cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
 
         panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
