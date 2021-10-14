@@ -1,13 +1,11 @@
 
 import numpy as np
-import unittest
 from pytplot.MPLPlotter.tplot import tplot
 from pytplot import get_data, store_data, options, tplot_options, cdf_to_tplot, tlimit, timebar
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
-#class MPLPlotter_tests(unittest.TestCase):
 """
 Creates a series of test images
 """
@@ -196,7 +194,3 @@ def test_options():
     tplot(panels, display=False, save_png=current_directory+'alpha')
     options('mms1_dis_numberdensity_brst', 'alpha', 1)
     options('mms1_dis_energyspectr_omni_brst', 'alpha', 1)
-
-
-#if __name__ == '__main__':
-#    unittest.main()
