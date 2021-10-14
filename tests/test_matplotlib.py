@@ -1,7 +1,8 @@
 
+import numpy as np
 import unittest
 from pytplot.MPLPlotter.tplot import tplot
-from pytplot import store_data, options, tplot_options, cdf_to_tplot, tlimit, timebar
+from pytplot import get_data, store_data, options, tplot_options, cdf_to_tplot, tlimit, timebar
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
@@ -29,6 +30,55 @@ class MPLPlotter_tests(unittest.TestCase):
         tlimit(['2015-10-16 13:06:10', '2015-10-16 13:06:20'])
         tplot_options('title', 'tlimit')
         tplot(panels, display=False, save_png=current_directory + 'tlimit')
+
+    def test_overplot(self):
+        cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
+        store_data('combined', data='mms1_dis_energyspectr_omni_brst mms1_dis_numberdensity_brst')
+        options('mms1_dis_numberdensity_brst', 'Color', 'w')
+        tplot_options('title', 'overplot')
+        tplot('combined', display=False, save_png=current_directory + 'overplot')
+
+    def test_errorbars(self):
+        cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf", get_support_data=True)
+        d = get_data('mms1_dis_numberdensity_brst')
+        e = get_data('mms1_dis_numberdensity_err_brst')
+        store_data('n_with_err', data={'x': d.times, 'y': d.y, 'dy': e.y*5})
+        tplot_options('title', 'error bars')
+        tlimit(['2015-10-16 13:06:10', '2015-10-16 13:06:20'])
+        tplot('n_with_err', display=False, save_png=current_directory + 'errorbars')
+
+    def test_spec_interp(self):
+        data = np.array([[0,       1,       2,       3,       4],
+               [5,       6,       7,       8,       9],
+              [10,      11,      12,      13,      14],
+              [15,      16,      17,      18,      19],
+              [20,      21,      22,      23,      24]])
+
+        store_data('bins_1', data={'x': [1, 2, 3, 4, 5], 'y': data.transpose(), 'v': [10, 20, 30, 40, 50]})
+
+        options('bins_1', 'spec', 1)
+        options('bins_1', 'yrange', [0, 60.0])
+        options('bins_1', 'Colormap', 'spedas')
+        options('bins_1', 'y_interp', False)
+        options('bins_1', 'x_interp', False)
+        options('bins_1', 'y_interp_points', 10000.0)
+        options('bins_1', 'x_interp_points', 10000.0)
+
+        tplot_options('title', 'no interp')
+        tplot('bins_1', display=False, save_png=current_directory + 'nointerp')
+
+        tplot_options('title', 'X interp')
+        options('bins_1', 'x_interp', True)
+        tplot('bins_1', display=False, save_png=current_directory + 'xinterp')
+        options('bins_1', 'x_interp', False)
+
+        tplot_options('title', 'Y interp')
+        options('bins_1', 'y_interp', True)
+        tplot('bins_1', display=False, save_png=current_directory + 'yinterp')
+
+        tplot_options('title', 'X and Y interp')
+        options('bins_1', 'x_interp', True)
+        tplot('bins_1', display=False, save_png=current_directory + 'xyinterp')
 
     def test_options(self):
         cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
