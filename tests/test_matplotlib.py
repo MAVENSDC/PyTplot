@@ -185,8 +185,10 @@ def test_options():
 
     tplot_options('title', 'thickness')
     options('mms1_dis_numberdensity_brst', 'thick', 4)
+    options('mms1_dis_bulkv_gse_brst', 'thick', 4)
     tplot(panels, display=False, save_png=current_directory+'thick')
-    options('mms1_dis_numberdensity_brst', 'thick', 1)
+    options('mms1_dis_numberdensity_brst', 'thick', 0.5)
+    options('mms1_dis_bulkv_gse_brst', 'thick', 0.5)
 
     tplot_options('title', 'alpha')
     options('mms1_dis_numberdensity_brst', 'alpha', 0.5)
