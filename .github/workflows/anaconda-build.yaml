@@ -21,6 +21,7 @@ jobs:
         sudo apt-get -y install xvfb
         $HOME/miniconda/bin/conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         $HOME/miniconda/bin/conda install pyqt --yes
+        # $HOME/miniconda/bin/conda install xarray numpy scipy pyopengl pytest flake8 six coverage bokeh pyqtgraph matplotlib --yes
         $HOME/miniconda/bin/conda install pip --yes
         $HOME/miniconda/bin/conda install -c anaconda netcdf4 --yes
         $HOME/miniconda/bin/conda install -c mavensdc cdflib --yes
