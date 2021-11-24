@@ -1,4 +1,5 @@
 numpy >= 1.19.5
+bokeh >= 1.1
 pandas
 matplotlib
 scipy
