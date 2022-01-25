@@ -68,7 +68,15 @@ def test_overplot():
     store_data('combined', data='mms1_dis_energyspectr_omni_brst mms1_dis_numberdensity_brst')
     options('mms1_dis_numberdensity_brst', 'Color', 'w')
     tplot_options('title', 'overplot')
+    options('combined', 'right_axis', True)
     tplot('combined', display=False, save_png=current_directory + 'overplot')
+
+def test_pseudo_vars():
+    store_data('var1', data={'x': [1, 2, 3, 4, 5], 'y': [3, 3, 3, 3, 3]})
+    store_data('var2', data={'x': [1, 2, 3, 4, 5], 'y': [7, 7, 7, 7, 7]})
+    store_data('var_combined', data=['var1', 'var2'])
+    options('var_combined', 'yrange', [1, 10])
+    tplot('var_combined', display=False, save_png=current_directory + 'pseudo_vars')
 
 def test_errorbars():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf", get_support_data=True)
