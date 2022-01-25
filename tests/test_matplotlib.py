@@ -76,6 +76,7 @@ def test_pseudo_vars():
     store_data('var2', data={'x': [1, 2, 3, 4, 5], 'y': [7, 7, 7, 7, 7]})
     store_data('var_combined', data=['var1', 'var2'])
     options('var_combined', 'yrange', [1, 10])
+    tplot_options('title', 'pseudo_vars')
     tplot('var_combined', display=False, save_png=current_directory + 'pseudo_vars')
 
 def test_errorbars():
