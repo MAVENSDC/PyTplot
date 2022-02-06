@@ -66,7 +66,8 @@ def test_axis_font_size():
 def test_overplot():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
     store_data('combined', data='mms1_dis_energyspectr_omni_brst mms1_dis_numberdensity_brst')
-    options('mms1_dis_numberdensity_brst', 'Color', 'w')
+    options('mms1_dis_numberdensity_brst', 'Color', 'k')
+    tplot_options('xmargin', [0.2, 0.2])
     tplot_options('title', 'overplot')
     options('combined', 'right_axis', True)
     tplot('combined', display=False, save_png=current_directory + 'overplot')
