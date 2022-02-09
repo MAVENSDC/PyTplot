@@ -10,59 +10,59 @@ def test_math():
 
     pytplot.tplot_math.split_vec('mvn_euv_calib_bands')
 
-    pytplot.tplot('mvn_euv_calib_bands_x', testing=True)
+    pytplot.tplot('mvn_euv_calib_bands_x', display=False)
 
     pytplot.tplot_math.subtract('mvn_euv_calib_bands_x', 'mvn_euv_calib_bands_y', new_tvar='s')
 
-    pytplot.tplot('s', testing=True)
+    pytplot.tplot('s', display=False)
 
     pytplot.tplot_math.add('s', 'mvn_euv_calib_bands_x', new_tvar='a')
 
-    pytplot.tplot(['mvn_euv_calib_bands_x', 'a'], testing=True)
+    pytplot.tplot(['mvn_euv_calib_bands_x', 'a'], display=False)
 
     pytplot.tplot_math.subtract('mvn_euv_calib_bands_x', 'mvn_euv_calib_bands_z', new_tvar='m')
 
-    pytplot.tplot('m', testing=True)
+    pytplot.tplot('m', display=False)
 
     pytplot.tplot_math.divide('m', 'mvn_euv_calib_bands_z', new_tvar='d')
 
-    pytplot.tplot('d', testing=True)
+    pytplot.tplot('d', display=False)
 
     pytplot.add_across('mvn_euv_calib_bands', new_tvar='data_summed')
 
-    pytplot.tplot('mvn_euv_calib_bands', testing=True)
+    pytplot.tplot('mvn_euv_calib_bands', display=False)
 
     pytplot.avg_res_data('data_summed', res=120)
 
-    pytplot.tplot('data_summed', testing=True)
+    pytplot.tplot('data_summed', display=False)
 
     pytplot.deflag('mvn_euv_calib_bands', 0, new_tvar='deflagged')
 
-    pytplot.tplot('deflagged', testing=True)
+    pytplot.tplot('deflagged', display=False)
 
     pytplot.flatten('mvn_euv_calib_bands')
 
-    pytplot.tplot('data_flattened', testing=True)
+    pytplot.tplot('data_flattened', display=False)
 
     pytplot.join_vec(['mvn_euv_calib_bands_x', 'mvn_euv_calib_bands_y', 'mvn_euv_calib_bands_z'], new_tvar='data2')
 
-    pytplot.tplot('data2', testing=True)
+    pytplot.tplot('data2', display=False)
 
     pytplot.pwr_spec('mvn_euv_calib_bands_x')
 
-    pytplot.tplot('mvn_euv_calib_bands_x_pwrspec', testing=True)
+    pytplot.tplot('mvn_euv_calib_bands_x_pwrspec', display=False)
 
     pytplot.derive('mvn_euv_calib_bands_x')
 
     pytplot.store_data("data3", data=['mvn_euv_calib_bands_x', 'mvn_euv_calib_bands_y', 'mvn_euv_calib_bands_z'])
 
-    pytplot.tplot('data3', testing=True)
+    pytplot.tplot('data3', display=False)
 
     pytplot.cdf_to_tplot(os.path.dirname(os.path.realpath(__file__))+ "/testfiles/mvn_swe_l2_svyspec_20170619_v04_r04.cdf")
 
     pytplot.resample('mvn_euv_calib_bands_y', pytplot.data_quants['diff_en_fluxes'].coords['time'].values, new_tvar='data_3_resampled')
 
-    pytplot.tplot('data_3_resampled', testing=True)
+    pytplot.tplot('data_3_resampled', display=False)
     pytplot.options('diff_en_fluxes', 'spec', 1)
     pytplot.spec_mult('diff_en_fluxes')
 
@@ -72,11 +72,11 @@ def test_math():
     pytplot.options('diff_en_fluxes', 'zlog', 1)
     pytplot.options('tot_en_flux', 'ylog', 1)
     pytplot.ylim('tot_en_flux', 1, 100)
-    pytplot.tplot(['diff_en_fluxes', 'tot_en_flux'], testing=True)
+    pytplot.tplot(['diff_en_fluxes', 'tot_en_flux'], display=False)
 
     pytplot.split_vec('tot_en_flux')
 
     pytplot.add('tot_en_flux_x', 'mvn_euv_calib_bands_y', new_tvar='weird_data')
 
-    pytplot.tplot('weird_data', testing=True)
+    pytplot.tplot('weird_data', display=False)
     

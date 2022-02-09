@@ -14,5 +14,5 @@ def test_altitude_plot():
     pytplot.timebar('2017-06-19 03:00:00', "A_COUNT", color=(100, 255, 0), thick=3)
     pytplot.timebar('2017-06-19 03:30:00', "A_COUNT", color='g')
     pytplot.options("A_COUNT", 'alt', 1)
-    pytplot.tplot(2, testing=True)
+    pytplot.tplot(2, display=False)
     pytplot.tplot(2, testing=True, bokeh=True)

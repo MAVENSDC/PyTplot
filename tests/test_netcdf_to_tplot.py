@@ -12,4 +12,4 @@ def test_goes_read():
     pytplot.timebar('2017-06-19 03:30:00', "B_COUNT", color='g')
     pytplot.options("B_COUNT", 'ylog', 1)
     pytplot.store_data("BCOUNTFLUX", data=["B_COUNT", "B_FLUX"])
-    pytplot.tplot([1, 2, 3, 4, 5, 7], var_label=6, testing=True)
+    pytplot.tplot([1, 2, 3, 4, 5, 7], var_label=6, display=False)

@@ -1,4 +1,6 @@
 import pytplot
 
-def test_qt_import():
-    assert pytplot.using_graphics == True
+# disabled by egrimes
+# re-enable to test the Qt version
+# def test_qt_import():
+#     assert pytplot.using_graphics == True
