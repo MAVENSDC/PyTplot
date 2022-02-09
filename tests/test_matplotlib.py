@@ -104,8 +104,8 @@ def test_spec_interp():
     options('bins_1', 'Colormap', 'spedas')
     options('bins_1', 'y_interp', False)
     options('bins_1', 'x_interp', False)
-    options('bins_1', 'y_interp_points', 10000.0)
-    options('bins_1', 'x_interp_points', 10000.0)
+    options('bins_1', 'y_interp_points', 1000.0)
+    options('bins_1', 'x_interp_points', 1000.0)
 
     tplot_options('title', 'no interp')
     tplot('bins_1', display=False, save_png=current_directory + 'nointerp')
