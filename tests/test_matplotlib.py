@@ -14,6 +14,22 @@ def test_simple():
     tplot_options('title', 'simple')
     tplot('simple', display=False, save_png=current_directory + 'simple')
 
+def test_symbols():
+    store_data('symbols', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 1, 5, 1]})
+    options('symbols', 'symbols', True)
+    tplot_options('title', 'symbols')
+    tplot('symbols', display=False, save_png=current_directory + 'symbols')
+
+def test_markers():
+    store_data('markers', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 6, 5, 1]})
+    options('markers', 'marker', 'v')
+    tplot_options('title', 'markers')
+    tplot('markers', display=False, save_png=current_directory + 'markers')
+
+    options('markers', 'marker_size', 100)
+    tplot_options('title', 'marker_size')
+    tplot('markers', display=False, save_png=current_directory + 'marker_size')
+
 def test_margins():
     store_data('margins', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 1, 5, 1]})
     tplot_options('title', 'margins')
@@ -104,8 +120,8 @@ def test_spec_interp():
     options('bins_1', 'Colormap', 'spedas')
     options('bins_1', 'y_interp', False)
     options('bins_1', 'x_interp', False)
-    options('bins_1', 'y_interp_points', 1000.0)
-    options('bins_1', 'x_interp_points', 1000.0)
+    options('bins_1', 'y_interp_points', 100.0)
+    options('bins_1', 'x_interp_points', 100.0)
 
     tplot_options('title', 'no interp')
     tplot('bins_1', display=False, save_png=current_directory + 'nointerp')
@@ -130,6 +146,39 @@ def test_options():
 
     tplot_options('title', 'Basic')
     tplot(panels, display=False, save_png=current_directory + 'basic')
+
+    tplot_options('title', 'panel_size')
+    options('mms1_dis_energyspectr_omni_brst', 'panel_size', 0.3)
+    tplot(panels, display=False, save_png=current_directory + 'panel_size')
+    options('mms1_dis_energyspectr_omni_brst', 'panel_size', 1)
+
+    tplot_options('title', 'border')
+    options('mms1_dis_bulkv_gse_brst', 'border', False)
+    tplot(panels, display=False, save_png=current_directory + 'border')
+    options('mms1_dis_bulkv_gse_brst', 'border', True)
+
+    tplot_options('title', 'tick_options')
+    options('mms1_dis_bulkv_gse_brst', 'xtick_color', 'red')
+    options('mms1_dis_bulkv_gse_brst', 'xtick_labelcolor', 'blue')
+    options('mms1_dis_bulkv_gse_brst', 'ytick_color', 'blue')
+    options('mms1_dis_bulkv_gse_brst', 'ytick_labelcolor', 'red')
+    options('mms1_dis_bulkv_gse_brst', 'xtick_direction', 'in')
+    options('mms1_dis_bulkv_gse_brst', 'ytick_direction', 'out')
+    options('mms1_dis_bulkv_gse_brst', 'xtick_length', 20)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_length', 20)
+    options('mms1_dis_bulkv_gse_brst', 'xtick_width', 3)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_width', 3)
+    tplot(panels, display=False, save_png=current_directory + 'tick_options')
+    options('mms1_dis_bulkv_gse_brst', 'xtick_color', None)
+    options('mms1_dis_bulkv_gse_brst', 'xtick_labelcolor', None)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_color', None)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_labelcolor', None)
+    options('mms1_dis_bulkv_gse_brst', 'xtick_direction', None)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_direction', None)
+    options('mms1_dis_bulkv_gse_brst', 'xtick_length', None)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_length', None)
+    options('mms1_dis_bulkv_gse_brst', 'xtick_width', None)
+    options('mms1_dis_bulkv_gse_brst', 'ytick_width', None)
 
     tplot_options('title', 'ylog')
     options('mms1_dis_energyspectr_omni_brst', 'ylog', False)
