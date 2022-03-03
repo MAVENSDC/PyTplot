@@ -5,3 +5,4 @@ matplotlib
 scipy
 cdflib
 xarray
+astropy
