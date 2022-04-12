@@ -93,6 +93,7 @@ def test_pseudo_vars():
     store_data('var2', data={'x': [1, 2, 3, 4, 5], 'y': [7, 7, 7, 7, 7]})
     store_data('var_combined', data=['var1', 'var2'])
     options('var_combined', 'yrange', [1, 10])
+    options('var_combined', 'color', ['red', 'blue'])
     tplot_options('title', 'pseudo_vars')
     tplot('var_combined', display=False, save_png=current_directory + 'pseudo_vars')
 
@@ -242,11 +243,21 @@ def test_options():
     tplot(panels, display=False, save_png=current_directory+'line_style')
     options('mms1_dis_numberdensity_brst', 'line_style', 'solid')
 
+    tplot_options('title', 'line_style_multi')
+    options('mms1_dis_bulkv_gse_brst', 'line_style', ['dashed', 'dotted', 'solid'])
+    tplot(panels, display=False, save_png=current_directory+'line_style_multi')
+    options('mms1_dis_bulkv_gse_brst', 'line_style', 'solid')
+
     tplot_options('title', 'thickness')
     options('mms1_dis_numberdensity_brst', 'thick', 4)
     options('mms1_dis_bulkv_gse_brst', 'thick', 4)
     tplot(panels, display=False, save_png=current_directory+'thick')
     options('mms1_dis_numberdensity_brst', 'thick', 0.5)
+    options('mms1_dis_bulkv_gse_brst', 'thick', 0.5)
+
+    tplot_options('title', 'thickness_multi')
+    options('mms1_dis_bulkv_gse_brst', 'thick', [1, 4, 8])
+    tplot(panels, display=False, save_png=current_directory+'thickness_multi')
     options('mms1_dis_bulkv_gse_brst', 'thick', 0.5)
 
     tplot_options('title', 'alpha')
