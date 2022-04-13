@@ -94,8 +94,60 @@ def test_pseudo_vars():
     store_data('var_combined', data=['var1', 'var2'])
     options('var_combined', 'yrange', [1, 10])
     options('var_combined', 'color', ['red', 'blue'])
+    options('var_combined', 'ytitle', 'This is a pseudo-variable')
     tplot_options('title', 'pseudo_vars')
     tplot('var_combined', display=False, save_png=current_directory + 'pseudo_vars')
+
+def test_pseudo_var_spectra():
+    data = np.array([[0,       1,       2,       3,       4],
+           [5,       6,       7,       8,       9],
+          [10,      11,      12,      13,      14],
+          [15,      16,      17,      18,      19],
+          [20,      21,      22,      23,      24]])
+
+    store_data('bins_1', data={'x': [1, 2, 3, 4, 5], 'y': data.transpose(), 'v': [10, 20, 30, 40, 50]})
+    store_data('bins_2', data={'x': [1, 2, 3, 4, 5], 'y': data.transpose()+25.0, 'v': [100, 120, 130, 140, 150]})
+
+    options('bins_1', 'spec', 1)
+    options('bins_1', 'yrange', [0, 200])
+    options('bins_1', 'Colormap', 'spedas')
+    options('bins_2', 'spec', 1)
+    options('bins_2', 'yrange', [0, 200])
+    options('bins_2', 'Colormap', 'spedas')
+
+    store_data('combined_spec', data=['bins_1', 'bins_2'])
+    options('combined_spec', 'yrange', [0, 200])
+
+    tplot_options('xmargin', [0.2, 0.2])
+    tplot_options('title', 'pseudo_var_spectra')
+    tplot('combined_spec', display=False, save_png=current_directory + 'combined_spec')
+
+def test_pseudo_var_spectra_zrange():
+    data = np.array([[0,       1,       2,       3,       4],
+           [5,       6,       7,       8,       9],
+          [10,      11,      12,      13,      14],
+          [15,      16,      17,      18,      19],
+          [20,      21,      22,      23,      24]])
+
+    store_data('bins_1', data={'x': [1, 2, 3, 4, 5], 'y': data.transpose(), 'v': [10, 20, 30, 40, 50]})
+    store_data('bins_2', data={'x': [1, 2, 3, 4, 5], 'y': data.transpose()+25.0, 'v': [100, 120, 130, 140, 150]})
+
+    options('bins_1', 'spec', 1)
+    options('bins_1', 'yrange', [0, 200])
+    options('bins_1', 'Colormap', 'spedas')
+    options('bins_1', 'zrange', [0, 50])
+    options('bins_2', 'spec', 1)
+    options('bins_2', 'yrange', [0, 200])
+    options('bins_2', 'Colormap', 'spedas')
+    options('bins_2', 'zrange', [0, 50])
+
+    store_data('combined_spec', data=['bins_1', 'bins_2'])
+    options('combined_spec', 'yrange', [0, 200])
+    options('combined_spec', 'zrange', [0, 50])
+
+    tplot_options('xmargin', [0.2, 0.2])
+    tplot_options('title', 'combined_spec_zrange')
+    tplot('combined_spec', display=False, save_png=current_directory + 'combined_spec_zrange')
 
 def test_errorbars():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf", get_support_data=True)
