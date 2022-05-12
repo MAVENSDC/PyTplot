@@ -46,6 +46,11 @@ def test_timebar():
     timebar('2015-10-16 13:06:20', color='r')
     timebar('2015-10-16 13:06:40', color='b')
     tplot(panels, display=False, save_png=current_directory + 'timebar')
+    timebar('2015-10-16 13:06:20', color='r', delete=True)
+    timebar('2015-10-16 13:06:40', color='b', delete=True)
+    tplot_options('title', 'timebar-removed')
+    tplot(panels, display=False, save_png=current_directory + 'timebar-removed')
+
 
 def test_tlimit():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
@@ -322,3 +327,45 @@ def test_options():
     tplot(panels, display=False, save_png=current_directory+'alpha')
     options('mms1_dis_numberdensity_brst', 'alpha', 1)
     options('mms1_dis_energyspectr_omni_brst', 'alpha', 1)
+
+    tplot_options('title', 'legend size')
+    options('mms1_dis_bulkv_gse_brst', 'legend_names', ['Vx GSE', 'Vy GSE', 'Vz GSE'])
+    options('mms1_dis_bulkv_gse_brst', 'legend_size', 20)
+    tplot(panels, display=False, save_png=current_directory+'legend_size')
+    options('mms1_dis_bulkv_gse_brst', 'legend_size', 10)
+
+    tplot_options('title', 'legend location')
+    options('mms1_dis_bulkv_gse_brst', 'legend_location', 'spedas')
+    tplot(panels, display=False, save_png=current_directory+'legend_location')
+    options('mms1_dis_bulkv_gse_brst', 'legend_location', 'best')
+
+    tplot_options('title', 'legend shadow')
+    options('mms1_dis_bulkv_gse_brst', 'legend_shadow', True)
+    tplot(panels, display=False, save_png=current_directory+'legend_shadow')
+    options('mms1_dis_bulkv_gse_brst', 'legend_shadow', False)
+
+    tplot_options('title', 'legend title')
+    options('mms1_dis_bulkv_gse_brst', 'legend_title', 'legend title!')
+    tplot(panels, display=False, save_png=current_directory+'legend_title')
+    options('mms1_dis_bulkv_gse_brst', 'legend_title', None)
+
+    tplot_options('title', 'legend title size')
+    options('mms1_dis_bulkv_gse_brst', 'legend_title', 'legend title!')
+    options('mms1_dis_bulkv_gse_brst', 'legend_titlesize', 16)
+    tplot(panels, display=False, save_png=current_directory+'legend_title_size')
+    options('mms1_dis_bulkv_gse_brst', 'legend_title', None)
+
+    tplot_options('title', 'legend color')
+    options('mms1_dis_bulkv_gse_brst', 'legend_color', ['blue', 'red', 'blue'])
+    tplot(panels, display=False, save_png=current_directory+'legend_color')
+    options('mms1_dis_bulkv_gse_brst', 'legend_color', None)
+
+    tplot_options('title', 'legend edge color')
+    options('mms1_dis_bulkv_gse_brst', 'legend_edgecolor', 'blue')
+    tplot(panels, display=False, save_png=current_directory+'legend_edgecolor')
+    options('mms1_dis_bulkv_gse_brst', 'legend_edgecolor', None)
+
+    tplot_options('title', 'legend face color')
+    options('mms1_dis_bulkv_gse_brst', 'legend_facecolor', 'blue')
+    tplot(panels, display=False, save_png=current_directory+'legend_facecolor')
+    options('mms1_dis_bulkv_gse_brst', 'legend_facecolor', None)
