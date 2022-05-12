@@ -1,5 +1,7 @@
 
 import numpy as np
+
+import pytplot
 from pytplot.MPLPlotter.tplot import tplot
 from pytplot import get_data, store_data, options, tplot_options, cdf_to_tplot, tlimit, timebar
 import os
@@ -369,3 +371,13 @@ def test_options():
     options('mms1_dis_bulkv_gse_brst', 'legend_facecolor', 'blue')
     tplot(panels, display=False, save_png=current_directory+'legend_facecolor')
     options('mms1_dis_bulkv_gse_brst', 'legend_facecolor', None)
+
+def test_highlight():
+    cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
+
+    panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
+
+    tplot_options('title', 'highlight interval')
+    pytplot.highlight('mms1_dis_bulkv_gse_brst', [1445000760.0, 1445000820.0])
+    tplot(panels, display=False, save_png=current_directory+'highlight_interval')
+    pytplot.highlight('mms1_dis_bulkv_gse_brst', None)
