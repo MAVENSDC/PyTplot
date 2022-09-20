@@ -27,6 +27,7 @@ requirements:
     - scipy
     - xarray
     - cdflib
+    - python-dateutil
 
 about:
   home: "https://github.com/MAVENSDC/pytplot"

@@ -203,6 +203,7 @@ def test_spec_interp():
     options('bins_1', 'x_interp', True)
     tplot('bins_1', display=False, save_png=current_directory + 'xyinterp')
 
+
 def test_options():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
 
@@ -381,3 +382,4 @@ def test_highlight():
     pytplot.highlight('mms1_dis_bulkv_gse_brst', [1445000760.0, 1445000820.0])
     tplot(panels, display=False, save_png=current_directory+'highlight_interval')
     pytplot.highlight('mms1_dis_bulkv_gse_brst', None)
+
