@@ -48,7 +48,7 @@ def test_math():
 
     pytplot.tplot('data2', display=False)
 
-    pytplot.pwr_spec('mvn_euv_calib_bands_x')
+    # pytplot.pwr_spec('mvn_euv_calib_bands_x')
 
     pytplot.tplot('mvn_euv_calib_bands_x_pwrspec', display=False)
 
