@@ -1,26 +1,24 @@
-
 import numpy as np
-
 import pytplot
-from pytplot.MPLPlotter.tplot import tplot
+from pytplot import store, tplot, options
 from pytplot import get_data, store_data, options, tplot_options, cdf_to_tplot, tlimit, timebar
 import os
 
 current_directory = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
-"""
-Creates a series of test images
-"""
+
 def test_simple():
     store_data('simple', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 1, 5, 1]})
     tplot_options('title', 'simple')
     tplot('simple', display=False, save_png=current_directory + 'simple')
+
 
 def test_symbols():
     store_data('symbols', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 1, 5, 1]})
     options('symbols', 'symbols', True)
     tplot_options('title', 'symbols')
     tplot('symbols', display=False, save_png=current_directory + 'symbols')
+
 
 def test_markers():
     store_data('markers', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 6, 5, 1]})
@@ -32,6 +30,7 @@ def test_markers():
     tplot_options('title', 'marker_size')
     tplot('markers', display=False, save_png=current_directory + 'marker_size')
 
+
 def test_margins():
     store_data('margins', data={'x': [1, 2, 3, 4, 5], 'y': [1, 5, 1, 5, 1]})
     tplot_options('title', 'margins')
@@ -40,6 +39,7 @@ def test_margins():
     tplot('margins', display=False, save_png=current_directory + 'margins')
     tplot_options('xmargin', None)
     tplot_options('ymargin', None)
+
 
 def test_timebar():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
@@ -62,6 +62,7 @@ def test_tlimit():
     tplot(panels, display=False, save_png=current_directory + 'tlimit')
     tlimit(full=True)
 
+
 def test_vertical_spacing():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
     panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
@@ -69,6 +70,7 @@ def test_vertical_spacing():
     tplot_options('vertical_spacing', 0.0)
     tplot(panels, display=False, save_png=current_directory + 'vertical_spacing')
     tplot_options('vertical_spacing', None)
+
 
 def test_charsize():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
@@ -78,6 +80,7 @@ def test_charsize():
     tplot('mms1_dis_bulkv_gse_brst', display=False, save_png=current_directory + 'charsize')
     options('mms1_dis_bulkv_gse_brst', 'char_size', None)
 
+
 def test_axis_font_size():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
     panels = ['mms1_dis_energyspectr_omni_brst', 'mms1_dis_bulkv_gse_brst', 'mms1_dis_numberdensity_brst']
@@ -85,6 +88,7 @@ def test_axis_font_size():
     tplot_options('axis_font_size', 20)
     tplot('mms1_dis_bulkv_gse_brst', display=False, save_png=current_directory + 'axis_font_size')
     tplot_options('axis_font_size', None)
+
 
 def test_overplot():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
@@ -94,6 +98,7 @@ def test_overplot():
     tplot_options('title', 'overplot')
     options('combined', 'right_axis', True)
     tplot('combined', display=False, save_png=current_directory + 'overplot')
+
 
 def test_pseudo_vars():
     store_data('var1', data={'x': [1, 2, 3, 4, 5], 'y': [3, 3, 3, 3, 3]})
@@ -108,6 +113,7 @@ def test_pseudo_vars():
     options('var_combined', 'ytitle', 'This is a pseudo-variable')
     tplot_options('title', 'pseudo_vars')
     tplot('var_combined', display=False, save_png=current_directory + 'pseudo_vars')
+
 
 def test_pseudo_var_spectra():
     data = np.array([[0,       1,       2,       3,       4],
@@ -132,6 +138,7 @@ def test_pseudo_var_spectra():
     tplot_options('xmargin', [0.2, 0.2])
     tplot_options('title', 'pseudo_var_spectra')
     tplot('combined_spec', display=False, save_png=current_directory + 'combined_spec')
+
 
 def test_pseudo_var_spectra_zrange():
     data = np.array([[0,       1,       2,       3,       4],
@@ -160,6 +167,18 @@ def test_pseudo_var_spectra_zrange():
     tplot_options('title', 'combined_spec_zrange')
     tplot('combined_spec', display=False, save_png=current_directory + 'combined_spec_zrange')
 
+
+def test_pseudo_var_options():
+    store('region1', data={'x': [1, 2, 3, 4, 5, 6], 'y': [1, 1, 1, 1, 1, 1]})
+    store('region2', data={'x': [1.5, 2.5, 3.5, 4.5, 5.5], 'y': [3, 3, 3, 3, 3]})
+    store('region3', data={'x': [1, 2, 3, 4, 5, 6], 'y': [2, 2, 2, 2, 2, 2]})
+    store('combined', data='region1 region2 region3')
+    options('combined', 'marker', ['o', 'v', '<'])
+    options('combined', 'marker_size', [2, 10, 20])
+    tplot_options('title', 'pseudo variable combined markers')
+    tplot('combined', display=False, save_png=current_directory + 'pseudo_markers')
+
+
 def test_errorbars():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf", get_support_data=True)
     d = get_data('mms1_dis_numberdensity_brst')
@@ -169,6 +188,7 @@ def test_errorbars():
     tlimit(['2015-10-16 13:06:10', '2015-10-16 13:06:20'])
     tplot('n_with_err', display=False, save_png=current_directory + 'errorbars')
     tlimit(full=True)
+
 
 def test_spec_interp():
     data = np.array([[0,       1,       2,       3,       4],
@@ -372,6 +392,7 @@ def test_options():
     options('mms1_dis_bulkv_gse_brst', 'legend_facecolor', 'blue')
     tplot(panels, display=False, save_png=current_directory+'legend_facecolor')
     options('mms1_dis_bulkv_gse_brst', 'legend_facecolor', None)
+
 
 def test_highlight():
     cdf_to_tplot(current_directory + "/testfiles/mms1_fpi_brst_l2_dis-moms_20151016130524_v3.3.0.cdf")
