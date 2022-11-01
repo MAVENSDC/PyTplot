@@ -30,6 +30,7 @@ docs/build/*
 pydata
 maven_data
 themis_data
+pydata
 
 # Sublime-github package stores a github token in this file
 # https://packagecontrol.io/packages/sublime-github
