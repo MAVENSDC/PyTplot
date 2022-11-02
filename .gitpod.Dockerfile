@@ -20,9 +20,9 @@ RUN sudo apt-get install -y libxkbcommon-x11-0
 RUN sudo apt-get install -y libfontconfig1
 RUN sudo apt-get install -y libfreetype6
 RUN sudo apt-get install -y libxext6
-RUN sudo apt-get install -y libxcb1
-RUN sudo apt-get install -y libx11-6
-RUN sudo apt-get install -y libice6
+#RUN sudo apt-get install -y libxcb1
+#RUN sudo apt-get install -y libx11-6
+#RUN sudo apt-get install -y libice6
 RUN sudo apt-get install -y libglib2.0-0
-RUN sudo apt-get install -y libpthread-stubs0-dev
+#RUN sudo apt-get install -y libpthread-stubs0-dev
 RUN sudo rm -rf /var/lib/apt/lists/*
