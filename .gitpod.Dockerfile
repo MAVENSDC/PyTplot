@@ -16,8 +16,8 @@ RUN sudo apt-get install -y libxcb-shm0
 RUN sudo apt-get install -y libxcb-image0
 RUN sudo apt-get install -y libxcb-keysyms1
 RUN sudo apt-get install -y libxkbcommon0
-RUN sudo apt-get install -y libxkbcommon-x11-0
-RUN sudo apt-get install -y libfontconfig1
+#RUN sudo apt-get install -y libxkbcommon-x11-0
+#RUN sudo apt-get install -y libfontconfig1
 #RUN sudo apt-get install -y libfreetype6
 #RUN sudo apt-get install -y libxext6
 #RUN sudo apt-get install -y libxcb1
