@@ -10,5 +10,6 @@
 		"ghcr.io/devcontainers/features/desktop-lite:1": {
 			"version": "latest"
 		}
-	}
+	},
+	"forwardPorts": [6080]
 }
