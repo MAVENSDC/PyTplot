@@ -1,0 +1,14 @@
+{
+	"name": "Hello",
+ 	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "bullseye"
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/desktop-lite:1": {
+			"version": "latest"
+		}
+	}
+}
