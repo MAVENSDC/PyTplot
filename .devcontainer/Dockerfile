@@ -14,3 +14,4 @@ RUN sudo apt-get install -y libxkbcommon-x11-0
 RUN sudo apt-get install -y python3
 RUN sudo apt-get install -y python3-pip
 RUN pip install pyspedas
+RUN pip install -r /workspaces/requirements.txt
