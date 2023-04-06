@@ -16,6 +16,10 @@ def test_math():
 
     pytplot.tplot('s', display=False)
 
+    pytplot.tplot_math.clean_spikes('mvn_euv_calib_bands_x',new_names='despike')
+
+    pytplot.tplot('despike',display=False)
+
     pytplot.tplot_math.add('s', 'mvn_euv_calib_bands_x', new_tvar='a')
 
     pytplot.tplot(['mvn_euv_calib_bands_x', 'a'], display=False)
