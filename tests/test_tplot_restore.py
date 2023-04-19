@@ -3,8 +3,6 @@ from pytplot import tplot_restore, tplot, get
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 
-current_directory = '/Users/eric/PyTplot2/tests'
-
 
 def test_basic_line():
     tplot_restore(os.path.join(current_directory, 'testfiles', 'mms1_dis_numberdensity_fast.tplot'))
