@@ -23,8 +23,9 @@ def test_tensor():
     tplot_restore(os.path.join(current_directory, 'testfiles', 'mms1_dis_prestensor_gse_fast.tplot'))
 
 
-def test_dist():
-    tplot_restore(os.path.join(current_directory, 'testfiles', 'mms1_dis_dist_fast.tplot'))
+# Disabled because the test file was too large
+# def test_dist():
+#     tplot_restore(os.path.join(current_directory, 'testfiles', 'mms1_dis_dist_fast.tplot'))
 
 
 def test_data_att():
