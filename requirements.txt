@@ -6,3 +6,4 @@ scipy
 cdflib < 1.0.0
 xarray
 astropy
+netCDF4
