@@ -9,7 +9,7 @@ import logging
 from astropy import units as u
 
 
-def get_data(name, xarray=False, metadata=False, dt=False, units=False):
+def get_data(name, xarray=False, metadata=False, dt=True, units=False):
     """
     This function extracts the data from the tplot Variables stored in memory.
     
