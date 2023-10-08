@@ -1,5 +1,6 @@
 numpy >= 1.19.5
 pandas
+bokeh
 matplotlib >= 3.4
 scipy
 cdflib < 1.0.0

@@ -1,5 +1,5 @@
 {% set name = "pytplot" %}
-{% set version = "2.1.49" %}
+{% set version = "2.1.50" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/MAVENSDC/pytplot.git
-  git_rev: v2.1.49
+  git_rev: v2.1.50
 
 build:
   number: 0
@@ -22,6 +22,7 @@ requirements:
     - python
     - numpy
     - pandas
+    - bokeh
     - matplotlib
     - scipy
     - xarray
