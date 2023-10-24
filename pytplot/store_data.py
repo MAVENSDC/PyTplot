@@ -92,6 +92,10 @@ def store_data(name, data=None, delete=False, newname=None, attr_dict={}, xarray
         del_data(name)
         return False
 
+    if xarray:
+        pytplot.data_quants[name] = data
+        return True
+    
     if data is None and newname is None:
         logging.error('Please provide data.')
         return False
