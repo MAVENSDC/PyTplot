@@ -155,6 +155,7 @@ from pytplot.importers.sts_to_tplot import sts_to_tplot
 from .tplot_utilities import compare_versions
 from .link import link
 from pytplot.tplot_math import *
+from .tres import tres
 
 # Start the App
 if using_graphics:
