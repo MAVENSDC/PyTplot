@@ -109,3 +109,4 @@ venv.bak/
 
 # Local user dir
 mylocaldir/
+build/*
