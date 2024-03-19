@@ -18,7 +18,7 @@ from dateutil.parser import parse
 tplot_num = 1
 
 
-def store_data(name, data=None, delete=False, newname=None, attr_dict={}):
+def store_data(name, data=None, delete=False, newname=None, attr_dict={}, xarray=False):
     
     """
     This function creates a "Tplot Variable" based on the inputs, and
@@ -95,6 +95,10 @@ def store_data(name, data=None, delete=False, newname=None, attr_dict={}):
         del_data(name)
         return False
 
+    if xarray:
+        pytplot.data_quants[name] = data
+        return True
+    
     if data is None and newname is None:
         logging.error('Please provide data.')
         return False
