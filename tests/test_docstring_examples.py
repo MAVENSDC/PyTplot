@@ -1,6 +1,7 @@
 import unittest
 import pytplot
 import numpy as np
+import datetime
 
 class TestDocstingExamples(unittest.TestCase):
     """
@@ -56,6 +57,35 @@ class TestDocstingExamples(unittest.TestCase):
         self.assertEqual(y1, 1)
         self.assertEqual(y2, 5)
 
+    def test_pytplot_time_float_one(self):
+        """
+        Test to ensure the pytplot.time_double.time_float_one code executes without errors, and returns and values.
+        Test for one or no parameters
+        """
+        time_now = (datetime.datetime.now() - datetime.datetime(1970,1,1)).total_seconds();
+        self.assertAlmostEqual(pytplot.time_float_one(), time_now, delta=1)
+        self.assertEqual(pytplot.time_float_one('2023-03-25 12:00:00'), 1679745600.0)
+
+    def test_pytplot_time_float(self):
+        """
+        Test to ensure the pytplot.time_double.time_float code executes without errors, and returns and values.
+        Test for one, list or no parameters
+        """
+        time_now = (datetime.datetime.now() - datetime.datetime(1970,1,1)).total_seconds();
+        self.assertAlmostEqual(pytplot.time_float(), time_now, delta=1)
+        self.assertEqual(pytplot.time_float('2023-03-25 12:00:00'), 1679745600.0)
+        self.assertEqual(pytplot.time_float(['2023-03-25 12:00:00', '2023-03-26 12:00:00']),  [1679745600.0, 1679832000.0])
+
+
+    def test_pytplot_time_double(self):
+        """
+        Test to ensure the pytplot.time_double code executes without errors, and returns and values.
+        Test for one, list or no parameters
+        """
+        time_now = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds();
+        self.assertAlmostEqual(pytplot.time_double(), time_now, delta=1)
+        self.assertEqual(pytplot.time_double('2023-03-25 12:00:00'), 1679745600.0)
+        self.assertEqual(pytplot.time_double(['2023-03-25 12:00:00', '2023-03-26 12:00:00']), [1679745600.0, 1679832000.0])
 
 
 if __name__ == '__main__':
