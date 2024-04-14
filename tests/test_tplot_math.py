@@ -48,7 +48,7 @@ def test_math():
 
     pytplot.tplot('data_flattened', display=False)
 
-    pytplot.join_vec(['mvn_euv_calib_bands_x', 'mvn_euv_calib_bands_y', 'mvn_euv_calib_bands_z'], new_tvar='data2')
+    pytplot.join_vec(['mvn_euv_calib_bands_x', 'mvn_euv_calib_bands_y', 'mvn_euv_calib_bands_z'], newname='data2')
 
     pytplot.tplot('data2', display=False)
 
