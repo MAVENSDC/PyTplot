@@ -40,7 +40,7 @@ def test_math():
 
     pytplot.tplot('data_summed', display=False)
 
-    pytplot.deflag('mvn_euv_calib_bands', 0, new_tvar='deflagged')
+    pytplot.deflag('mvn_euv_calib_bands', 0, newname='deflagged')
 
     pytplot.tplot('deflagged', display=False)
 
