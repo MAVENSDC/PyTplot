@@ -3,6 +3,7 @@ import pytplot
 import numpy as np
 import datetime
 
+
 class TestDocstingExamples(unittest.TestCase):
     """
     Automated tests of docstring examples
@@ -62,7 +63,7 @@ class TestDocstingExamples(unittest.TestCase):
         Test to ensure the pytplot.time_double.time_float_one code executes without errors, and returns and values.
         Test for one or no parameters
         """
-        time_now = (datetime.datetime.now() - datetime.datetime(1970,1,1)).total_seconds();
+        time_now = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds();
         self.assertAlmostEqual(pytplot.time_float_one(), time_now, delta=1)
         self.assertEqual(pytplot.time_float_one('2023-03-25 12:00:00'), 1679745600.0)
 
@@ -71,11 +72,11 @@ class TestDocstingExamples(unittest.TestCase):
         Test to ensure the pytplot.time_double.time_float code executes without errors, and returns and values.
         Test for one, list or no parameters
         """
-        time_now = (datetime.datetime.now() - datetime.datetime(1970,1,1)).total_seconds();
+        time_now = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds()
         self.assertAlmostEqual(pytplot.time_float(), time_now, delta=1)
         self.assertEqual(pytplot.time_float('2023-03-25 12:00:00'), 1679745600.0)
-        self.assertEqual(pytplot.time_float(['2023-03-25 12:00:00', '2023-03-26 12:00:00']),  [1679745600.0, 1679832000.0])
-
+        self.assertEqual(pytplot.time_float(['2023-03-25 12:00:00', '2023-03-26 12:00:00']),
+                         [1679745600.0, 1679832000.0])
 
     def test_pytplot_time_double(self):
         """
@@ -85,7 +86,58 @@ class TestDocstingExamples(unittest.TestCase):
         time_now = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds();
         self.assertAlmostEqual(pytplot.time_double(), time_now, delta=1)
         self.assertEqual(pytplot.time_double('2023-03-25 12:00:00'), 1679745600.0)
-        self.assertEqual(pytplot.time_double(['2023-03-25 12:00:00', '2023-03-26 12:00:00']), [1679745600.0, 1679832000.0])
+        self.assertEqual(pytplot.time_double(['2023-03-25 12:00:00', '2023-03-26 12:00:00']),
+                         [1679745600.0, 1679832000.0])
+
+    def test_pytplot_time_string_one(self):
+        """
+        Test to ensure the pytplot.time_string.time_string_one code executes without errors, and returns and values.
+        Test for no parameters, one parameter, and one parameters with a format
+        """
+
+        # This must be executed fast enough for comparison
+        now_str = pytplot.time_string_one()
+        now_str_no_ms = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.assertEqual(now_str[:-7], now_str_no_ms)
+        self.assertEqual(pytplot.time_string_one(1679745600.0), '2023-03-25 12:00:00.000000')
+        self.assertEqual(pytplot.time_string_one(1679745600.0, fmt="%Y-%m-%d"), '2023-03-25')
+
+    def test_pytplot_time_string(self):
+        """
+        Test to ensure the pytplot.time_string.time_string code executes without errors, and returns and values.
+        Test for no parameters, one parameter, and one parameters with a format
+        """
+
+        # This must be executed fast enough for comparison
+        now_str = pytplot.time_string()
+        now_str_no_ms = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.assertEqual(now_str[:-7], now_str_no_ms)
+        self.assertEqual(pytplot.time_string(1679745600.0), '2023-03-25 12:00:00.000000')
+        self.assertEqual(pytplot.time_string(1679745600.0, fmt="%Y-%m-%d"), '2023-03-25')
+        self.assertEqual(pytplot.time_string([1679745600.0, 1679832000.0], fmt="%Y-%m-%d %H:%M:%S"),
+                         ['2023-03-25 12:00:00', '2023-03-26 12:00:00'])
+
+    def test_pytplot_time_datetime(self):
+        """
+        Test to ensure the pytplot.time_datetime code executes without errors, and returns and values.
+        Test for one, list or no parameters
+        """
+        test_datetime = datetime.datetime(2023, 3, 25, 12, 0, tzinfo=datetime.timezone.utc)
+        test_datetime_list = [datetime.datetime(2023, 3, 25, 12, 0, tzinfo=datetime.timezone.utc),
+                              datetime.datetime(2023, 3, 26, 12, 0, tzinfo=datetime.timezone.utc)]
+        test_datetime_offset = datetime.datetime(2023, 3, 25, 6, 0,
+                                                 tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=64800)))
+
+        self.assertEqual(pytplot.time_datetime(1679745600.0), test_datetime)
+        self.assertEqual(pytplot.time_datetime('2023-03-25 12:00:00'), test_datetime)
+
+        self.assertEqual(pytplot.time_datetime([1679745600.0, 1679832000.0]), test_datetime_list)
+        self.assertEqual(pytplot.time_datetime(['2023-03-25 12:00:00', '2023-03-26 12:00:00']), test_datetime_list)
+
+        self.assertEqual(pytplot.time_datetime(1679745600.0, tz=datetime.timezone(datetime.timedelta(hours=-6))),
+                         test_datetime_offset)
+
+        self.assertLessEqual(abs(pytplot.time_datetime() - datetime.datetime.now()), datetime.timedelta(seconds=1))
 
 
 if __name__ == '__main__':
