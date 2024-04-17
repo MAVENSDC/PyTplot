@@ -64,8 +64,6 @@ def test_math():
 
     pytplot.cdf_to_tplot(os.path.dirname(os.path.realpath(__file__))+ "/testfiles/mvn_swe_l2_svyspec_20170619_v04_r04.cdf")
 
-    pytplot.resample('mvn_euv_calib_bands_y', pytplot.data_quants['diff_en_fluxes'].coords['time'].values, new_tvar='data_3_resampled')
-
     pytplot.tplot('data_3_resampled', display=False)
     pytplot.options('diff_en_fluxes', 'spec', 1)
     pytplot.spec_mult('diff_en_fluxes')
