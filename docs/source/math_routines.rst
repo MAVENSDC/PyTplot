@@ -1,4 +1,4 @@
-.. _math_routines:
+.. math-routines:
 
 Math Routines
 =============
