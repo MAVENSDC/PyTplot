@@ -1,6 +1,7 @@
 .. _math_routines:
+
 Math Routines
-======================
+=============
 
 Arithmetic
 ----------
@@ -51,10 +52,6 @@ Join/Split Data
 Power Spectrum
 --------------
 .. autofunction:: pytplot.tplot_math.pwr_spec
-
-Resample Data
--------------
-.. autofunction:: pytplot.tplot_math.resample
 
 Spectrum Multiplication
 -----------------------

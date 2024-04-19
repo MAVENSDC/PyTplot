@@ -89,7 +89,7 @@ Version History
 * Reverting a change from 1.7.1 back
 
 1.7.3 Changes:
-*fixing tplot math add routine to actually add
+* fixing tplot math add routine to actually add
 
 1.7.2 Changes:
 * Fixing some issues with the import order of various graphic tools.  Should be easier to import where graphics are disabled.
