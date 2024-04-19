@@ -1,3 +1,4 @@
+.. _math_routines
 Math Routines
 ======================
 
