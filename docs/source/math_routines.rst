@@ -9,8 +9,6 @@ Arithmetic
 .. autofunction:: pytplot.tplot_math.subtract
 .. autofunction:: pytplot.tplot_math.multiply
 .. autofunction:: pytplot.tplot_math.divide
-.. autofunction:: pytplot.tplot_math.crop
-.. autofunction:: pytplot.tplot_math.tinterp
 
 Add Across Columns
 ------------------
