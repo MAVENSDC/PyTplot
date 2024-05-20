@@ -15,9 +15,6 @@ PyTplot's Documentation
     reading_in_data
     options
     tplot_options
-    format_sandbox
     helper_functions
     plotting
-    linking
-    interactivity 
     math_routines
