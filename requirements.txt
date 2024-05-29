@@ -1,6 +1,6 @@
 numpy >= 1.19.5
 pandas
-matplotlib >= 3.4
+matplotlib >= 3.6.2
 scipy
 cdflib
 xarray
