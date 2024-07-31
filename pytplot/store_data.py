@@ -18,7 +18,7 @@ import warnings
 tplot_num = 1
 
 
-def store_data(name, data=None, delete=False, newname=None, attr_dict={}):
+def store_data(name, data=None, delete=False, newname=None, attr_dict={}, xarray=False):
     
     """
     Create a "Tplot Variable" (similar to the IDL SPEDAS concept) based on the inputs, and
@@ -98,6 +98,10 @@ def store_data(name, data=None, delete=False, newname=None, attr_dict={}):
         del_data(name)
         return False
 
+    if xarray:
+        pytplot.data_quants[name] = data
+        return True
+    
     if data is None and newname is None:
         logging.error('store_data: Neither data array nor newname supplied, nothing to do.')
         return False
