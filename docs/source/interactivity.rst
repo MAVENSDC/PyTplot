@@ -159,9 +159,9 @@ You can specify window names when you call pytplot so that you can reference the
 
 The above command will a) stop the qt event loop from starting and b) name the window created "PYDIVIDE_MAP2D".  Then you can find the window again by ::
 
-	    for i, plot_name in enumerate(pytplot.pytplotWindow_names):
-			if plot_name == 'PYDIVIDE_MAP2D':
-				The_window_I_need = pytplot.pytplotWindows[i]
+    for i, plot_name in enumerate(pytplot.pytplotWindow_names):
+        if plot_name == 'PYDIVIDE_MAP2D':
+            The_window_I_need = pytplot.pytplotWindows[i]
 
 This can be useful if you want to add the window to a GUI you are creating.  
 
@@ -172,7 +172,7 @@ GUI Creation Example
 Below is some sample code of how the MAVEN SDC creates a simple GUI from pytplot :: 
 
 	# Load in MAVEN Data from PySPEDAS (variables assumed to be filled in from elsewhere)
-	tplot_names = pyspedas.maven_load(filenames=filenames, instruments=instruments, level=level, type=type, start_date=start_date, end_date=end_date)
+	tplot_names = pyspedas.projects.maven_load(filenames=filenames, instruments=instruments, level=level, type=type, start_date=start_date, end_date=end_date)
 	
 	# Change Altitude information to plot as a Map
 	pytplot.options('mvn_kp::spacecraft::altitude', 'map', 1)
