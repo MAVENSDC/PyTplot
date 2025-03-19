@@ -7,7 +7,7 @@ netCDF4
 pywavelets
 astropy
 pyspedas
-pytplot-mpl-temp>=2.2.61
+pytplot-mpl-temp>=2.2.62
 geopack>=1.0.9
 viresclient
 hapiclient
