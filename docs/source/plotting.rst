@@ -10,6 +10,13 @@ it is assume that you have set them up prior to calling this function.
 
 .. autofunction:: pytplot.tplot
 
+Interactive time selection
+---------------------------
+
+To interactively select a list of times corresponding to features of interest in your plot,
+you can use the ctime() routine.
+
+.. autofunction:: pytplot.ctime
 
 Oveplotting
 -----------
