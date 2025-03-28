@@ -68,7 +68,7 @@ Version History
 1.7.16 Changes:
 * Added keyword for get_ignore_data in cdf_to_tplot
 
-1.7.15 Changes:
+1.7.16 Changes:
 * Added support in tplot_restore for higher dimensional variables
 
 1.7.14 Changes:
