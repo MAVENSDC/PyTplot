@@ -1,5 +1,5 @@
 {% set name = "pytplot" %}
-{% set version = "2.2.78" %}
+{% set version = "2.2.79" %}
 
 package:
   name: "{{ name|lower }}"
